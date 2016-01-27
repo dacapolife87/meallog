@@ -2,17 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="meal">
-     <select id="selectMealList" parameterType="meallog.meal.vo.Meal" resultType="hashmap">
+     <select id="selectMealList" parameterType="meallog.meal.vo.Meal" resultType="meallog.meal.vo.Meal">
         <![CDATA[
             SELECT
                 IDX,
-                TITLE,
-                HIT_CNT,
-                CREA_DTM
+                USER_IDX,
+                USER_NAME,
+                NAME,
+                CATEGORY,
+                CONTENTS,
+                EATDATE,
+                BSHARE,
+                WHENEAT,
+                PICPATH
             FROM
-                TB_BOARD
-            WHERE
-                DEL_GB = 'N'
+                MEALLIST
             ORDER BY IDX DESC
         ]]>
     </select>
