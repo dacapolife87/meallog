@@ -53,6 +53,7 @@ public class AbstractDAO {
     @SuppressWarnings("rawtypes")
     public List selectList(String queryId, Object params){
         printQueryId(queryId);
+        log.debug("\t selectList  \t:  " + params.toString());
         return sqlSession.selectList(queryId,params);
     }
 }
