@@ -1,4 +1,4 @@
-package meallog.sample.vo;
+package meallog.meal.vo;
 
 import java.util.Date;
 
