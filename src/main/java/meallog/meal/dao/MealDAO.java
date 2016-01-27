@@ -1,5 +1,5 @@
 
-package meallog.sample.dao;
+package meallog.meal.dao;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import meallog.common.dao.AbstractDAO;
-import meallog.sample.vo.Meal;
+import meallog.meal.vo.Meal;
 
 @Repository("mealDAO")
 public class MealDAO extends AbstractDAO{
