@@ -14,7 +14,7 @@ public class MealDAO extends AbstractDAO{
  
     @SuppressWarnings("unchecked")
     public List<Meal> selectBoardList(Meal meal) throws Exception{
-        return (List<Meal>)selectList("sample.selectBoardList", meal);
+        return (List<Meal>)selectList("meal.selectBoardList", meal);
     }
  
 }
