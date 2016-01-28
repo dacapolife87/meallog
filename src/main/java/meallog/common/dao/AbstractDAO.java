@@ -54,9 +54,7 @@ public class AbstractDAO {
     public List selectList(String queryId, Object params){
         printQueryId(queryId);
         log.debug("\t selectList  \t:  " + params.toString());
-        log.debug("sql : "+sqlSession);
-        log.debug("sql : "+queryId);
-        log.debug("sql : "+sqlSession.selectList(queryId,params));
+
         return sqlSession.selectList(queryId,params);
     }
 }
