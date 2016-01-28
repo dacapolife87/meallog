@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Meal Login Page</title>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
   <style>
   .jumbotron {
       background-color: #f4511e;
@@ -73,21 +72,21 @@
         <h4><span class="glyphicon glyphicon-user"></span>Sing Up</h4>
       </div>
       <div class="modal-body" style="padding:40px 50px;">
-        <form role="form">
+        <form role="form" id="frm">
           <div class="form-group">
             <label for="usrname"><span class="glyphicon glyphicon-user"></span>UserId</label>
             <!-- Check exsist ID -->
             <button type="button" class="btn btn-info btn-xs pull-right">Check Id</button>
-            <input type="text" class="form-control" id="signUp_userID" placeholder="Enter UserId">
+            <input type="text" class="form-control" id="signUp_userID" name="signUp_userID" placeholder="Enter UserId">
           </div>
           
           <div class="form-group">
             <label for="usrmail"><span class="glyphicon glyphicon-user"></span>UserMail</label>
-            <input type="text" class="form-control" id="signUp_userMail" placeholder="Enter UserMail">
+            <input type="text" class="form-control" id="signUp_userMail" name="signUp_userMail" placeholder="Enter UserMail">
           </div>
           <div class="form-group">
             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>Password</label>
-            <input type="password" class="form-control" id="signUp_psw" placeholder="Enter Password">
+            <input type="password" class="form-control" id="signUp_psw" name="signUp_psw" placeholder="Enter Password">
           </div>
           <div class="form-group">
             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>Password Check</label>
@@ -102,30 +101,34 @@
     </div>
   </div>
 
-
+<%@ include file="/WEB-INF/include/include-body.jspf" %>
 <script type="text/javascript">
   $(document).ready(function(){
     $("#logInBtn").click(function(){
-      $("#loginModal").modal();
+    	fn_openBoardList();
+  //    $("#loginModal").modal();
     });
 
     $("#signUpBtn").click(function(){
       $("#signupModal").modal();
     });
     
-    $("#signup").click(function(){
-        $("#loginModal").on("click", function(e){ //목록으로 버튼
-            e.preventDefault();
-        
-            fn_userSignUp();
-        });
+    $("#signup").on("click", function(e){ //작성하기 버튼
+        e.preventDefault();
+        fn_userSignUp();
     });
   });
   
+  function fn_openBoardList(){
+      var comSubmit = new ComSubmit();
+      comSubmit.setUrl("<c:url value='/meallog.do' />");
+      comSubmit.submit();
+  }
   
   function fn_userSignUp(){
-      var comSubmit = new ComSubmit("signupModal");
+      var comSubmit = new ComSubmit("frm");
       comSubmit.setUrl("<c:url value='/joinMember.do' />");
+
       comSubmit.submit();
   }
 </script>
