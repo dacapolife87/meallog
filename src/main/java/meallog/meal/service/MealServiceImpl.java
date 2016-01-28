@@ -1,6 +1,7 @@
 package meallog.meal.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,8 +13,6 @@ import meallog.meal.vo.Meal;
 
 @Service("mealService")
 public class MealServiceImpl implements MealService{
-	Logger log = Logger.getLogger(this.getClass());
-    
     @Resource(name="mealDAO")
     private MealDAO mealDAO;
 
