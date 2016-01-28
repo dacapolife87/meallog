@@ -19,7 +19,7 @@
             #{signUp_userMail},
             #{signUp_psw},  
             #{signUp_userID},  
-            UNIX_TIMESTAMP()  
+            CURDATE()  
         )
     ]]>
 </insert>

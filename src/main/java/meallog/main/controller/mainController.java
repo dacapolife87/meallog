@@ -22,19 +22,23 @@ public class mainController {
      
     @RequestMapping(value="/main.do")
     public ModelAndView introMeallog() throws Exception{
-    	log.debug("test1");
         ModelAndView mv = new ModelAndView("/main/meallogin");
-        log.debug("test2");
         return mv;
     }
     
     @RequestMapping(value="/joinMember.do")
     public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/main.do");
-        
         mainService.joinMember(commandMap.getMap());
 
          
+        return mv;
+    }
+    
+    @RequestMapping(value="//meallog.do")
+    public ModelAndView openMealMain(CommandMap commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("/main/mainpage");
+
         return mv;
     }
 }
