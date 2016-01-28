@@ -29,9 +29,9 @@
                 <c:forEach items="${list }" var="row">
                     <tr>
                         <td>${row.IDX }</td>
-                        <td>${row.TITLE }</td>
-                        <td>${row.HIT_CNT }</td>
-                        <td>${row.CREA_DTM }</td>
+                        <td>${row.NAME }</td>
+                        <td>${row.USER_NAME }</td>
+                        <td>${row.EATDATE }</td>
                     </tr>
                 </c:forEach>
             </c:when>
