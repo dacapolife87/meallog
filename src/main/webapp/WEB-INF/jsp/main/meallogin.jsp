@@ -80,6 +80,11 @@
             <button type="button" class="btn btn-info btn-xs pull-right">Check Id</button>
             <input type="text" class="form-control" id="signUp_userID" placeholder="Enter UserId">
           </div>
+          
+          <div class="form-group">
+            <label for="usrmail"><span class="glyphicon glyphicon-user"></span>UserMail</label>
+            <input type="text" class="form-control" id="signUp_userMail" placeholder="Enter UserMail">
+          </div>
           <div class="form-group">
             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>Password</label>
             <input type="password" class="form-control" id="signUp_psw" placeholder="Enter Password">
@@ -88,7 +93,7 @@
             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>Password Check</label>
             <input type="password" class="form-control" id="signUp_pswCheck" placeholder="Enter Password Again">
           </div>
-            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-ok-sign"></span>Sign Up</button>
+            <button type="submit" class="btn btn-success btn-block" id="signup"><span class="glyphicon glyphicon-ok-sign"></span>Sign Up</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -107,8 +112,22 @@
     $("#signUpBtn").click(function(){
       $("#signupModal").modal();
     });
-
+    
+    $("#signup").click(function(){
+        $("#loginModal").on("click", function(e){ //목록으로 버튼
+            e.preventDefault();
+        
+            fn_userSignUp();
+        });
+    });
   });
+  
+  
+  function fn_userSignUp(){
+      var comSubmit = new ComSubmit("signupModal");
+      comSubmit.setUrl("<c:url value='/joinMember.do' />");
+      comSubmit.submit();
+  }
 </script>
 
 </body>

@@ -1,4 +1,4 @@
-package meallog.common.controller;
+package meallog.main.controller;
 
 
 import javax.annotation.Resource;
@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import meallog.common.common.CommandMap;
 import meallog.common.dao.AbstractDAO;
-import meallog.common.service.MainService;
+import meallog.main.service.MainService;
 
 @Controller
 public class mainController {
@@ -24,6 +25,16 @@ public class mainController {
     	log.debug("test1");
         ModelAndView mv = new ModelAndView("/main/meallogin");
         log.debug("test2");
+        return mv;
+    }
+    
+    @RequestMapping(value="/joinMember.do")
+    public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("redirect:/main.do");
+        
+        mainService.joinMember(commandMap.getMap());
+
+         
         return mv;
     }
 }
