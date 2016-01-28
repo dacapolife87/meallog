@@ -16,6 +16,32 @@
             ORDER BY IDX DESC
         ]]>
     </select>
+    
+    <insert id="insertBoard" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO TB_BOARD
+        (
+            IDX,
+            TITLE, 
+            CONTENTS, 
+            HIT_CNT, 
+            DEL_GB, 
+            CREA_DTM, 
+            CREA_ID
+        )
+        VALUES
+        (
+            11, 
+            #{TITLE}, 
+            #{CONTENTS}, 
+            0, 
+            'N', 
+            123, 
+            'Admin'
+        )
+    ]]>
+</insert>
+    
      
      
 </mapper>
