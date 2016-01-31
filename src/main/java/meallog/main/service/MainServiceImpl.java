@@ -16,14 +16,14 @@ import meallog.meal.vo.Meal;
 public class MainServiceImpl implements MainService{
 	Logger log = Logger.getLogger(this.getClass());
 	
-    @Resource(name="mainDAO")
-    private MainDAO mainDAO;
-
-	@Override
-	public void joinMember(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		mainDAO.joinMember(map);
-		
-	}
+//    @Resource(name="mainDAO")
+//    private MainDAO mainDAO;
+//
+//	@Override
+//	public void joinMember(Map<String, Object> map) throws Exception {
+//		// TODO Auto-generated method stub
+//		mainDAO.joinMember(map);
+//		
+//	}
 
 }

@@ -7,6 +7,8 @@ import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import meallog.user.vo.Member;
+
 public class AbstractDAO {
     protected Log log = LogFactory.getLog(AbstractDAO.class);
      
@@ -44,6 +46,12 @@ public class AbstractDAO {
         return sqlSession.selectOne(queryId, params);
     }
      
+    @SuppressWarnings("rawtypes")
+    public Member selectExist(String queryId, Object params){
+        printQueryId(queryId);
+        return sqlSession.selectOne(queryId,params);
+    }
+    
     @SuppressWarnings("rawtypes")
     public List selectList(String queryId){
         printQueryId(queryId);

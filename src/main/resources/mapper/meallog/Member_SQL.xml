@@ -22,7 +22,22 @@
             CURDATE()  
         )
     ]]>
-</insert>
+    </insert>
+    
+    <select id="loginMember" parameterType="hashmap" resultType="meallog.user.vo.Member">
+    <![CDATA[
+			SELECT
+                EMAIL,
+                PASSWORD
+            FROM
+                MEMBERLIST
+            WHERE
+                EMAIL = #{userID}
+                AND
+                PASSWORD = #{userPW}
+
+    ]]>
+	</select>
     
      
      
