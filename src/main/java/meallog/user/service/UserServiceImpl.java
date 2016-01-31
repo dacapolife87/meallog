@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService{
 		return userDAO.loginMember(map);
 	}
 
+	@Override
+	public void logoutMember(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+	}
+
 }
