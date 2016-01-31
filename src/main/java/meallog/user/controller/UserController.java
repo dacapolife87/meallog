@@ -2,6 +2,8 @@ package meallog.user.controller;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -27,30 +29,69 @@ public class UserController {
         ModelAndView mv = new ModelAndView("redirect:/main.do");
         userService.joinMember(commandMap.getMap());
 
-         
+        
         return mv;
     }
     
-    @RequestMapping(value="/meallog.do")
-    public ModelAndView checkMember(CommandMap commandMap,HttpSession session) throws Exception{
-    	Member member = userService.loginMember(commandMap.getMap());
-    	ModelAndView mv;
-    	if(member != null){
-    		mv = new ModelAndView("redirect:/mealmain.do");
-    		log.debug("login succeed");
-    		session.setAttribute("member",member);
-    	}else{
-    		mv = new ModelAndView("redirect:/main.do");
-    		log.debug("login fail");
-    	}
-    	
-        return mv;
-    }
+//    @RequestMapping(value="/meallog.do")
+//    public String checkMember(CommandMap commandMap,HttpSession session) throws Exception{
+//    	Member member = userService.loginMember(commandMap.getMap());
+//
+//    	if(member != null){
+//    		
+//    		log.debug("login succeed");
+//    		session.setAttribute("member",member);
+//    		return "redirect:/mealmain.do";
+//    	}else{
+//    		log.debug("login fail");
+//    		return "redirect:/main.do";
+//    	}
+//    }
+    
+	  @RequestMapping(value="/meallog.do")
+	  public ModelAndView checkMember(CommandMap commandMap,HttpSession session) throws Exception{
+	  	Member member = userService.loginMember(commandMap.getMap());
+	  	ModelAndView mv;
+	  	if(member != null){
+	  		mv = new ModelAndView("redirect:/mealmain.do");
+	  		log.debug("login succeed");
+	  		session.setAttribute("member",member);
+	  	}else{
+	  		mv = new ModelAndView("redirect:/main.do");
+	  		log.debug("login fail");
+	  	}
+	  	
+	      return mv;
+	  }
+    
+//    @RequestMapping(value="/meallog.do")
+//    public ModelAndView checkMember(CommandMap commandMap,HttpSession session) throws Exception{
+//    	Member member = userService.loginMember(commandMap.getMap());
+//    	ModelAndView mv;
+//    	if(member != null){
+//    		mv = new ModelAndView("redirect:/mealmain.do");
+//    		log.debug("login succeed");
+//    		session.setAttribute("member",member);
+//    	}else{
+//    		mv = new ModelAndView("redirect:/main.do");
+//    		log.debug("login fail");
+//    	}
+//    	
+//        return mv;
+//    }
+	  
     
     @RequestMapping(value="/mealmain.do")
     public ModelAndView mealMain(CommandMap commandMap) throws Exception{
     	ModelAndView mv = new ModelAndView("/main/mainpage");
-
+    	log.debug("login after");
+        return mv;
+    }
+    @RequestMapping(value="/meallogout.do")
+    public ModelAndView mealLogout(CommandMap commandMap,HttpSession session) throws Exception{
+    	ModelAndView mv = new ModelAndView("redirect:/main.do");
+    	session.invalidate();
+    	log.debug("logout after");
         return mv;
     }
 }

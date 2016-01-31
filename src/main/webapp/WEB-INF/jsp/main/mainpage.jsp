@@ -24,7 +24,7 @@
 		$("#pdffile").on('chang', function(){
 			readURL(this);
 		});
-
+		
 		function readURL(input){
 			if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -73,11 +73,24 @@
 			<a class="navbar-brand" href="#">Home</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Logout</a></li>
+			<li class="active"><a href="#" id="logout">Logout</a></li>
 		</ul>
 	</div>
 </nav>
-
+<%@ include file="/WEB-INF/include/include-body.jspf" %>
+<script type="text/javascript">
+$("#logout").on("click", function(e){ //작성하기 버튼
+	alert("test1");
+    e.preventDefault();
+    fn_userLogOut();
+});
+function fn_userLogOut(){
+      var comSubmit = new ComSubmit("");
+      alert("test2");
+      comSubmit.setUrl("<c:url value='/meallogout.do' />");
+      comSubmit.submit();
+  }
+</script>
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-2 sidenav">

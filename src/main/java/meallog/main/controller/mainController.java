@@ -2,6 +2,7 @@ package meallog.main.controller;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,8 +22,14 @@ public class mainController {
     private MainService mainService;
      
     @RequestMapping(value="/main.do")
-    public ModelAndView introMeallog() throws Exception{
-        ModelAndView mv = new ModelAndView("/main/meallogin");
+    public ModelAndView introMeallog(HttpSession session) throws Exception{
+        ModelAndView mv;
+        log.debug("main");
+        if(session.getAttribute("member")!=null){
+        	mv = new ModelAndView("redirect:/mealmain.do");
+        }else{
+        	mv = new ModelAndView("/main/meallogin");
+        }
         return mv;
     }
 }

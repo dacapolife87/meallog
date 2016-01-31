@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  
+
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
   <title>Meal Login Page</title>
@@ -102,6 +104,13 @@
   </div>
 
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
+<%   
+response.setHeader("Cache-Control","no-store");   
+response.setHeader("Pragma","no-cache");   
+response.setDateHeader("Expires",0);   
+if (request.getProtocol().equals("HTTP/1.1")) 
+        response.setHeader("Cache-Control", "no-cache"); 
+%> 
 <script type="text/javascript">
   $(document).ready(function(){
     $("#logInBtn").click(function(){
