@@ -26,19 +26,19 @@ public class mainController {
         return mv;
     }
     
-    @RequestMapping(value="/joinMember.do")
-    public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
-        ModelAndView mv = new ModelAndView("redirect:/main.do");
-        mainService.joinMember(commandMap.getMap());
-
-         
-        return mv;
-    }
-    
-    @RequestMapping(value="//meallog.do")
-    public ModelAndView openMealMain(CommandMap commandMap) throws Exception{
-        ModelAndView mv = new ModelAndView("/main/mainpage");
-
-        return mv;
-    }
+//    @RequestMapping(value="/joinMember.do")
+//    public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
+//        ModelAndView mv = new ModelAndView("redirect:/main.do");
+//        mainService.joinMember(commandMap.getMap());
+//
+//         
+//        return mv;
+//    }
+//    
+//    @RequestMapping(value="/meallog.do")
+//    public ModelAndView openMealMain(CommandMap commandMap) throws Exception{
+//        ModelAndView mv = new ModelAndView("/main/mainpage");
+//
+//        return mv;
+//    }
 }

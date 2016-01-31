@@ -39,16 +39,16 @@
           <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
+          <form role="form" id="logInfrm">
             <div class="form-group">
               <label for="usrname"><span class="glyphicon glyphicon-user"></span> UserId</label>
-              <input type="text" class="form-control" id="username" placeholder="Enter UserId">
+              <input type="text" class="form-control" id="username" name="userID" placeholder="Enter UserId">
             </div>
             <div class="form-group">
               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" id="psw" placeholder="Enter password">
+              <input type="password" class="form-control" id="psw" name="userPW" placeholder="Enter password">
             </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button type="submit" class="btn btn-success btn-block" id="login"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -72,7 +72,7 @@
         <h4><span class="glyphicon glyphicon-user"></span>Sing Up</h4>
       </div>
       <div class="modal-body" style="padding:40px 50px;">
-        <form role="form" id="frm">
+        <form role="form" id="signUpfrm">
           <div class="form-group">
             <label for="usrname"><span class="glyphicon glyphicon-user"></span>UserId</label>
             <!-- Check exsist ID -->
@@ -105,30 +105,34 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $("#logInBtn").click(function(){
-    	fn_openBoardList();
-  //    $("#loginModal").modal();
+  //  	fn_openBoardList();
+      $("#loginModal").modal();
     });
 
     $("#signUpBtn").click(function(){
       $("#signupModal").modal();
+      alert("1");
     });
     
+    $("#login").on("click", function(e){ //작성하기 버튼
+        e.preventDefault();
+        fn_userLogin();
+    });
     $("#signup").on("click", function(e){ //작성하기 버튼
         e.preventDefault();
         fn_userSignUp();
     });
   });
   
-  function fn_openBoardList(){
-      var comSubmit = new ComSubmit();
+  function fn_userLogin(){
+      var comSubmit = new ComSubmit("logInfrm");
       comSubmit.setUrl("<c:url value='/meallog.do' />");
       comSubmit.submit();
   }
   
   function fn_userSignUp(){
-      var comSubmit = new ComSubmit("frm");
+      var comSubmit = new ComSubmit("signUpfrm");
       comSubmit.setUrl("<c:url value='/joinMember.do' />");
-
       comSubmit.submit();
   }
 </script>
