@@ -16,6 +16,7 @@ public class UserDAO extends AbstractDAO{
     public void joinMember(Map<String, Object> map) throws Exception{
         insert("member.joinMember", map);
     }
+	
 	@SuppressWarnings("unchecked")
     public Member loginMember(Map<String, Object> map) throws Exception{
 		return selectExist("member.loginMember", map);

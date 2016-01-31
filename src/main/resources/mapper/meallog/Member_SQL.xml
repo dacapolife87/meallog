@@ -7,7 +7,6 @@
     <![CDATA[
         INSERT INTO MEMBERLIST
         (
-            IDX,
             EMAIL, 
             PASSWORD, 
             NICK, 
@@ -15,11 +14,10 @@
         )
         VALUES
         (
-            null,
             #{signUp_userMail},
             #{signUp_psw},  
             #{signUp_userID},  
-            CURDATE()  
+            CURDATE()
         )
     ]]>
     </insert>

@@ -2,6 +2,7 @@ package meallog.user.controller;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,12 +32,13 @@ public class UserController {
     }
     
     @RequestMapping(value="/meallog.do")
-    public ModelAndView checkMember(CommandMap commandMap) throws Exception{
+    public ModelAndView checkMember(CommandMap commandMap,HttpSession session) throws Exception{
     	Member member = userService.loginMember(commandMap.getMap());
     	ModelAndView mv;
     	if(member != null){
     		mv = new ModelAndView("redirect:/mealmain.do");
     		log.debug("login succeed");
+    		session.setAttribute("member",member);
     	}else{
     		mv = new ModelAndView("redirect:/main.do");
     		log.debug("login fail");
