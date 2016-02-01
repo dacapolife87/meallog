@@ -20,6 +20,33 @@
             ORDER BY IDX DESC
         ]]>
     </select>
+    
+    <insert id="insertBoard" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO MEALLIST
+        (
+            USER_IDX, 
+            USER_NAME, 
+            NAME, 
+            CATEGORY, 
+            CONTENTS, 
+            EATDATE,
+            BSHARE,
+            WHENEAT
+        )
+        VALUES
+        (
+            '12', 
+            'USER_NAME', 
+            'NAME',
+            CATEGORY = #{CATEGORY},
+            CONTENTS = #{CONTENTS},
+            CURDATE(), 
+            1,
+            WHENEAT = #{WHENEAT}        
+        )
+       ]]>
+	</insert>
      
      
 </mapper>

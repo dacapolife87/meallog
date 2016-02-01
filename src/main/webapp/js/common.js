@@ -31,4 +31,5 @@ function ComSubmit(opt_formId) {
         frm.method = "post";
         frm.submit();   
     };
+    alert(this.formId.toString());
 }

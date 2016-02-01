@@ -77,20 +77,7 @@
 		</ul>
 	</div>
 </nav>
-<%@ include file="/WEB-INF/include/include-body.jspf" %>
-<script type="text/javascript">
-$("#logout").on("click", function(e){ //작성하기 버튼
-	alert("test1");
-    e.preventDefault();
-    fn_userLogOut();
-});
-function fn_userLogOut(){
-      var comSubmit = new ComSubmit("");
-      alert("test2");
-      comSubmit.setUrl("<c:url value='/meallogout.do' />");
-      comSubmit.submit();
-  }
-</script>
+
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -119,7 +106,7 @@ function fn_userLogOut(){
       		<div class="jumbotron text-center">
       			<p>Upload Your Meal</p>
       			<img id="preview_img" src="#" width="400" height="300"/>
-      				<form role="form">
+      				<form role="form" id="mealfrm" name="mealfrm" enctype="multipart/form-data">
       					<input type="file" name="file" style="visibility:hidden;" id="pdffile" />
 						<div class="form-group pull-left">
 							<lavel>Upload Image</lavel>
@@ -129,21 +116,21 @@ function fn_userLogOut(){
 						<br/><br/><br/>
 						<div class="form-group pull-left">
 							<label class="pull-left">Date </label><br/>
-							<input type="date" name="bday" min="1979-12-31"></input>
+							<input type="date" id="bday" name="bday" min="1979-12-31"></input>
 						</div><br/><br/><br/><br/>
 						<div class="form-group pull-left">
 							<label class="pull-left">Eat Time</label><br/>
-							<input type="text"></input>
+							<input type="text" id="WHENEAT" name="WHENEAT"></input>
 						</div><br/><br/><br/><br/>
 						<div class="form-group pull-left">
 							<label class="pull-left">Food Category</label><br/>
-							<input type="text"></input>
+							<input type="text" id="CATEGORY" name="CATEGORY"></input>
 						</div><br/><br/><br/><br/>
 						<div class="form-group ">
 							<label class="pull-left">Comment</label>
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+							<textarea class="form-control" rows="5" id="CONTENTS" name="CONTENTS"></textarea>
 						</div><br/><br/><br/>
-						<button type="submit" class="btn btn-success btn-default">Submit</button>
+						<button type="submit" class="btn btn-success btn-default" id="mealsubmit">Submit</button>
 						<button type="submit" class="btn btn-danger btn-default">Cancel</button>
       				</form>
       		</div>
@@ -155,5 +142,29 @@ function fn_userLogOut(){
     </div>
   </div>
 </div>
+<%@ include file="/WEB-INF/include/include-body.jspf" %>
+<script type="text/javascript">
+$("#logout").on("click", function(e){ //작성하기 버튼
+	alert("test1");
+    e.preventDefault();
+    fn_userLogOut();
+});
+$("#mealsubmit").on("click", function(e){ //작성하기 버튼
+    e.preventDefault();
+    fn_insertMeal();
+});
+function fn_userLogOut(){
+      var comSubmit = new ComSubmit("");
+      alert("test2");
+      comSubmit.setUrl("<c:url value='/meallogout.do' />");
+      comSubmit.submit();
+  }
+function fn_insertMeal(){
+    var comSubmit = new ComSubmit("mealfrm");
+    comSubmit.setUrl("<c:url value='/meal/mealBoardWrite.do' />");
+    comSubmit.submit();
+}
+</script>
 </body>
+
 </html>

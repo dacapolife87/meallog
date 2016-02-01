@@ -21,5 +21,13 @@ public class MealServiceImpl implements MealService{
 		// TODO Auto-generated method stub
 		return mealDAO.selectBoardList(meal);
 	}
+
+	@Override
+	public void insertBoard(Map<String, Object> meal) throws Exception {
+		// TODO Auto-generated method stub
+		
+		mealDAO.insertBoard(meal);
+		
+	}
  
 }

@@ -4,6 +4,8 @@ package meallog.meal.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +14,17 @@ import meallog.meal.vo.Meal;
 
 @Repository("mealDAO")
 public class MealDAO extends AbstractDAO{
+	protected Log log = LogFactory.getLog(AbstractDAO.class);
+	
+	
     @SuppressWarnings("unchecked")
     public List<Meal> selectBoardList(Meal meal) throws Exception{
     	return (List<Meal>)selectList("meal.selectMealList", meal);
+    }
+    
+    public void insertBoard(Map<String, Object> meal) throws Exception{
+        log.debug("test : "+meal);
+    	insert("meal.insertBoard", meal);
     }
  
 }
