@@ -23,8 +23,14 @@ public class MealDAO extends AbstractDAO{
     }
     
     public void insertBoard(Map<String, Object> meal) throws Exception{
-        log.debug("test : "+meal);
+        log.debug("test1 : "+meal);
     	insert("meal.insertBoard", meal);
+    	log.debug("test2 : "+meal);
     }
+    
+    public void insertFile(Map<String, Object> map) throws Exception{
+        insert("meal.insertFile", map);
+    }
+
  
 }

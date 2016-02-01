@@ -21,7 +21,7 @@
         ]]>
     </select>
     
-    <insert id="insertBoard" parameterType="hashmap">
+    <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
         (
@@ -32,7 +32,8 @@
             CONTENTS, 
             EATDATE,
             BSHARE,
-            WHENEAT
+            WHENEAT,
+            PICPATH
         )
         VALUES
         (
@@ -43,10 +44,35 @@
             CONTENTS = #{CONTENTS},
             CURDATE(), 
             1,
-            WHENEAT = #{WHENEAT}        
+            WHENEAT = #{WHENEAT},
+            'PICPATH'   
         )
        ]]>
 	</insert>
+	
+	<insert id="insertFile" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO MEALPIC
+        (
+            MEALLIST_IDX,
+            ORIGINAL_FILE_NAME,
+            STORED_FILE_NAME,
+            FILE_SIZE,
+            CREA_DTM,
+            USER_NICK
+        )
+        VALUES
+        (
+            #{BOARD_IDX},
+            #{ORIGINAL_FILE_NAME},
+            #{STORED_FILE_NAME},
+            #{FILE_SIZE},
+            CURDATE(),
+            'Admin'
+        )
+    ]]>
+	</insert>
+	
      
      
 </mapper>
