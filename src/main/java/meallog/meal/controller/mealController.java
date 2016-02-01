@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,10 +28,10 @@ public class mealController {
     }
     
     @RequestMapping(value="/meal/mealBoardWrite.do")
-    public ModelAndView insertMealBoard(CommandMap meal) throws Exception{
-        ModelAndView mv = new ModelAndView("redirect:/main/mealmain.do");
+    public ModelAndView insertMealBoard(CommandMap meal, HttpServletRequest request) throws Exception{
+        ModelAndView mv = new ModelAndView("redirect:/mealmain.do");
         
-        mealService.insertBoard(meal.getMap());
+        mealService.insertBoard(meal.getMap(),request);
         
         return mv;
     }
