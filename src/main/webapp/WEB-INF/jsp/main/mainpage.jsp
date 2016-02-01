@@ -127,7 +127,7 @@
 							<input type="text" id="CATEGORY" name="CATEGORY"></input>
 						</div><br/><br/><br/><br/>
 						<div class="form-group ">
-							<label class="pull-left">Comment</label>
+							<label class="pull-left">TestJang</label>
 							<textarea class="form-control" rows="5" id="CONTENTS" name="CONTENTS"></textarea>
 						</div><br/><br/><br/>
 						<button type="submit" class="btn btn-success btn-default" id="mealsubmit">Submit</button>
