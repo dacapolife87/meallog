@@ -93,48 +93,59 @@
 
     <div class="col-sm-10">
       <div class="tab-content">
-      	<div id="section1" class="tab-pane fade in active">
-      		<p>My_Meal</p>
-      	</div>
-      	<div id="section2" class="tab-pane fade">
-      		<p>Other_Meal</p>
-      	</div>
-      	<div id="section3" class="tab-pane fade">
-      		<p>Average_Meal</p>
-      	</div>
-      	<div id="section4" class="tab-pane fade">
-      		<div class="jumbotron text-center">
-      			<p>Upload Your Meal</p>
-      			<img id="preview_img" src="#" width="400" height="300"/>
-      				<form role="form" id="mealfrm" name="mealfrm" enctype="multipart/form-data">
-      					<input type="file" name="file" style="visibility:hidden;" id="pdffile" />
-						<div class="form-group pull-left">
-							<lavel>Upload Image</lavel>
-							<input type="text" id="subfile" class="input-xlarge" size="50">
-							<a class="btn btn-info" onclick="$('#pdffile').click();">Browse</a>
-						</div>
-						<br/><br/><br/>
-						<div class="form-group pull-left">
-							<label class="pull-left">Date </label><br/>
-							<input type="date" id="bday" name="bday" min="1979-12-31"></input>
-						</div><br/><br/><br/><br/>
-						<div class="form-group pull-left">
-							<label class="pull-left">Eat Time</label><br/>
-							<input type="text" id="WHENEAT" name="WHENEAT"></input>
-						</div><br/><br/><br/><br/>
-						<div class="form-group pull-left">
-							<label class="pull-left">Food Category</label><br/>
-							<input type="text" id="CATEGORY" name="CATEGORY"></input>
-						</div><br/><br/><br/><br/>
-						<div class="form-group ">
-							<label class="pull-left">TestJang</label>
-							<textarea class="form-control" rows="5" id="CONTENTS" name="CONTENTS"></textarea>
-						</div><br/><br/><br/>
-						<button type="submit" class="btn btn-success btn-default" id="mealsubmit">Submit</button>
-						<button type="submit" class="btn btn-danger btn-default">Cancel</button>
-      				</form>
-      		</div>
-      	</div>
+        <div id="section1" class="tab-pane fade in active">
+          <p>My_Meal</p>
+        </div>
+        <div id="section2" class="tab-pane fade">
+          <p>Other_Meal</p>
+        </div>
+        <div id="section3" class="tab-pane fade">
+          <p>Average_Meal</p>
+        </div>
+        <div id="section4" class="tab-pane fade">
+          <div class="jumbotron text-center">
+            <p>Upload Your Meal</p>
+            <img id="preview_img" src="#" width="400" height="300"/>
+              <form role="form" id="mealfrm" name="mealfrm" enctype="multipart/form-data">
+              <div class="form-group pull-left">
+                  <label class="pull-left">Subject</label><br/>
+                  <input type="text" size="50"></input>
+              </div><br/><br/><br/>
+              <input type="file" name="file" style="visibility:hidden;" id="pdffile" />
+            <div class="form-group pull-left">
+              <lavel class="pull-left">Upload Image</lavel><br/>
+              <input type="text" id="subfile" class="input-xlarge" size="50">
+              <a class="btn btn-info" onclick="$('#pdffile').click();">Browse</a>
+            </div>
+            <br/><br/><br/><br/>
+            <div class="form-group pull-left">
+              <label class="pull-left">Date </label><br/>
+              <input type="date" id="bday" name="bday" min="1979-12-31"></input>
+            </div><br/><br/><br/><br/>
+            <div class="form-group pull-left">
+              <label for="sel_Time" class="pull-left">Eat Time</label><br/>
+              <select class="form-control pull-left" id="sel1">
+                <option>Morning</option>
+                <option>AfterNoon</option>
+                <option>Evening</option>
+              </select>
+            </div><br/><br/><br/><br/>
+            <div class="form-group pull-left">
+              <label class="pull-left">Food Category</label><br/>
+              <input type="text" id="CATEGORY" name="CATEGORY"></input>
+            </div><br/><br/><br/><br/>
+            <div class="form-group ">
+              <label class="pull-left">Comment</label>
+              <textarea class="form-control" rows="5" id="CONTENTS" name="CONTENTS"></textarea>
+            </div><br/><br/><br/>
+            <div class="form-group checkbox">
+              <label class="pull-left"><input type="checkbox" value=""><span class="glyphicon glyphicon-share"></span>Share</label>
+              </div>
+            <button type="submit" class="btn btn-success btn-default" id="mealsubmit">Submit</button>
+            <button type="submit" class="btn btn-danger btn-default">Cancel</button>
+              </form>
+          </div>
+        </div>
       	<div id="setting" class="tab-pane fade">
       		<p>Settings</p>
       	</div>
