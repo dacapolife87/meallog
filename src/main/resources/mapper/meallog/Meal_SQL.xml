@@ -24,8 +24,7 @@
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
-        (
-            USER_IDX, 
+        ( 
             USER_NAME, 
             NAME, 
             CATEGORY, 
@@ -37,15 +36,14 @@
         )
         VALUES
         (
-            '12', 
-            'USER_NAME', 
-            'NAME',
-            CATEGORY = #{CATEGORY},
-            CONTENTS = #{CONTENTS},
+            #{USERNICK}, 
+            #{NAME},
+            #{CATEGORY},
+            #{CONTENTS},
             CURDATE(), 
-            1,
-            WHENEAT = #{WHENEAT},
-            'PICPATH'   
+            ifnull (#{SHARE}, 0 ),  
+            #{WHENEAT},
+            'PICPATH'
         )
        ]]>
 	</insert>

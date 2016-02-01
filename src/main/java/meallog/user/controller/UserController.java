@@ -33,23 +33,9 @@ public class UserController {
         return mv;
     }
     
-//    @RequestMapping(value="/meallog.do")
-//    public String checkMember(CommandMap commandMap,HttpSession session) throws Exception{
-//    	Member member = userService.loginMember(commandMap.getMap());
-//
-//    	if(member != null){
-//    		
-//    		log.debug("login succeed");
-//    		session.setAttribute("member",member);
-//    		return "redirect:/mealmain.do";
-//    	}else{
-//    		log.debug("login fail");
-//    		return "redirect:/main.do";
-//    	}
-//    }
     
 	  @RequestMapping(value="/meallog.do")
-	  public ModelAndView checkMember(CommandMap commandMap,HttpSession session) throws Exception{
+	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session) throws Exception{
 	  	Member member = userService.loginMember(commandMap.getMap());
 	  	ModelAndView mv;
 	  	if(member != null){
@@ -63,23 +49,6 @@ public class UserController {
 	  	
 	      return mv;
 	  }
-    
-//    @RequestMapping(value="/meallog.do")
-//    public ModelAndView checkMember(CommandMap commandMap,HttpSession session) throws Exception{
-//    	Member member = userService.loginMember(commandMap.getMap());
-//    	ModelAndView mv;
-//    	if(member != null){
-//    		mv = new ModelAndView("redirect:/mealmain.do");
-//    		log.debug("login succeed");
-//    		session.setAttribute("member",member);
-//    	}else{
-//    		mv = new ModelAndView("redirect:/main.do");
-//    		log.debug("login fail");
-//    	}
-//    	
-//        return mv;
-//    }
-	  
     
     @RequestMapping(value="/mealmain.do")
     public ModelAndView mealMain(CommandMap commandMap) throws Exception{

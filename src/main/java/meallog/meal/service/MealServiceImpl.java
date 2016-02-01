@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,6 +19,7 @@ import meallog.common.dao.AbstractDAO;
 import meallog.common.util.FileUtils;
 import meallog.meal.dao.MealDAO;
 import meallog.meal.vo.Meal;
+import meallog.user.vo.Member;
 
 @Service("mealService")
 public class MealServiceImpl implements MealService{
@@ -36,9 +38,11 @@ public class MealServiceImpl implements MealService{
 	}
 
 	@Override
-	public void insertBoard(Map<String, Object> meal, HttpServletRequest request) throws Exception {
+	public void insertBoard(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		
+		Member member = (Member) session.getAttribute("member");
+		log.debug("session : "+member);
+		meal.put("USERNICK", member.getNick());
 		mealDAO.insertBoard(meal);
 		
 		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, request);

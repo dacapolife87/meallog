@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="meallog.user.vo.Member"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %> 
 <title>Meal First Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,8 +73,17 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">Home</a>
 		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#" id="logout">Logout</a></li>
+		<ul class="nav navbar-nav"   style="float:right;">
+			<li  class="navbar-brand">
+				<div style="color:white">
+				<c:if test="${!empty sessionScope.member and 
+              		!empty sessionScope.member.email}">${sessionScope.member.nick} 님 환영합니다.
+              		</div>
+              	</c:if>
+			</li>
+			<li class="active">
+				<a href="#" id="logout">Logout</a>
+			</li>
 		</ul>
 	</div>
 </nav>
@@ -109,7 +119,7 @@
               <form role="form" id="mealfrm" name="mealfrm" enctype="multipart/form-data">
               <div class="form-group pull-left">
                   <label class="pull-left">Subject</label><br/>
-                  <input type="text" size="50"></input>
+                  <input type="text" size="50" id="NAME" name="NAME"></input>
               </div><br/><br/><br/>
               <input type="file" name="file" style="visibility:hidden;" id="pdffile" />
             <div class="form-group pull-left">
@@ -124,7 +134,7 @@
             </div><br/><br/><br/><br/>
             <div class="form-group pull-left">
               <label for="sel_Time" class="pull-left">Eat Time</label><br/>
-              <select class="form-control pull-left" id="sel1">
+              <select class="form-control pull-left" id="sel1" id="WHENEAT" name="WHENEAT">
                 <option>Morning</option>
                 <option>AfterNoon</option>
                 <option>Evening</option>
@@ -139,7 +149,7 @@
               <textarea class="form-control" rows="5" id="CONTENTS" name="CONTENTS"></textarea>
             </div><br/><br/><br/>
             <div class="form-group checkbox">
-              <label class="pull-left"><input type="checkbox" value=""><span class="glyphicon glyphicon-share"></span>Share</label>
+              <label class="pull-left"><input type="checkbox" id="SHARE" name="SHARE" value="1"><span class="glyphicon glyphicon-share"></span>Share</label>
               </div>
             <button type="submit" class="btn btn-success btn-default" id="mealsubmit">Submit</button>
             <button type="submit" class="btn btn-danger btn-default">Cancel</button>
