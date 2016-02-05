@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Member loginMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
+		log.debug("login data : "+map);
 		return userDAO.loginMember(map);
 	}
 
