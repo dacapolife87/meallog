@@ -45,19 +45,19 @@ public class UserController {
 	  @RequestMapping(value="/meallog.do")
 	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
 	  	Member member = userService.loginMember(commandMap.getMap());
-	  	Base64 base;
-	  	String auth1;
-	  	byte[] auth2;
-	  	log.debug("login data check");
-	  	log.debug("login data11 : "+request.getHeader("Authorization"));
-	  	
-	  	
-	  	auth1 = request.getHeader("Authorization");
-	  	auth2 = Base64.decode(auth1.getBytes());
-	  	
-	  	String byteToString = new String(auth2,0,auth2.length);
-	  	
-	  	log.debug("byteToString : "+byteToString);
+//	  	Base64 base;
+//	  	String auth1;
+//	  	byte[] auth2;
+//	  	log.debug("login data check");
+//	  	log.debug("login data11 : "+request.getHeader("Authorization"));
+//	  	
+//	  	
+//	  	auth1 = request.getHeader("Authorization");
+//	  	auth2 = Base64.decode(auth1.getBytes());
+//	  	
+//	  	String byteToString = new String(auth2,0,auth2.length);
+//	  	
+//	  	log.debug("byteToString : "+byteToString);
 	  	
 //	 // The token is 'valid' so magically get a user id from it 
 //	  	 Long id = getUserIdFromToken(auth); 
@@ -66,8 +66,8 @@ public class UserController {
 //	  	Authentication auth = new DemoAuthenticationToken(id); 
 //	  	SecurityContextHolder.getContext().setAuthentication(auth);             
 
-	  	
-	  	log.debug("login data2 : "+commandMap.getMap());
+//	  	
+//	  	log.debug("login data2 : "+commandMap.getMap());
 	  	ModelAndView mv;
 	  	if(member != null){
 	  		mv = new ModelAndView("redirect:/mealmain.do");
