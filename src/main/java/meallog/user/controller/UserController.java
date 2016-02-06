@@ -1,14 +1,22 @@
 package meallog.user.controller;
 
 
+
+
 import javax.annotation.Resource;
+import javax.security.sasl.AuthorizeCallback;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.event.AuthorizedEvent;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,8 +43,31 @@ public class UserController {
     
     
 	  @RequestMapping(value="/meallog.do")
-	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session) throws Exception{
+	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
 	  	Member member = userService.loginMember(commandMap.getMap());
+	  	Base64 base;
+	  	String auth1;
+	  	byte[] auth2;
+	  	log.debug("login data check");
+	  	log.debug("login data11 : "+request.getHeader("Authorization"));
+	  	
+	  	
+	  	auth1 = request.getHeader("Authorization");
+	  	auth2 = Base64.decode(auth1.getBytes());
+	  	
+	  	String byteToString = new String(auth2,0,auth2.length);
+	  	
+	  	log.debug("byteToString : "+byteToString);
+	  	
+//	 // The token is 'valid' so magically get a user id from it 
+//	  	 Long id = getUserIdFromToken(auth); 
+//	  	         
+//	  	 // Create our Authentication and let Spring know about it 
+//	  	Authentication auth = new DemoAuthenticationToken(id); 
+//	  	SecurityContextHolder.getContext().setAuthentication(auth);             
+
+	  	
+	  	log.debug("login data2 : "+commandMap.getMap());
 	  	ModelAndView mv;
 	  	if(member != null){
 	  		mv = new ModelAndView("redirect:/mealmain.do");

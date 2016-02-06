@@ -24,6 +24,7 @@ public class mainController {
     @RequestMapping(value="/main.do")
     public ModelAndView introMeallog(HttpSession session) throws Exception{
         ModelAndView mv;
+
         log.debug("main");
         if(session.getAttribute("member")!=null){
         	mv = new ModelAndView("redirect:/mealmain.do");
