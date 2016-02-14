@@ -82,19 +82,24 @@ public class UserController {
     public ModelAndView mealMain(CommandMap commandMap,HttpSession session) throws Exception{
     	ModelAndView mv = new ModelAndView("/main/mainpage");
     	log.debug("login after");
-    	log.debug("login1 : "+session);
-        log.debug("login2 : "+session.getSessionContext());
-        log.debug("login3 : "+session.getValue("member"));
+    	log.debug("login : "+session);
+        log.debug("login : "+session.getValue("member"));
         return mv;
     }
     @RequestMapping(value="/meal/logout.do")
-    public ModelAndView mealLogout(CommandMap commandMap,HttpSession session) throws Exception{
-    	ModelAndView mv = new ModelAndView("redirect:/main.do");
-    	log.debug("logout after1");
-    	log.debug("logout1 : "+session);
-        log.debug("logout2 : "+session.getSessionContext());
-        log.debug("logout3 : "+session.getValue("member"));
-    	session.invalidate();    	
+    public ModelAndView mealLogout(CommandMap commandMap,HttpSession session,HttpServletResponse                 
+    		   response,HttpServletRequest request) throws Exception{
+    	ModelAndView mv = new ModelAndView("/main/logOut");
+    	
+    	final String refererUrl = request.getHeader("Referer");
+    	response.setHeader(refererUrl, "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        session.removeAttribute("member");
+    	log.debug("logout after");
+    	log.debug("logout : "+session);
+        log.debug("logout : "+session.getValue("member"));
+    	session.invalidate();
         return mv;
     }
     
