@@ -3,6 +3,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%   
+response.setHeader("cache-control","no-store"); // http 1.1   
+response.setHeader("Pragma","no-cache"); // http 1.0   
+response.setDateHeader("Expires",0); // proxy server 에 cache방지.   
+%>  
+
+
 <%@ include file="/WEB-INF/include/include-header.jspf" %> 
 <title>Meal First Page</title>
   <meta charset="utf-8">
