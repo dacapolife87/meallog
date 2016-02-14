@@ -2,7 +2,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  
+
+<%   
+response.setHeader("cache-control","no-store"); // http 1.1   
+response.setHeader("Pragma","no-cache"); // http 1.0   
+response.setDateHeader("Expires",0); // proxy server 에 cache방지.   
+%>  
 
 <%@ include file="/WEB-INF/include/include-header.jspf" %>
   <!-- Theme Made By www.w3schools.com - No Copyright -->
@@ -18,6 +23,17 @@
       color: #fff;
   }
   </style>
+<!--   <script>
+	$(document).ready(
+			function(){
+				var bsession;
+				bsession = <% session.getAttribute("MEMBER");%>
+				
+				if(bsession != null){
+					location.href='/meallog/mealmain.do'
+				}
+			});
+  </script> -->
 </head>
 <body>
 
@@ -104,38 +120,32 @@
   </div>
 
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
-<%   
-response.setHeader("Cache-Control","no-store");   
-response.setHeader("Pragma","no-cache");   
-response.setDateHeader("Expires",0);   
-if (request.getProtocol().equals("HTTP/1.1")) 
-        response.setHeader("Cache-Control", "no-cache"); 
-%> 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("#logInBtn").click(function(){
-  //  	fn_openBoardList();
-      $("#loginModal").modal();
-    });
 
-    $("#signUpBtn").click(function(){
-      $("#signupModal").modal();
-      alert("1");
-    });
-    
-    $("#login").on("click", function(e){ //작성하기 버튼
-        e.preventDefault();
-        fn_userLogin();
-    });
-    $("#signup").on("click", function(e){ //작성하기 버튼
-        e.preventDefault();
-        fn_userSignUp();
-    });
-  });
+<script type="text/javascript">
+	$(document).ready(
+		function(){
+
+			
+			$("#logInBtn").click(function(){
+				$("#loginModal").modal();
+			});
+			$("#signUpBtn").click(function(){
+				$("#signupModal").modal();
+			});
+			$("#login").on("click", function(e){ //작성하기 버튼
+				e.preventDefault();
+				fn_userLogin();
+			});
+			$("#signup").on("click", function(e){ //작성하기 버튼
+				e.preventDefault();
+				fn_userSignUp();
+			});
+		}
+	);
   
   function fn_userLogin(){
       var comSubmit = new ComSubmit("logInfrm");
-      comSubmit.setUrl("<c:url value='/meallog.do' />");
+      comSubmit.setUrl("<c:url value='/meallogin.do' />");
       comSubmit.submit();
   }
   

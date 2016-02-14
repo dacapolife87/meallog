@@ -39,7 +39,7 @@ public class UserController {
     }
     
     
-	  @RequestMapping(value="/meallog.do")
+	  @RequestMapping(value="/meallogin.do")
 	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
 	  	Member member = userService.loginMember(commandMap.getMap());
 //	  	Base64 base;
@@ -67,34 +67,47 @@ public class UserController {
 //	  	log.debug("login data2 : "+commandMap.getMap());
 	  	ModelAndView mv;
 	  	if(member != null){
-	  		mv = new ModelAndView("redirect:/mealmain.do");
+	  		mv = new ModelAndView("redirect:/logSucceed.do");
 	  		log.debug("login succeed");
 	  		session.setAttribute("member",member);
 	  	}else{
-	  		mv = new ModelAndView("redirect:/meallogFail.do");
+	  		mv = new ModelAndView("redirect:/logFail.do");
 	  		log.debug("login fail");
 	  	}
 	  	
 	      return mv;
 	  }
     
-    @RequestMapping(value="/mealmain.do")
-    public ModelAndView mealMain(CommandMap commandMap) throws Exception{
+    @RequestMapping(value="/meal/main.do")
+    public ModelAndView mealMain(CommandMap commandMap,HttpSession session) throws Exception{
     	ModelAndView mv = new ModelAndView("/main/mainpage");
     	log.debug("login after");
+    	log.debug("login1 : "+session);
+        log.debug("login2 : "+session.getSessionContext());
+        log.debug("login3 : "+session.getValue("member"));
         return mv;
     }
-    @RequestMapping(value="/meallogout.do")
+    @RequestMapping(value="/meal/logout.do")
     public ModelAndView mealLogout(CommandMap commandMap,HttpSession session) throws Exception{
     	ModelAndView mv = new ModelAndView("redirect:/main.do");
-    	session.invalidate();
-    	log.debug("logout after");
+    	log.debug("logout after1");
+    	log.debug("logout1 : "+session);
+        log.debug("logout2 : "+session.getSessionContext());
+        log.debug("logout3 : "+session.getValue("member"));
+    	session.invalidate();    	
         return mv;
     }
-    @RequestMapping(value="/meallogFail.do")
+    
+    @RequestMapping(value="/logSucceed.do")
+    public ModelAndView mealLoginSucced(CommandMap commandMap) throws Exception{
+    	ModelAndView mv = new ModelAndView("/main/logInSucceed");
+    	log.debug("login Succeed Func");
+        return mv;
+    }
+    @RequestMapping(value="/logFail.do")
     public ModelAndView mealLoginFail(CommandMap commandMap) throws Exception{
     	ModelAndView mv = new ModelAndView("/main/logInfail");
-    	log.debug("login fail");
+    	log.debug("login fail Func");
         return mv;
     }
 }

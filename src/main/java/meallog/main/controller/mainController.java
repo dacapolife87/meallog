@@ -25,9 +25,11 @@ public class mainController {
     public ModelAndView introMeallog(HttpSession session) throws Exception{
         ModelAndView mv;
 
-        log.debug("main");
+        log.debug("main : "+session);
+        log.debug("main : "+session.getSessionContext());
+        log.debug("main : "+session.getValue("member"));
         if(session.getAttribute("member")!=null){
-        	mv = new ModelAndView("redirect:/mealmain.do");
+        	mv = new ModelAndView("redirect:/meal/main.do");
         }else{
         	mv = new ModelAndView("/main/meallogin");
         }

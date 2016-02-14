@@ -165,8 +165,10 @@
 </div>
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
 <script type="text/javascript">
+var bsession;
+bsession = <% session.getAttribute("member");%>
+
 $("#logout").on("click", function(e){ //작성하기 버튼
-	alert("test1");
     e.preventDefault();
     fn_userLogOut();
 });
@@ -176,8 +178,7 @@ $("#mealsubmit").on("click", function(e){ //작성하기 버튼
 });
 function fn_userLogOut(){
       var comSubmit = new ComSubmit("");
-      alert("test2");
-      comSubmit.setUrl("<c:url value='/meallogout.do' />");
+      comSubmit.setUrl("<c:url value='/meal/logout.do' />");
       comSubmit.submit();
   }
 function fn_insertMeal(){
