@@ -15,7 +15,7 @@
             <bean class="meallog.common.resolver.CustomMapArgumentResolver"></bean>       
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
-	
+
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
