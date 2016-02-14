@@ -1,8 +1,5 @@
 package meallog.user.controller;
 
-
-
-
 import javax.annotation.Resource;
 import javax.security.sasl.AuthorizeCallback;
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +71,7 @@ public class UserController {
 	  		log.debug("login succeed");
 	  		session.setAttribute("member",member);
 	  	}else{
-	  		mv = new ModelAndView("redirect:/main.do");
+	  		mv = new ModelAndView("redirect:/meallogFail.do");
 	  		log.debug("login fail");
 	  	}
 	  	
@@ -92,6 +89,12 @@ public class UserController {
     	ModelAndView mv = new ModelAndView("redirect:/main.do");
     	session.invalidate();
     	log.debug("logout after");
+        return mv;
+    }
+    @RequestMapping(value="/meallogFail.do")
+    public ModelAndView mealLoginFail(CommandMap commandMap) throws Exception{
+    	ModelAndView mv = new ModelAndView("/main/logInfail");
+    	log.debug("login fail");
         return mv;
     }
 }

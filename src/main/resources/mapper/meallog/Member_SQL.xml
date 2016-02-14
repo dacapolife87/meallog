@@ -34,12 +34,8 @@
                 EMAIL = #{userID}
                 AND
                 PASSWORD = #{userPW}
-
     ]]>
 	</select>
-    
-     
-     
 </mapper>
  
  
