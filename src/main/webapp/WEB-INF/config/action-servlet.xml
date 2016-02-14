@@ -16,18 +16,15 @@
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
-	
+
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/meallog/meallog.do"/>
-	    	<bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-	    	    <property name="cacheSeconds" value="0" />
-	    	    <property name="useExpiresHeader" value="true" />
-	    	    <property name="useCacheControlHeader" value="true" />
-	    	    <property name="useCacheControlNoStore" value="true" />
-	    	</bean>
+			<mvc:mapping path="/meal/**"/>
+	    	<bean class="meallog.common.session.SessionCheck"></bean>
   		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	
   
 	<mvc:interceptors>
 		<mvc:interceptor>
