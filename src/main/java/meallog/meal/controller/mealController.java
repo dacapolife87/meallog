@@ -30,7 +30,7 @@ public class mealController {
     
     @RequestMapping(value="/meal/mealBoardWrite.do")
     public ModelAndView insertMealBoard(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
-        ModelAndView mv = new ModelAndView("redirect:/mealmain.do");
+        ModelAndView mv = new ModelAndView("redirect:/meal/main.do");
         
         mealService.insertBoard(meal.getMap(),request,session);
         
