@@ -3,18 +3,18 @@ package meallog.user.vo;
 import java.util.Date;
 
 public class Member {
-	protected int 		no;
+	protected int 		idx;
 	protected String 	email;
 	protected String 	password;
 	protected String 	nick;
-	protected Date		createdDate;
+	protected Date		joinDate;
 	protected Date		modifiedDate;
 	
-	public int getNo() {
-		return no;
+	public int getIdx() {
+		return idx;
 	}
-	public Member setNo(int no) {
-		this.no = no;
+	public Member setIdx(int idx) {
+		this.idx = idx;
 		return this;
 	}
 	public String getEmail() {
@@ -38,11 +38,11 @@ public class Member {
 		this.nick = nick;
 		return this;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
+	public Date getJoinDate() {
+		return joinDate;
 	}
-	public Member setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public Member setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
 		return this;
 	}
 	public Date getModifiedDate() {

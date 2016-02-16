@@ -7,16 +7,21 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import meallog.common.common.CommandMap;
+import meallog.common.dao.AbstractDAO;
 import meallog.meal.service.MealService;
 import meallog.meal.vo.Meal;
 
 @Controller
 public class mealController {
+	protected Log log = LogFactory.getLog(AbstractDAO.class);
+	
     @Resource(name="mealService")
     private MealService mealService;
      
@@ -25,6 +30,17 @@ public class mealController {
         ModelAndView mv = new ModelAndView("/meal/mealList");
         List<Meal> list = mealService.selectBoardList(meal);
         mv.addObject("list", list);
+        return mv;
+    }
+    
+    @RequestMapping(value="/meal/userMealList.do")
+    public ModelAndView userMealList(HttpSession session) throws Exception{
+        ModelAndView mv = new ModelAndView();
+        List<Meal> list = mealService.selectUserMealList(session);
+        mv.addObject("list", list);
+        log.debug("userMealList");
+        log.debug(list);
+        
         return mv;
     }
     

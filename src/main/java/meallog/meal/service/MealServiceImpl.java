@@ -1,6 +1,6 @@
 package meallog.meal.service;
 
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import meallog.common.dao.AbstractDAO;
 import meallog.common.util.FileUtils;
@@ -38,6 +35,14 @@ public class MealServiceImpl implements MealService{
 	}
 
 	@Override
+	public List<Meal> selectUserMealList(HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		Member member = (Member) session.getAttribute("member");
+		
+		return mealDAO.selectUserMealList(member);
+	}
+ 
+	@Override
 	public void insertBoard(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		Member member = (Member) session.getAttribute("member");
@@ -52,5 +57,5 @@ public class MealServiceImpl implements MealService{
 
 
 	}
- 
+
 }

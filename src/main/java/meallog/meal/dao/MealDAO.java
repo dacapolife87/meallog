@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import meallog.common.dao.AbstractDAO;
 import meallog.meal.vo.Meal;
+import meallog.user.vo.Member;
 
 @Repository("mealDAO")
 public class MealDAO extends AbstractDAO{
@@ -20,6 +21,11 @@ public class MealDAO extends AbstractDAO{
     @SuppressWarnings("unchecked")
     public List<Meal> selectBoardList(Meal meal) throws Exception{
     	return (List<Meal>)selectList("meal.selectMealList", meal);
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<Meal> selectUserMealList(Member member) throws Exception{
+    	return (List<Meal>)selectList("meal.selectUserMealList", member);
     }
     
     public void insertBoard(Map<String, Object> meal) throws Exception{

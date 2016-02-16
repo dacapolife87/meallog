@@ -1,19 +1,13 @@
 package meallog.user.controller;
 
 import javax.annotation.Resource;
-import javax.security.sasl.AuthorizeCallback;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.access.event.AuthorizedEvent;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +22,7 @@ public class UserController {
     
 	@Resource(name="userService")
     private UserService userService;
-     
+	
     @RequestMapping(value="/joinMember.do")
     public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/main.do");
@@ -70,6 +64,7 @@ public class UserController {
 	  		mv = new ModelAndView("redirect:/logSucceed.do");
 	  		log.debug("login succeed");
 	  		session.setAttribute("member",member);
+
 	  	}else{
 	  		mv = new ModelAndView("redirect:/logFail.do");
 	  		log.debug("login fail");
@@ -81,6 +76,7 @@ public class UserController {
     @RequestMapping(value="/meal/main.do")
     public ModelAndView mealMain(CommandMap commandMap,HttpSession session) throws Exception{
     	ModelAndView mv = new ModelAndView("/main/mainpage");
+    	
     	log.debug("login after");
     	log.debug("login : "+session);
         log.debug("login : "+session.getValue("member"));
