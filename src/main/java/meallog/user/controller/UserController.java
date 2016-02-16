@@ -28,7 +28,6 @@ public class UserController {
         ModelAndView mv = new ModelAndView("redirect:/main.do");
         userService.joinMember(commandMap.getMap());
 
-        
         return mv;
     }
     

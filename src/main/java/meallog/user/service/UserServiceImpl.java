@@ -22,20 +22,15 @@ public class UserServiceImpl implements UserService{
 	public void joinMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		userDAO.joinMember(map);
-		
 	}
-
 	@Override
 	public Member loginMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("login data : "+map);
 		return userDAO.loginMember(map);
 	}
-
 	@Override
 	public void logoutMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 	}
-
-
 }
