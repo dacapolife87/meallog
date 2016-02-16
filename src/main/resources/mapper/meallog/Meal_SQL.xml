@@ -20,6 +20,18 @@
             ORDER BY IDX DESC
         ]]>
     </select>
+    <select id="selectUserMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
+        <![CDATA[
+            SELECT
+                *
+            FROM
+                MEALLIST
+            WHERE
+                USER_IDX = #{idx},
+                USER_NAME = #{nick}
+            ORDER BY IDX DESC
+        ]]>
+    </select>
     
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[

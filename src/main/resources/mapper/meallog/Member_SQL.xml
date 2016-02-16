@@ -25,9 +25,10 @@
     <select id="loginMember" parameterType="hashmap" resultType="meallog.user.vo.Member">
     <![CDATA[
 			SELECT
+				IDX,
                 EMAIL,
                 NICK,
-                PASSWORD
+                JOINDATE
             FROM
                 MEMBERLIST
             WHERE

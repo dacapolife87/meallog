@@ -8,14 +8,14 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import meallog.common.logger.LoggerInterceptor;
+import meallog.user.vo.Member;
 
 public class SessionCheck extends HandlerInterceptorAdapter{
     protected Log log = LogFactory.getLog(LoggerInterceptor.class);
-    
+    private Member member;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	try {
-          
             if(request.getSession().getAttribute("member") == null ){
                     response.sendRedirect("/meallog/main.do"); 
                    
