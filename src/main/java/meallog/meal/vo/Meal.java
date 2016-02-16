@@ -11,7 +11,7 @@ public class Meal {
 	protected String 	content;
 	protected Date		eatdate;
 	protected boolean 	bshare;
-	protected int 		wheneat;
+	protected String 	wheneat;
 	protected String 	picpath;
 	
 	public int getIdx() {
@@ -70,10 +70,10 @@ public class Meal {
 		this.bshare = bshare;
 		return this;
 	}
-	public int getWhenEat() {
+	public String getWhenEat() {
 		return wheneat;
 	}
-	public Meal setWhenEat(int wheneat) {
+	public Meal setWhenEat(String wheneat) {
 		this.wheneat = wheneat;
 		return this;
 	}

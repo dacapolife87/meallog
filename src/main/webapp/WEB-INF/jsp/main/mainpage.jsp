@@ -100,7 +100,7 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
     <div class="col-sm-2 sidenav">
       <h4>Category</h4>
       <ul class="nav nav-pills nav-stacked nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#section1">My_Meal</a></li>
+        <li class="active" onClick="testFunc()"><a data-toggle="tab" href="#section1">My_Meal</a></li>
         <li><a data-toggle="tab" href="#section2">Other_Meal</a></li>
         <li><a data-toggle="tab" href="#section3">Average_Meal</a></li>
         <li><a data-toggle="tab" href="#section4">Upload</a></li>
@@ -192,6 +192,31 @@ function fn_insertMeal(){
     var comSubmit = new ComSubmit("mealfrm");
     comSubmit.setUrl("<c:url value='/meal/mealBoardWrite.do' />");
     comSubmit.submit();
+}
+function testFunc(){
+	alert("test1");
+		$.ajax({
+			type:"POST",
+			url:'/meallog/meal/test.do',
+			success:function(result){
+				alert(result);
+				$.each(result,function(key){
+					var list = result[key];
+					
+					var content = "<div><table>";
+					for(i=0;i<list.length;i++){
+						content +="<tr>";
+						content +="<td>"+list[i].idx+"</td>";
+						content +="<td>"+list[i].user_name+"</td>";
+						content +="<td>"+list[i].name+"</td>";
+						content +="</tr>";
+					}
+					content += "</table></div>";
+					
+					$("#section1").html(content);
+				});
+			}
+		});
 }
 </script>
 </body>
