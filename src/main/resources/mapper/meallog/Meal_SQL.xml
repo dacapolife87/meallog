@@ -27,7 +27,7 @@
             FROM
                 MEALLIST
             WHERE
-                USER_NAME = #{nick}
+                USERNAME = #{nick}
             ORDER BY IDX DESC
         ]]>
     </select>
@@ -39,7 +39,7 @@
             USER_NAME, 
             NAME, 
             CATEGORY, 
-            CONTENTS, 
+            CONTENT, 
             EATDATE,
             BSHARE,
             WHENEAT,
@@ -50,7 +50,7 @@
             #{USERNICK}, 
             #{NAME},
             #{CATEGORY},
-            #{CONTENTS},
+            #{CONTENT},
             CURDATE(), 
             ifnull (#{SHARE}, 0 ),  
             #{WHENEAT},

@@ -153,7 +153,7 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
             </div><br/><br/><br/><br/>
             <div class="form-group ">
               <label class="pull-left">Comment</label>
-              <textarea class="form-control" rows="5" id="CONTENTS" name="CONTENTS"></textarea>
+              <textarea class="form-control" rows="5" id="CONTENT" name="CONTENT"></textarea>
             </div><br/><br/><br/>
             <div class="form-group checkbox">
               <label class="pull-left"><input type="checkbox" id="SHARE" name="SHARE" value="1"><span class="glyphicon glyphicon-share"></span>Share</label>
@@ -199,22 +199,30 @@ function testFunc(){
 			type:"POST",
 			url:'/meallog/meal/test.do',
 			success:function(result){
-				alert(result);
-				$.each(result,function(key){
-					var list = result[key];
+				var content = "<div><table>";
+				for(i=0;i<result.length;i++){
+					content +="<tr>";
+					content +="<td>"+result[i].idx+"<br></td><br>";
+					content +="<td>"+result[i].username+"<br></td><br>";
+					content +="<td>"+result[i].name+"<br></td><br>";
+					content +="<td>"+result[i].category+"<br></td><br>";
+					content +="<td>"+result[i].content+"<br></td><br>";
+					content +="<td>"+result[i].eatdate+"<br></td><br>";
+					content +="<td>"+result[i].share+"<br></td><br>";
+					content +="<td>"+result[i].wheneat+"<br></td><br>";
+					content +="<td>"+result[i].picpath+"<br></td><br>";
+					content +="</tr><br><br>";
 					
-					var content = "<div><table>";
-					for(i=0;i<list.length;i++){
-						content +="<tr>";
-						content +="<td>"+list[i].idx+"</td>";
-						content +="<td>"+list[i].user_name+"</td>";
-						content +="<td>"+list[i].name+"</td>";
-						content +="</tr>";
-					}
-					content += "</table></div>";
-					
-					$("#section1").html(content);
-				});
+					alert("typeof user_name : "+typeof(result[i].username));
+				}
+				
+				content += "</table></div>";
+				
+				$("#section1").html(content);
+				
+
+				
+			
 			}
 		});
 }

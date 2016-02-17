@@ -61,7 +61,9 @@ public class mealController {
     public @ResponseBody List test(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
         String test = "test111";
         List<Meal> list = mealService.selectUserMealList(session);
-        log.debug("mealController");
+
+        log.debug("userMealList");
+        log.debug(list);
         return list;
     }
     

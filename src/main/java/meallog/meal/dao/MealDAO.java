@@ -27,7 +27,7 @@ public class MealDAO extends AbstractDAO{
 	public List<Meal> selectUserMealList(Member member) throws Exception{
     	return (List<Meal>)selectList("meal.selectUserMealList", member);
     }
-    
+
     public void insertBoard(Map<String, Object> meal) throws Exception{
         log.debug("test1 : "+meal);
     	insert("meal.insertBoard", meal);

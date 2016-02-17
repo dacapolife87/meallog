@@ -4,83 +4,75 @@ import java.util.Date;
 
 public class Meal {
 	protected int 		idx;
-	protected int 		user_idx;
-	protected String 	user_name;
+	protected String 	username;
 	protected String 	name;
 	protected String 	category;
 	protected String 	content;
 	protected Date		eatdate;
-	protected boolean 	bshare;
+	protected boolean 	share;
 	protected String 	wheneat;
 	protected String 	picpath;
 	
-	public int getIdx() {
+	public int getidx() {
 		return idx;
 	}
-	public Meal setIdx(int idx) {
+	public Meal setidx(int idx) {
 		this.idx = idx;
 		return this;
 	}
-	public int getUserIdx() {
-		return user_idx;
+	public String getusername() {
+		return username;
 	}
-	public Meal setUserIdx(int user_idx) {
-		this.user_idx = user_idx;
+	public Meal setusername(String user_name) {
+		this.username = user_name;
 		return this;
 	}
-	public String getUserName() {
-		return user_name;
-	}
-	public Meal setUserName(String user_name) {
-		this.user_name = user_name;
-		return this;
-	}
-	public String getName() {
+	public String getname() {
 		return name;
 	}
-	public Meal setName(String name) {
+	public Meal setname(String name) {
 		this.name = name;
 		return this;
 	}
-	public String getCategory() {
+	public String getcategory() {
 		return category;
 	}
-	public Meal setCategory(String category) {
+	public Meal setcategory(String category) {
 		this.category = category;
 		return this;
 	}
-	public String getContent() {
+	public String getcontent() {
 		return content;
 	}
-	public Meal setContent(String content) {
+	public Meal setcontent(String content) {
 		this.content = content;
 		return this;
 	}
-	public Date getEatDate() {
+	public Date geteatdate() {
 		return eatdate;
 	}
-	public Meal setEatDate(Date eatdate) {
+	public Meal seteatdate(Date eatdate) {
 		this.eatdate = eatdate;
 		return this;
 	}
-	public boolean getShare() {
-		return bshare;
+	public boolean getshare() {
+		return share;
 	}
-	public Meal setShare(boolean bshare) {
-		this.bshare = bshare;
+	public Meal setshare(boolean share) {
+		this.share = share;
 		return this;
 	}
-	public String getWhenEat() {
+	public String getwheneat() {
 		return wheneat;
 	}
-	public Meal setWhenEat(String wheneat) {
+	public Meal setwheneat(String wheneat) {
 		this.wheneat = wheneat;
 		return this;
 	}
-	public String getPicPath() {
+	public String getpicpath() {
 		return picpath;
 	}
-	public Meal setPicPath(String picpath) {
+	public Meal setpicpath(String picpath) {
 		this.picpath = picpath;
 		return this;
 	}
