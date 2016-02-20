@@ -46,7 +46,7 @@ public class mealController {
 	  	JSONObject resultJSON = new JSONObject();
 	  	
         List<Meal> list = mealService.selectUserMealList(session);
-        resultJSON.put("RESULT", list);
+        resultJSON.put("result", list);
        
         log.debug("userMealListMobile");
         
