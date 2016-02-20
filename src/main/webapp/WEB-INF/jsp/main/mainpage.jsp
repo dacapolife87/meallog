@@ -193,39 +193,7 @@ function fn_insertMeal(){
     comSubmit.setUrl("<c:url value='/meal/mealBoardWrite.do' />");
     comSubmit.submit();
 }
-function testFunc(){
-	alert("test1");
-		$.ajax({
-			type:"POST",
-			url:'/meallog/meal/test.do',
-			success:function(result){
-				var content = "<div><table>";
-				for(i=0;i<result.length;i++){
-					content +="<tr>";
-					content +="<td>"+result[i].idx+"<br></td><br>";
-					content +="<td>"+result[i].username+"<br></td><br>";
-					content +="<td>"+result[i].name+"<br></td><br>";
-					content +="<td>"+result[i].category+"<br></td><br>";
-					content +="<td>"+result[i].content+"<br></td><br>";
-					content +="<td>"+result[i].eatdate+"<br></td><br>";
-					content +="<td>"+result[i].share+"<br></td><br>";
-					content +="<td>"+result[i].wheneat+"<br></td><br>";
-					content +="<td>"+result[i].picpath+"<br></td><br>";
-					content +="</tr><br><br>";
-					
-					alert("typeof user_name : "+typeof(result[i].username));
-				}
-				
-				content += "</table></div>";
-				
-				$("#section1").html(content);
-				
 
-				
-			
-			}
-		});
-}
 </script>
 </body>
 

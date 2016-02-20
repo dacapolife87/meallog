@@ -2,23 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="meal">
-     <select id="selectMealList" parameterType="hashmap" resultType="hashmap">
-        <![CDATA[
-            SELECT
-                IDX,
-                USER_NAME,
-                NAME,
-                CATEGORY,
-                CONTENT,
-                EATDATE,
-                BSHARE,
-                WHENEAT,
-                PICPATH
-            FROM
-                MEALLIST
-            ORDER BY IDX DESC
-        ]]>
-    </select>
+     <select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+    <![CDATA[
+        SELECT
+            IDX,
+            ORIGINAL_FILE_NAME,
+            ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+        FROM
+            MEALPIC
+        WHERE
+            MEALLIST_IDX = #{IDX}
+            AND DEL_GB = 'N'
+    ]]>
+	</select>
     
     <select id="selectUserMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
         <![CDATA[
@@ -36,12 +32,12 @@
     <![CDATA[
         INSERT INTO MEALLIST
         ( 
-            USER_NAME, 
+            USERNAME, 
             NAME, 
             CATEGORY, 
             CONTENT, 
             EATDATE,
-            BSHARE,
+            SHARE,
             WHENEAT,
             PICPATH
         )
@@ -58,7 +54,16 @@
         )
        ]]>
 	</insert>
-	
+	 <select id="updateFilePath" parameterType="hashmap" resultType="hashmap">
+    <![CDATA[
+        UPDATE
+        	MEALLIST
+        SET
+        	PICPATH = #{PICPATH}
+        WHERE
+        	IDX = #{IDX}
+    ]]>
+	</select>
 	<insert id="insertFile" parameterType="hashmap">
     <![CDATA[
         INSERT INTO MEALPIC

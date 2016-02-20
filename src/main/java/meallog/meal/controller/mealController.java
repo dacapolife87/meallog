@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,18 @@ public class mealController {
         log.debug(list);
         
         return mv;
+    }
+    @RequestMapping(value="/meal/userMealList.mobile")
+    public @ResponseBody  JSONObject userMealListMobile(HttpSession session) throws Exception{
+
+	  	JSONObject resultJSON = new JSONObject();
+	  	
+        List<Meal> list = mealService.selectUserMealList(session);
+        resultJSON.put("RESULT", list);
+       
+        log.debug("userMealListMobile");
+        
+        return resultJSON;
     }
     
     @RequestMapping(value="/meal/mealBoardList.do")
