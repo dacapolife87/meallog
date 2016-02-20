@@ -27,7 +27,17 @@
             ORDER BY IDX DESC
         ]]>
     </select>
-    
+    <select id="selectShareMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
+         <![CDATA[
+             SELECT
+                 *
+             FROM
+                 MEALLIST
+             WHERE
+                 SHARE = "1"
+             ORDER BY IDX DESC
+         ]]>
+     </select>
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST

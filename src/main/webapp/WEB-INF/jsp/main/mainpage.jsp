@@ -20,6 +20,8 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
   <script>
  	$(document).ready(function(){
  		// This is the simple bit of jquery to duplicate the hidden field to subfile
+ 		myMealPage();
+ 		
  		$('#pdffile').change(function(){
 			$('#subfile').val($(this).val());
 		});
@@ -100,9 +102,9 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
     <div class="col-sm-2 sidenav">
       <h4>Category</h4>
       <ul class="nav nav-pills nav-stacked nav-tabs">
-        <li class="active" onClick="testFunc()"><a data-toggle="tab" href="#section1">My_Meal</a></li>
-        <li><a data-toggle="tab" href="#section2">Other_Meal</a></li>
-        <li><a data-toggle="tab" href="#section3">Average_Meal</a></li>
+          <li class="active" onClick="myMealPage()"><a data-toggle="tab" href="#section1">My_Meal</a></li>
+ +        <li onClick="otherMealPage()"><a data-toggle="tab" href="#section2">Other_Meal</a></li>
+          <li><a data-toggle="tab" href="#section3">Average_Meal</a></li>
         <li><a data-toggle="tab" href="#section4">Upload</a></li>
         <li><a data-toggle="tab" href="#setting">Setting</a></li>
       </ul><br>
@@ -110,14 +112,17 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 
     <div class="col-sm-10">
       <div class="tab-content">
-        <div id="section1" class="tab-pane fade in active">
-          <p>My_Meal</p>
+        <div id="section1" class="tab-pane fade in active row">
+          <div id = "imagetest"></div>
         </div>
         <div id="section2" class="tab-pane fade">
           <p>Other_Meal</p>
+          <div id="section2" class="tab-pane fade row">
         </div>
         <div id="section3" class="tab-pane fade">
           <p>Average_Meal</p>
+          <img src="C:\meallog\file\0eff94c2f2f643c39e9d2a1244adcec6.jpg" width ="500px" height =" 500px" />
+          
         </div>
         <div id="section4" class="tab-pane fade">
           <div class="jumbotron text-center">

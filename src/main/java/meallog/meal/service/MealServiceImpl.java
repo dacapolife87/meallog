@@ -42,6 +42,13 @@ public class MealServiceImpl implements MealService{
 		
 		return mealDAO.selectUserMealList(member);
 	}
+	@Override
+ 	public List<Meal> selectShareMealList(HttpSession session) throws Exception {
+ 		// TODO Auto-generated method stub
+ 		Member member = (Member) session.getAttribute("member");
+ 		
+ 		return mealDAO.selectShareMealList(member);
+ 	}
  
 	@Override
 	public void insertBoard(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
