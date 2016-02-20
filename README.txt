@@ -6,3 +6,5 @@ mybatis ������ ����
 test
 
 test Final
+
+test Final 2
