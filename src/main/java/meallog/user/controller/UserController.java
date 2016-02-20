@@ -59,8 +59,9 @@ public class UserController {
 	  }
     
 	  @RequestMapping(value="/meallogin.do")
-	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
+	  public String mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
 	  	Member member = userService.loginMember(commandMap.getMap());
+	  	String returnValue;
 //	  	Base64 base;
 //	  	String auth1;
 //	  	byte[] auth2;
@@ -86,16 +87,18 @@ public class UserController {
 //	  	log.debug("login data2 : "+commandMap.getMap());
 	  	ModelAndView mv;
 	  	if(member != null){
-	  		mv = new ModelAndView("redirect:/logSucceed.do");
+	  		//mv = new ModelAndView("redirect:/logSucceed.do");
+	  		returnValue = "redirect:/logSucceed.do";
 	  		log.debug("login succeed");
 	  		session.setAttribute("member",member);
 
 	  	}else{
-	  		mv = new ModelAndView("redirect:/logFail.do");
+	  		//mv = new ModelAndView("redirect:/logFail.do");
+	  		returnValue = "redirect:/logFail.do";
 	  		log.debug("login fail");
 	  	}
 	  	
-	      return mv;
+	      return returnValue;
 	  }
     
     @RequestMapping(value="/meal/main.do")

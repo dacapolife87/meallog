@@ -57,7 +57,7 @@ public class mealController {
         return mv;
     }
     
-    @RequestMapping(value="/meal/test.do", method=RequestMethod.POST)
+    @RequestMapping(value="/meal/test.do", method=RequestMethod.GET)
     public @ResponseBody List test(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
         String test = "test111";
         List<Meal> list = mealService.selectUserMealList(session);
