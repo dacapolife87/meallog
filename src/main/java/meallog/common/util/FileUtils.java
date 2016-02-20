@@ -15,9 +15,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Component("fileUtils")
 public class FileUtils {
-   private static final String filePath = "C:\\meallog\\file\\";
-    
-   public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
+	private static final String filePath = "C:\\meallog\\file\\";
+    public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
         
@@ -25,13 +24,15 @@ public class FileUtils {
        String originalFileName = null;
        String originalFileExtension = null;
        String storedFileName = null;
-        
+       
        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
        Map<String, Object> listMap = null; 
         
        String boardIdx = map.get("IDX").toString();
+       String userName = map.get("USERNICK").toString();
+       String userFilePath = filePath+userName+"\\";
        
-       File file = new File(filePath);
+       File file = new File(userFilePath);
        if(file.exists() == false){
            file.mkdirs();
        }
@@ -43,7 +44,7 @@ public class FileUtils {
                originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
                storedFileName = CommonUtils.getRandomString() + originalFileExtension;
                 
-               file = new File(filePath + storedFileName);
+               file = new File(userFilePath + storedFileName);
                multipartFile.transferTo(file);
                 
                listMap = new HashMap<String,Object>();

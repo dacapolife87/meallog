@@ -37,6 +37,10 @@ public class MealDAO extends AbstractDAO{
     public void insertFile(Map<String, Object> map) throws Exception{
         insert("meal.insertFile", map);
     }
+    
+    public void updateFilePath(Map<String, Object> map) throws Exception{
+        insert("meal.updateFilePath", map);
+    }
 
  
 }
