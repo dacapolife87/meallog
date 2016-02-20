@@ -119,8 +119,6 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
         </div>
         <div id="section3" class="tab-pane fade">
           <p>Average_Meal</p>
-          <img src="C:\meallog\file\0eff94c2f2f643c39e9d2a1244adcec6.jpg" width ="500px" height =" 500px" />
-          
         </div>
         <div id="section4" class="tab-pane fade">
           <div class="jumbotron text-center">
@@ -175,9 +173,6 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 </div>
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
 <script type="text/javascript">
-var bsession;
-bsession = <% session.getAttribute("member");%>
-
 $("#logout").on("click", function(e){ //작성하기 버튼
     e.preventDefault();
     fn_userLogOut();

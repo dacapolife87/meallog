@@ -45,7 +45,7 @@ public class UserController {
 	  		log.debug("login succeed");
 	  		session.setAttribute("member",member);
 	  		result = "LOGIN_OK";
-
+	  		log.debug("login session : "+session);
 	  	}else{
 	  		log.debug("login fail");
 	  		result = "LOGIN_FAIL";

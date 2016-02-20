@@ -97,6 +97,17 @@
     ]]>
 	</insert>
 	
+	<insert id="insertImg" parameterType="hashmap">
+	<![CDATA[
+    	INSERT INTO 
+    		img_table 
+    	VALUES(
+    		#{img}
+    	)    
+    ]]>
+	</insert>
+	
+	
      
      
 </mapper>

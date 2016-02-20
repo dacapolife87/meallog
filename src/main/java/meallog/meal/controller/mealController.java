@@ -40,7 +40,7 @@ public class mealController {
         
         return mv;
     }
-    @RequestMapping(value="/meal/userMealList.mobile")
+    @RequestMapping(value="/mealMobile/userMealList.mobile")
     public @ResponseBody  JSONObject userMealListMobile(HttpSession session) throws Exception{
 
 	  	JSONObject resultJSON = new JSONObject();

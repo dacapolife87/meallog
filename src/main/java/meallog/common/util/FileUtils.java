@@ -8,18 +8,26 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import meallog.common.dao.AbstractDAO;
+
 @Component("fileUtils")
 public class FileUtils {
-	private static final String filePath = "C:\\meallog\\file\\";
-    public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
+	protected Log log = LogFactory.getLog(AbstractDAO.class);
+	
+//	private static final String filePath1 = "C:\\meallog\\file\\";
+    public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map,String filePath, HttpServletRequest request) throws Exception{
        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-        
+       
+       
        MultipartFile multipartFile = null;
        String originalFileName = null;
        String originalFileExtension = null;
@@ -30,8 +38,10 @@ public class FileUtils {
         
        String boardIdx = map.get("IDX").toString();
        String userName = map.get("USERNICK").toString();
-       String userFilePath = filePath+userName+"\\";
        
+       String userFilePath = filePath+"meal"+File.separator+userName;
+       
+       log.debug("file upload : "+userFilePath);
        File file = new File(userFilePath);
        if(file.exists() == false){
            file.mkdirs();
@@ -44,7 +54,7 @@ public class FileUtils {
                originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
                storedFileName = CommonUtils.getRandomString() + originalFileExtension;
                 
-               file = new File(userFilePath + storedFileName);
+               file = new File(userFilePath +file.separator+ storedFileName);
                multipartFile.transferTo(file);
                 
                listMap = new HashMap<String,Object>();

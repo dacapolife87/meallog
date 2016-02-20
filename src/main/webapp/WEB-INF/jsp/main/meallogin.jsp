@@ -40,6 +40,9 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 <div class="jumbotron text-center">
   <h1>Temp Meal Project</h1> 
   <p>Test Page</p>
+  <div>
+	<img src="\meallog\imgFolder\aa\95478686ca67482f8c93a490f35f7dc7.jpg">
+	</div>
   <br/><br/><br/><br/><br/><br/> 
   <form class="form-inline">
     <button type="button" class="btn btn-primary" id="logInBtn">Login</button>
@@ -118,7 +121,7 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
         </div>
     </div>
   </div>
-
+	
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
 
 <script type="text/javascript">
