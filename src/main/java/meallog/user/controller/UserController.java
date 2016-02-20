@@ -7,8 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import meallog.common.common.CommandMap;
@@ -31,6 +34,29 @@ public class UserController {
         return mv;
     }
     
+    @RequestMapping(value="/meallogin.mobile", method=RequestMethod.POST)
+    public @ResponseBody JSONObject mealLoginMobile(CommandMap commandMap,HttpSession session,HttpServletRequest request,HttpServletResponse response ) throws Exception{
+	  	String result;
+	  	JSONObject resultJSON = new JSONObject();
+	  	log.debug("Connect mobile");
+    	Member member = userService.loginMember(commandMap.getMap());
+
+	  	if(member != null){
+	  		log.debug("login succeed");
+	  		session.setAttribute("member",member);
+	  		result = "LOGIN_OK";
+	  		
+	  		
+	  		
+
+	  	}else{
+	  		log.debug("login fail");
+	  		result = "LOGIN_FAIL";
+	  	}
+	  	resultJSON.put("STATUS", result);
+	  	//return result;
+		return resultJSON;
+	  }
     
 	  @RequestMapping(value="/meallogin.do")
 	  public ModelAndView mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
