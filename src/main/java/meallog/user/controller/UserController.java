@@ -50,7 +50,7 @@ public class UserController {
 	  		log.debug("login fail");
 	  		result = "LOGIN_FAIL";
 	  	}
-	  	resultJSON.put("STATUS", result);
+	  	resultJSON.put("result", result);
 
 		return resultJSON;
 	  }
