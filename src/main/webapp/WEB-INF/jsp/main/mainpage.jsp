@@ -103,21 +103,19 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
       <h4>Category</h4>
       <ul class="nav nav-pills nav-stacked nav-tabs">
           <li class="active" onClick="myMealPage()"><a data-toggle="tab" href="#section1">My_Meal</a></li>
- +        <li onClick="otherMealPage()"><a data-toggle="tab" href="#section2">Other_Meal</a></li>
+          <li onClick="otherMealPage()"><a data-toggle="tab" href="#section2">Other_Meal</a></li>
           <li><a data-toggle="tab" href="#section3">Average_Meal</a></li>
-        <li><a data-toggle="tab" href="#section4">Upload</a></li>
-        <li><a data-toggle="tab" href="#setting">Setting</a></li>
+          <li><a data-toggle="tab" href="#section4">Upload</a></li>
+          <li><a data-toggle="tab" href="#setting">Setting</a></li>
       </ul><br>
     </div>
 
     <div class="col-sm-10">
       <div class="tab-content">
         <div id="section1" class="tab-pane fade in active row">
-          <div id = "imagetest"></div>
+          
         </div>
-        <div id="section2" class="tab-pane fade">
-          <p>Other_Meal</p>
-          <div id="section2" class="tab-pane fade row">
+        <div id="section2" class="tab-pane fade row">
         </div>
         <div id="section3" class="tab-pane fade">
           <p>Average_Meal</p>
