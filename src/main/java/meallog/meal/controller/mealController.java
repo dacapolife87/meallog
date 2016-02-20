@@ -59,7 +59,6 @@ public class mealController {
     
     @RequestMapping(value="/meal/test.do", method=RequestMethod.POST)
     public @ResponseBody List test(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
-        String test = "test111";
         List<Meal> list = mealService.selectUserMealList(session);
 
         log.debug("userMealList");
@@ -67,6 +66,14 @@ public class mealController {
         return list;
     }
     
+    @RequestMapping(value="/meal/test2.do", method=RequestMethod.POST)
+    public @ResponseBody List test2(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
+        List<Meal> list = mealService.selectShareMealList(session);
+
+        log.debug("userMealList");
+        log.debug(list);
+        return list;
+    }
     
 }
 

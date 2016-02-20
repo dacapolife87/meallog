@@ -66,4 +66,12 @@ public class MealServiceImpl implements MealService{
         	mealDAO.insertFile(list.get(i));
         }
 	}
+
+	@Override
+	public List<Meal> selectShareMealList(HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		Member member = (Member) session.getAttribute("member");
+		
+		return mealDAO.selectShareMealList(member);
+	}
 }

@@ -33,7 +33,7 @@ function ComSubmit(opt_formId) {
     };
 }
 
-function testFunc(){
+function myMealPage(){
 	$.ajax({
 		type:"POST",
 		url:'/meallog/meal/test.do',
@@ -47,6 +47,7 @@ function testFunc(){
 				content += '</div>';
 			}
 			$("#section1").html(content);
+			
 		}
 	})
 }
