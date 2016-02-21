@@ -14,5 +14,6 @@ public interface MealService {
 	List<Meal> selectUserMealList(HttpSession session) throws Exception;
 	List<Meal> selectShareMealList(HttpSession session) throws Exception;
 	void insertBoard(Map<String, Object> map,HttpServletRequest request,HttpSession session) throws Exception;
+	void insertMealMobile(Map<String, Object> map,HttpServletRequest request,HttpSession session) throws Exception;
 }
 

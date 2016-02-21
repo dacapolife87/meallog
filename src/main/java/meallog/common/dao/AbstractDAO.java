@@ -53,6 +53,12 @@ public class AbstractDAO {
     }
     
     @SuppressWarnings("rawtypes")
+    public boolean selectCheckId(String queryId, Object params){
+        printQueryId(queryId);
+        return sqlSession.selectOne(queryId,params);
+    }
+    
+    @SuppressWarnings("rawtypes")
     public List selectList(String queryId){
         printQueryId(queryId);
         return sqlSession.selectList(queryId);
