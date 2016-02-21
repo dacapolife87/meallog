@@ -63,6 +63,7 @@ public class FileUtils {
                listMap.put("ORIGINAL_FILE_NAME", originalFileName);
                listMap.put("STORED_FILE_NAME", storedFileName);
                listMap.put("FILE_SIZE", multipartFile.getSize());
+               listMap.put("USER_NICK", userName);
                list.add(listMap);
            }
        }

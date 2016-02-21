@@ -3,6 +3,7 @@ package meallog.meal.service;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import meallog.common.dao.AbstractDAO;
+import meallog.common.util.CommonUtils;
 import meallog.common.util.FileUtils;
 import meallog.meal.dao.MealDAO;
 import meallog.meal.vo.Meal;
@@ -58,6 +62,8 @@ public class MealServiceImpl implements MealService{
 		log.debug("session : "+member);
 		String userName = member.getNick();
 		meal.put("USERNICK", userName);
+		log.debug("insertBoard meal : "+meal.containsKey("name"));
+		log.debug("insertBoard : "+request.getParameter("multipart/form-data"));
 		mealDAO.insertBoard(meal);
 		String filePath = session.getServletContext().getRealPath("");
 //		String userFilePath = filePath+"imgFolder"+File.separator+userName;
@@ -73,10 +79,60 @@ public class MealServiceImpl implements MealService{
         		log.debug("meal IDX : "+meal.get("IDX").toString());
         		log.debug("meal file path : "+ userName+File.separator+list.get(0).get("STORED_FILE_NAME"));
         		picMap.put("IDX", meal.get("IDX").toString());
-        		picMap.put("PICPATH", userName+File.separator+list.get(0).get("STORED_FILE_NAME"));
+        		picMap.put("PICPATH", userName+"/"+list.get(0).get("STORED_FILE_NAME"));
         		mealDAO.updateFilePath(picMap);
         	}
         	mealDAO.insertFile(list.get(i));
         }
+	}
+	
+	@Override
+	public void insertMealMobile(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		Member member = (Member) session.getAttribute("member");
+		log.debug("insertBoard multipart/form-data : "+request.getContentLength());
+		log.debug("insertBoard : "+request.getParameter("multipart/form-data"));
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    
+		log.debug("size : ");
+		int i=0;
+		
+		while(iterator.hasNext()){
+			log.debug("size : "+i);
+			i++;
+		}
+		
+		Map<String, Object> listMap = null; 
+        
+		MultipartFile multipartFile = null;
+		String originalFileName = null;
+	    String originalFileExtension = null;
+	    String storedFileName = null;
+	       
+
+		log.debug("hasNext : ");
+		while(iterator.hasNext()){
+	           multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	           if(multipartFile.isEmpty() == false){
+	               originalFileName = multipartFile.getOriginalFilename();
+	               originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+	               
+	               log.debug("0 : "+multipartFile.getContentType());
+	               log.debug("0 : "+multipartFile.getName());
+	               log.debug("0 : "+multipartFile.getSize());
+	               log.debug("0 : "+multipartFile.getBytes());
+	               log.debug("1 : "+originalFileName);
+	               log.debug("2 : "+originalFileExtension);
+
+	               
+	           }
+	       }
+	    
+		log.debug("insertBoard req : "+multipartHttpServletRequest.getContentLength());
+		log.debug("insertBoard req : "+multipartHttpServletRequest.getContentType());
+		log.debug("insertBoard req : "+multipartHttpServletRequest.getContextPath());
+		log.debug("insertBoard req : "+multipartHttpServletRequest.getHeaderNames());
+
 	}
 }

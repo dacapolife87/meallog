@@ -92,22 +92,10 @@
             #{STORED_FILE_NAME},
             #{FILE_SIZE},
             CURDATE(),
-            'Admin'
+            #{USER_NICK}
         )
     ]]>
 	</insert>
 	
-	<insert id="insertImg" parameterType="hashmap">
-	<![CDATA[
-    	INSERT INTO 
-    		img_table 
-    	VALUES(
-    		#{img}
-    	)    
-    ]]>
-	</insert>
-	
-	
-     
-     
+
 </mapper>

@@ -9,6 +9,7 @@ import meallog.user.vo.Member;
 public interface UserService {
 
 	void joinMember(Map<String, Object> map) throws Exception;
+	boolean idCheck(String id) throws Exception;
 	Member loginMember(Map<String, Object> map) throws Exception;
 	void logoutMember(Map<String, Object> map) throws Exception;
 

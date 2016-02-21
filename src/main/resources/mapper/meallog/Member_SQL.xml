@@ -21,6 +21,17 @@
         )
     ]]>
     </insert>
+    <select id="idCheck" parameterType="String" resultType="boolean">
+    <![CDATA[
+        SELECT
+            if(COUNT(*)>0,'true','false')
+        FROM
+            MEMBERLIST
+        WHERE
+            NICK = #{id}
+
+    ]]>
+    </select>
     
     <select id="loginMember" parameterType="hashmap" resultType="meallog.user.vo.Member">
     <![CDATA[

@@ -40,18 +40,34 @@ public class mealController {
         
         return mv;
     }
-    @RequestMapping(value="/mealMobile/userMealList.mobile")
+    @RequestMapping(value="/meal/userMealList.mobile")
     public @ResponseBody  JSONObject userMealListMobile(HttpSession session) throws Exception{
 
 	  	JSONObject resultJSON = new JSONObject();
 	  	
         List<Meal> list = mealService.selectUserMealList(session);
+        
         resultJSON.put("result", list);
        
         log.debug("userMealListMobile");
         
         return resultJSON;
     }
+    @RequestMapping(value="/meal/shareMealList.mobile")
+    public @ResponseBody  JSONObject shareMealListMobile(HttpSession session) throws Exception{
+
+	  	JSONObject resultJSON = new JSONObject();
+	  	
+        List<Meal> list = mealService.selectShareMealList(session);
+        
+        resultJSON.put("result", list);
+       
+        log.debug("shareMealListMobile");
+        
+        return resultJSON;
+    }
+    
+    
     
     @RequestMapping(value="/meal/mealBoardList.do")
     public ModelAndView openMealBoardList(Meal meal) throws Exception{
@@ -59,6 +75,15 @@ public class mealController {
         List<Meal> list = mealService.selectBoardList(meal);
         mv.addObject("list", list);
         return mv;
+    }
+    
+    //중민이 파일 업로드
+    @RequestMapping(value="/meal/mealUploadList.mobile", method=RequestMethod.POST)
+    public void insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
+    	log.debug("meal upload : ");
+    	request.setCharacterEncoding("UTF-8");
+    	mealService.insertMealMobile(meal.getMap(), request, session);
+    	mealService.insertBoard(meal.getMap(), request, session);
     }
     
     @RequestMapping(value="/meal/mealBoardWrite.do")

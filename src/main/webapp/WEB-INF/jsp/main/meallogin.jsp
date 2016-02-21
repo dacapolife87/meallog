@@ -23,26 +23,14 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
       color: #fff;
   }
   </style>
-<!--   <script>
-	$(document).ready(
-			function(){
-				var bsession;
-				bsession = <% session.getAttribute("MEMBER");%>
-				
-				if(bsession != null){
-					location.href='/meallog/mealmain.do'
-				}
-			});
-  </script> -->
+
 </head>
 <body>
 
 <div class="jumbotron text-center">
   <h1>Temp Meal Project</h1> 
   <p>Test Page</p>
-  <div>
-	<img src="\meallog\imgFolder\aa\95478686ca67482f8c93a490f35f7dc7.jpg">
-	</div>
+
   <br/><br/><br/><br/><br/><br/> 
   <form class="form-inline">
     <button type="button" class="btn btn-primary" id="logInBtn">Login</button>
@@ -97,8 +85,9 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
           <div class="form-group">
             <label for="usrname"><span class="glyphicon glyphicon-user"></span>UserId</label>
             <!-- Check exsist ID -->
-            <button type="button" class="btn btn-info btn-xs pull-right">Check Id</button>
-            <input type="text" class="form-control" id="signUp_userID" name="signUp_userID" placeholder="Enter UserId">
+            <button type="button" class="btn btn-info btn-xs pull-right" id="idcheck">Check Id</button>
+            <input type="text" class="form-control" onkeyup="idCheck()" id="signUp_userID" name="signUp_userID" placeholder="Enter UserId">
+    
           </div>
           
           <div class="form-group">
@@ -107,11 +96,12 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
           </div>
           <div class="form-group">
             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>Password</label>
-            <input type="password" class="form-control" id="signUp_psw" name="signUp_psw" placeholder="Enter Password">
+            <button type="button" class="btn btn-info btn-xs pull-right" id="pwcheck">Check PW</button>
+            <input type="password" class="form-control" onkeyup="pwCheck()" id="signUp_psw" name="signUp_psw" placeholder="Enter Password">
           </div>
           <div class="form-group">
             <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>Password Check</label>
-            <input type="password" class="form-control" id="signUp_pswCheck" placeholder="Enter Password Again">
+            <input type="password" class="form-control" onkeyup="pwCheck()" id="signUp_pswCheck" placeholder="Enter Password Again">
           </div>
             <button type="submit" class="btn btn-success btn-block" id="signup"><span class="glyphicon glyphicon-ok-sign"></span>Sign Up</button>
           </form>
@@ -124,8 +114,9 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 	
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
 
+
 <script type="text/javascript">
-	$(document).ready(
+$(document).ready(
 		function(){
 
 			
@@ -144,19 +135,72 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 				fn_userSignUp();
 			});
 		}
-	);
+);
+function fn_userLogin(){
+	var mymeal = new myMealPage();
+    var comSubmit = new ComSubmit("logInfrm");
+    comSubmit.setUrl("<c:url value='/meallogin.do' />");
+    comSubmit.submit();
+}
+
+function fn_userSignUp(){
+    var comSubmit = new ComSubmit("signUpfrm");
+    comSubmit.setUrl("<c:url value='/joinMember.do' />");
+    comSubmit.submit();
+}
+
+
+var xhr = null;
+
+function getXHR(){
+	if(window.XMLHttpRequest){
+		return new XMLHttpRequest();
+	}else{
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	}
+}
+function idCheck(){
+	
+	xhr=getXHR();
+	xhr.onreadystatechange=getResult;
+	var id=document.getElementById("signUp_userID").value;
+	
+	xhr.open("get","/meallog/idCheck.do?id="+id,true);
+	
+	xhr.send(null);
+}
+function getResult(){
+	if(xhr.readyState==4 && xhr.status==200){
+		var isUse=xhr.response;
+		elem =  document.getElementById("signup");
+		if(isUse=="true"){
+			
+			document.getElementById("idcheck").innerHTML="사용불가";
+			elem.disabled = true;
+		}else{
+			document.getElementById("idcheck").innerHTML="사용가능"
+			elem.disabled = false;
+		}
+	}
+}
+function pwCheck(){
+	var pw1=document.getElementById("signUp_psw").value;
+	var pw2=document.getElementById("signUp_pswCheck").value;
+	elem =  document.getElementById("signup");
+	if(pw1==pw2){
+		document.getElementById("pwcheck").innerHTML="비밀번호일치";
+		elem.disabled = false;
+	}else{
+		document.getElementById("pwcheck").innerHTML="비밀번호불일치";
+		elem.disabled = true;
+	}
+}
+
+
+
+	
   
-  function fn_userLogin(){
-      var comSubmit = new ComSubmit("logInfrm");
-      comSubmit.setUrl("<c:url value='/meallogin.do' />");
-      comSubmit.submit();
-  }
   
-  function fn_userSignUp(){
-      var comSubmit = new ComSubmit("signUpfrm");
-      comSubmit.setUrl("<c:url value='/joinMember.do' />");
-      comSubmit.submit();
-  }
 </script>
 
 </body>

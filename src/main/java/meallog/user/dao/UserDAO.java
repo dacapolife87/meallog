@@ -25,4 +25,10 @@ public class UserDAO extends AbstractDAO{
 		return selectExist("member.loginMember", map);
 
     }
+	
+	@SuppressWarnings("unchecked")
+    public boolean idCheck(String id) throws Exception{
+		return selectCheckId("member.idCheck", id);
+
+    }
 }

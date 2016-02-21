@@ -33,6 +33,24 @@ public class UserController {
 
         return mv;
     }
+    @RequestMapping(value="/joinMember.mobile", method=RequestMethod.POST)
+    public @ResponseBody JSONObject joinMobile(CommandMap commandMap) throws Exception{
+    	JSONObject resultJSON = new JSONObject();
+        userService.joinMember(commandMap.getMap());
+        log.debug("JOIN OK 1");
+        resultJSON.put("result", "JOIN_OK");
+        log.debug("JOIN OK 2");
+		return resultJSON;
+    }
+    @RequestMapping(value="/idCheck.do", method=RequestMethod.GET)
+    public @ResponseBody boolean joinIdCheck(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response ) throws Exception{
+    	log.debug("id check in "+request.getParameter("id"));
+       
+
+        log.debug("id check : "+userService.idCheck(request.getParameter("id")));
+        return userService.idCheck(request.getParameter("id"));
+
+    }
     
     @RequestMapping(value="/meallogin.mobile", method=RequestMethod.POST)
     public @ResponseBody JSONObject mealLoginMobile(CommandMap commandMap,HttpSession session,HttpServletRequest request,HttpServletResponse response ) throws Exception{
