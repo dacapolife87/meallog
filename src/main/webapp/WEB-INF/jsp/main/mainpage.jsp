@@ -20,7 +20,11 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
   <script>
  	$(document).ready(function(){
  		// This is the simple bit of jquery to duplicate the hidden field to subfile
+		
+ 		
  		myMealPage();
+
+
  		
  		$('#pdffile').change(function(){
 			$('#subfile').val($(this).val());
@@ -113,6 +117,10 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
     <div class="col-sm-10">
       <div class="tab-content">
         <div id="section1" class="tab-pane fade in active row">
+
+          
+          
+          
           
         </div>
         <div id="section2" class="tab-pane fade row">
@@ -171,6 +179,23 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
     </div>
   </div>
 </div>
+
+          
+          
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id="modalbody">
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <%@ include file="/WEB-INF/include/include-body.jspf" %>
 <script type="text/javascript">
 $("#logout").on("click", function(e){ //작성하기 버튼
@@ -181,6 +206,8 @@ $("#mealsubmit").on("click", function(e){ //작성하기 버튼
     e.preventDefault();
     fn_insertMeal();
 });
+
+
 function fn_userLogOut(){
       var comSubmit = new ComSubmit("");
       comSubmit.setUrl("<c:url value='/meal/logout.do' />");
@@ -191,6 +218,25 @@ function fn_insertMeal(){
     comSubmit.setUrl("<c:url value='/meal/mealBoardWrite.do' />");
     comSubmit.submit();
 }
+
+function testfunc(x){
+	alert(x);
+	$("#exampleModal").modal("show");
+
+}
+
+$("#exampleModal").on('show.bs.modal', function(event){
+	
+	$.ajax({
+		type:"GET",
+		url:'/meallog/meal/test3.do',
+		success:function(result){
+			$("#modalbody").html(result);
+		}
+	})
+	
+});
+
 
 </script>
 </body>

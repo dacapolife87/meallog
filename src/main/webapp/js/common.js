@@ -33,20 +33,37 @@ function ComSubmit(opt_formId) {
     };
 }
 
+
+
+
+
 function myMealPage(){
+	var array = new Array();
 	$.ajax({
 		type:"POST",
 		url:'/meallog/meal/test.do',
 		success:function(result){
 			var content = "";
+			var username = new String();
+			var idx;
 			for(i=0; i<result.length; i++){
+				username = result[i].username;
+				idx = result[i].idx;
 				content += '<div class="col-md-4">';
-				content += '<p>' + result[i].name + '</p>';
-				content += '<img src = "'+ result[i].picpath + '" style = "width:400px;height:400px">';
+				content += '<p data-whatever="' + result[i].username + '" >제목 : ' + result[i].name + '</p>';
+				content += '<p>게시자 : ' + result[i].username + '</p>';
+				content += '<a onclick="testfunc(' + idx + ')">';
+				content += '<img src = "'+ result[i].picpath + '" style = "width:400px;height:400px"></img></a>';
 				content += '<p>' + result[i].eatdate + '</p>';
 				content += '</div>';
+				
+				array[i] = "anchor_" + result[i].idx;
 			}
+			alert(username);
+			alert(idx);
 			$("#section1").html(content);
 		}
 	})
 }
+
+

@@ -39,6 +39,7 @@ public class FileUtils {
        String boardIdx = map.get("IDX").toString();
        String userName = map.get("USERNICK").toString();
        
+       log.debug(filePath);
        String userFilePath = filePath+"meal"+File.separator+userName;
        
        log.debug("file upload : "+userFilePath);

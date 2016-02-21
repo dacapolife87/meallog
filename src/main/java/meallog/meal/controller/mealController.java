@@ -88,6 +88,27 @@ public class mealController {
         return list;
     }
     
+//    @RequestMapping(value="/meal/test3.do", method=RequestMethod.GET)
+//    public ModelAndView modalTest(HttpSession session) throws Exception{
+//    	log.debug("Modal Test ========================== Modal Test");
+//    	ModelAndView mv = new ModelAndView("/main/modal");
+//    	return mv;
+//    }
+    
+//    @RequestMapping(value="/meal/test3.do", method=RequestMethod.GET)
+//    public ModelAndView modalTest(HttpServletRequest request, HttpSession session) throws Exception{
+//    	log.debug("Modal Test ========================== Modal Test");
+//    	ModelAndView mv = new ModelAndView("/main/modal");
+//    	return mv;
+//    }
+    
+      @RequestMapping(value="/meal/test3.do", method=RequestMethod.GET)
+      public String modalTest(HttpSession session) throws Exception{
+    	  log.debug("/meal/test3.do Call");
+    	 
+    	  return "/main/modal";
+      }
+    
 }
 
 
