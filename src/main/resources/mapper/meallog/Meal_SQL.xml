@@ -2,31 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="meal">
-     <select id="selectFileList" parameterType="hashmap" resultType="hashmap">
-    <![CDATA[
-        SELECT
-            IDX,
-            ORIGINAL_FILE_NAME,
-            ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
-        FROM
-            MEALPIC
-        WHERE
-            MEALLIST_IDX = #{IDX}
-            AND DEL_GB = 'N'
-    ]]>
-	</select>
-    
-    <select id="selectUserMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
-        <![CDATA[
+	<!-- MealList 출력  개인리스트 -->
+	<select id="selectUserMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
+    	<![CDATA[
             SELECT
                 *
             FROM
                 MEALLIST
             WHERE
                 USERNAME = #{nick}
+            AND
+            	DEL_GB = 'N'
             ORDER BY IDX DESC
         ]]>
-    </select>
+	</select>
+    <!-- MealList 출력  공유리스트 -->
     <select id="selectShareMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
          <![CDATA[
              SELECT
@@ -35,9 +25,52 @@
                  MEALLIST
              WHERE
                  SHARE = "1"
+             AND
+             	USERNAME not in (#{nick})
+             AND
+            	DEL_GB = 'N'               
              ORDER BY IDX DESC
          ]]>
-     </select>
+    </select>
+    <!-- MealList 출력  해당 글 -->
+	<select id="selectUserOneMealList" parameterType="hashmap" resultType="meallog.meal.vo.Meal">
+    	<![CDATA[
+            SELECT
+                *
+            FROM
+                MEALLIST
+            WHERE
+            	IDX = #{IDX}
+        ]]>
+	</select>
+	<!-- MealList 수정  해당 글 -->
+	<update id="updateUserMeal" parameterType="hashmap">
+    <![CDATA[
+        UPDATE MEALLIST
+        SET
+            NAME = #{NAME},
+            CATEGORY = #{CATEGORY},
+            CONTENT = #{CONTENT},
+            EATDATE = #{EATDATE},
+            SHARE = #{SHARE},
+            WHENEAT = #{WHENEAT}
+        WHERE
+            IDX = #{IDX}    
+    ]]>
+	</update>
+	<!-- MealList 삭제  해당 글 -->
+	<!-- 개발중이라서 update 를 통하여 해당 del_gb 값을 삭제로 변경 -->
+	<update id="deleteUserMeal" parameterType="hashmap">
+    <![CDATA[
+        UPDATE MEALLIST
+        SET
+            DEL_GB = 'Y'
+        WHERE
+            IDX = #{IDX}
+    ]]>
+	</update>
+
+    <!-- MealList 입력 게시물 내용 -->
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
@@ -64,7 +97,8 @@
         )
        ]]>
 	</insert>
-	 <select id="updateFilePath" parameterType="hashmap" resultType="hashmap">
+	<!-- MealList 입력  시 파일 경로 추가-->
+	<update id="updateFilePath" parameterType="hashmap">
     <![CDATA[
         UPDATE
         	MEALLIST
@@ -73,7 +107,8 @@
         WHERE
         	IDX = #{IDX}
     ]]>
-	</select>
+	</update>
+	<!-- MealList 파일 업로드-->
 	<insert id="insertFile" parameterType="hashmap">
     <![CDATA[
         INSERT INTO MEALPIC
@@ -97,5 +132,20 @@
     ]]>
 	</insert>
 	
+	
+	<!-- 파일 보기 -->
+	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+    <![CDATA[
+        SELECT
+            IDX,
+            ORIGINAL_FILE_NAME,
+            ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+        FROM
+            MEALPIC
+        WHERE
+            MEALLIST_IDX = #{IDX}
+            AND DEL_GB = 'N'
+    ]]>
+	</select>
 
 </mapper>

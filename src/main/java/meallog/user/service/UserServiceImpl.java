@@ -1,9 +1,7 @@
 package meallog.user.service;
 
 import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -26,17 +24,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Member loginMember(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		log.debug("login data : "+map);
 		return userDAO.loginMember(map);
-	}
-	@Override
-	public void logoutMember(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
 	}
 	@Override
 	public boolean idCheck(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		return userDAO.idCheck(map);
-		
 	}
 }

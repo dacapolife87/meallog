@@ -215,7 +215,7 @@ function fn_userLogOut(){
   }
 function fn_insertMeal(){
     var comSubmit = new ComSubmit("mealfrm");
-    comSubmit.setUrl("<c:url value='/meal/mealBoardWrite.do' />");
+    comSubmit.setUrl("<c:url value='/meal/mealUploadList.do' />");
     comSubmit.submit();
 }
 

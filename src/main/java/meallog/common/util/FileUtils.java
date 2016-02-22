@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,11 +21,9 @@ import meallog.common.dao.AbstractDAO;
 public class FileUtils {
 	protected Log log = LogFactory.getLog(AbstractDAO.class);
 	
-//	private static final String filePath1 = "C:\\meallog\\file\\";
     public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map,String filePath, HttpServletRequest request) throws Exception{
        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-       
        
        MultipartFile multipartFile = null;
        String originalFileName = null;
@@ -55,7 +52,7 @@ public class FileUtils {
                originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
                storedFileName = CommonUtils.getRandomString() + originalFileExtension;
                 
-               file = new File(userFilePath +file.separator+ storedFileName);
+               file = new File(userFilePath +File.separator+ storedFileName);
                multipartFile.transferTo(file);
                 
                listMap = new HashMap<String,Object>();

@@ -1,7 +1,6 @@
 package meallog.meal.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,33 +27,35 @@ public class mealController {
     @Resource(name="mealService")
     private MealService mealService;
      
-
-    
-    
-    /*
-     * Web  // Mobile 게시글 출력
-     * /meal/userMealList.do
-     * /meal/shareMealList.do
-     * /meal/userMealList.mobile
-     * /meal/shareMealList.mobile
-     * 개인과 공유 구분
-     * Web ->  List 
-     * Mobile -> JSON[List]
-     * 반환
-     * */
-    @RequestMapping(value="/meal/userMealList.do", method=RequestMethod.POST)
-    public @ResponseBody  List userMealList(CommandMap meal, HttpSession session) throws Exception{
+    /********************************************************
+     * Web 게시글 출력
+     * @param meal
+     * @param session
+     * @return Web -> List
+     * @throws Exception
+     ********************************************************/
+    @SuppressWarnings("rawtypes")
+	@RequestMapping(value="/meal/userMealList.do", method=RequestMethod.POST)
+    public @ResponseBody  List userMealList(HttpSession session) throws Exception{
     	log.debug("[WebB] user Meal List ");
         List<Meal> list = mealService.selectUserMealList(session);
         return list;
     }
-    @RequestMapping(value="/meal/shareMealList.do", method=RequestMethod.POST)
-    public @ResponseBody List shareMealList(CommandMap meal, HttpSession session) throws Exception{
+    @SuppressWarnings("rawtypes")
+	@RequestMapping(value="/meal/shareMealList.do", method=RequestMethod.POST)
+    public @ResponseBody List shareMealList(HttpSession session) throws Exception{
     	log.debug("[WebB] share Meal List ");
         List<Meal> list = mealService.selectShareMealList(session);
         return list;
     }
-    @RequestMapping(value="/meal/userMealList.mobile")
+    /********************************************************
+     * Mobile 게시글 출력
+     * @param session
+     * @return Mobile -> JSON[List]
+     * @throws Exception
+     ********************************************************/
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/userMealList.mobile", method=RequestMethod.POST)
     public @ResponseBody  JSONObject userMealListMobile(HttpSession session) throws Exception{
     	log.debug("[Mobile] user Meal List ");
 	  	JSONObject resultJSON = new JSONObject();
@@ -62,23 +63,47 @@ public class mealController {
         resultJSON.put("result", list);
         return resultJSON;
     }
-    @RequestMapping(value="/meal/shareMealList.mobile")
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/shareMealList.mobile", method=RequestMethod.POST)
     public @ResponseBody  JSONObject shareMealListMobile(HttpSession session) throws Exception{
     	log.debug("[Mobile] Share Meal List ");
 	  	JSONObject resultJSON = new JSONObject();
         List<Meal> list = mealService.selectShareMealList(session);
         resultJSON.put("result", list); 
         return resultJSON;
-    } 
-    /*
-     * Web // Mobile 게시글  작성
-     * /meal/mealBoardWrite.do
-     * /meal/mealUploadList.mobile
-     * Web ->  Map 으로 전달 받아  Service 의  insertMeal 에서 처리
-     * Mobile -> JSON 으로 전달 받아  Service 의  insertMealMobile 에서  JSON을 추출후 처리
-     * 반환
-     * */
-    @RequestMapping(value="/meal/mealBoardWrite.do")
+    }
+    
+    /********************************************************
+     *  Web // Mobile 해당 게시글 출력
+     * @param requestMeal
+     * @return Web ->  Meal // Mobile -> JSONObject
+     * @throws Exception
+     ********************************************************/
+    
+    @RequestMapping(value="/meal/userOneMealList.do", method=RequestMethod.POST)
+    public @ResponseBody  Meal selectUserOneMealList(CommandMap requestMeal) throws Exception{
+        Meal meal = mealService.selectUserOneMealList(requestMeal.getMap());
+        return meal;
+    }
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/userOneMealList.mobile", method=RequestMethod.POST)
+    public @ResponseBody  JSONObject selectUserOneMealListMobile(CommandMap requestMeal) throws Exception{
+	  	JSONObject resultJSON = new JSONObject();
+	  	Meal meal = mealService.selectUserOneMealList(requestMeal.getMap());
+        resultJSON.put("result", meal);
+        return resultJSON;
+    }
+    
+      
+    /********************************************************
+     *  Web // Mobile 게시글  작성
+     * @param meal		[Web] Map  // [Mobile] JSON
+     * @param request
+     * @param session
+     * @return Web ->  ModelAndView // Mobile -> JSON[result_Code]
+     * @throws Exception
+     ********************************************************/
+    @RequestMapping(value="/meal/mealUploadList.do")
     public ModelAndView insertMealBoard(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/meal/main.do");
         log.debug("[WebB] meal upload Request");
@@ -86,16 +111,83 @@ public class mealController {
         mealService.insertMeal(meal.getMap(),request,session);
         return mv;
     }
-    @RequestMapping(value="/meal/mealUploadList.mobile", method=RequestMethod.POST)
-    public void insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/mealUploadList.mobile", method=RequestMethod.POST)
+    public @ResponseBody JSONObject insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
     	log.debug("[Mobile] meal upload Request");
     	log.debug("map data : "+meal.getMap());
-    	request.setCharacterEncoding("UTF-8");
-    	mealService.insertMealMobile(meal.getMap(), request, session);
+    	JSONObject resultJSON = new JSONObject();
+    	try {
+    		request.setCharacterEncoding("UTF-8");
+    		mealService.insertMealMobile(meal.getMap(), request, session);
+    		resultJSON.put("result", "insert_OK");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultJSON.put("result", "insert_FAIL");
+		}
+    	return resultJSON;
     }
-    
-    
-    
+    /********************************************************
+     * Web // Mobile 게시글 삭제
+     * @param commandMap
+     * @return Web ->  ModelAndView // Mobile -> JSON[result_Code]
+     * @throws Exception
+     ********************************************************/
+    @RequestMapping(value="/meal/deleteUserMeal.do")
+    public ModelAndView deleteMeal(CommandMap commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("redirect:/meal/main.do");
+         
+        mealService.deleteMeal(commandMap.getMap());
+         
+        return mv;
+    }
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/deleteUserMeal.mobile")
+    public @ResponseBody JSONObject deleteMealMobile(CommandMap commandMap) throws Exception{
+    	JSONObject resultJSON = new JSONObject();
+    	try {
+    		mealService.deleteMeal(commandMap.getMap());
+    		resultJSON.put("result", "DELETE_OK");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultJSON.put("result", "DELETE_FAIL");
+		}
+    	return resultJSON;
+    }
+    /********************************************************
+     * Web // Mobile 게시글 수정
+     * @param commandMap
+     * @return Web ->  ModelAndView // Mobile -> JSON[result_Code]
+     * @throws Exception
+     ********************************************************/
+    @RequestMapping(value="/meal/updateUserMeal.do")
+    public ModelAndView updateMeal(CommandMap commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("redirect:/meal/main.do");
+        mealService.updateMeal(commandMap.getMap());
+        return mv;
+    }
+    @SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/updateUserMeal.mobile")
+    public @ResponseBody JSONObject updateMealMobile(CommandMap commandMap) throws Exception{
+    	JSONObject resultJSON = new JSONObject();
+    	try {
+    		mealService.updateMeal(commandMap.getMap());
+    		resultJSON.put("result", "UPDATE_OK");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultJSON.put("result", "UPDATE_FAIL");
+		}
+    	return resultJSON;
+    }
+    /********************************************************
+     *  test 용 함수
+     *  작업할때 만들고 추후에 지울것
+     * @param meal
+     * @param request
+     * @param session
+     * @return
+     * @throws Exception
+     ********************************************************/
     @RequestMapping(value="/meal/test.do", method=RequestMethod.POST)
     public @ResponseBody List test(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
         List<Meal> list = mealService.selectUserMealList(session);
@@ -132,7 +224,9 @@ public class mealController {
     	 
     	  return "/main/modal";
       }
-    
+      /********************************************************
+       * test 용 함수 끝
+       ********************************************************/
 }
 
 

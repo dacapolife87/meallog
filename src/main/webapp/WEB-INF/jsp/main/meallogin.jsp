@@ -62,7 +62,7 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Not a member? <a href="#">Sign Up</a></p>
+          <p>Not a member? <a href="#" id="loginWin_signUp">Sign Up</a></p>
           <p>Forgot <a href="#">Password?</a></p>
         </div>
       </div>
@@ -126,6 +126,10 @@ $(document).ready(
 			$("#signUpBtn").click(function(){
 				$("#signupModal").modal();
 			});
+			$("#loginWin_signUp").click(function(){
+				$("#signupModal").modal();
+			});
+			
 			$("#login").on("click", function(e){ //작성하기 버튼
 				e.preventDefault();
 				fn_userLogin();
