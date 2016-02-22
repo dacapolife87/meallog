@@ -147,5 +147,17 @@
             AND DEL_GB = 'N'
     ]]>
 	</select>
+	<!-- 카테고리 자동완성 -->
+	<select id="autocompleteMeal" parameterType="hashmap" resultType="hashmap">
+    <![CDATA[
+        SELECT
+            CATEGORY
+        FROM
+            MEMBERLIST
+        WHERE
+            CATEGORY = "%{CATEGORY}%
+
+    ]]>
+    </select>
 
 </mapper>

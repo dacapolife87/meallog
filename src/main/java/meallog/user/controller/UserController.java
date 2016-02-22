@@ -131,12 +131,12 @@ public class UserController {
     }
     @RequestMapping(value="/logSucceed.do")
     public ModelAndView mealLoginSucced() throws Exception{
-    	ModelAndView mv = new ModelAndView("/main/logInSucceed");
+    	ModelAndView mv = new ModelAndView("/login/logInSucceed");
         return mv;
     }
     @RequestMapping(value="/logFail.do")
     public ModelAndView mealLoginFail() throws Exception{
-    	ModelAndView mv = new ModelAndView("/main/logInfail");
+    	ModelAndView mv = new ModelAndView("/login/logInfail");
         return mv;
     }
     /********************************************************
@@ -149,7 +149,7 @@ public class UserController {
      ********************************************************/
     @RequestMapping(value="/meal/logout.do")
     public ModelAndView mealLogout(HttpSession session,HttpServletResponse response,HttpServletRequest request) throws Exception{
-    	ModelAndView mv = new ModelAndView("/main/logOut");
+    	ModelAndView mv = new ModelAndView("/login/logOut");
     	final String refererUrl = request.getHeader("Referer");
     	
     	response.setHeader(refererUrl, "no-cache");

@@ -90,4 +90,9 @@ public class MealServiceImpl implements MealService{
 		// TODO Auto-generated method stub
 		mealDAO.deleteMeal(map);
 	}
+	@Override
+	public List<String> autocompleteMeal(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return mealDAO.autocompleteMeal(map);
+	}
 }

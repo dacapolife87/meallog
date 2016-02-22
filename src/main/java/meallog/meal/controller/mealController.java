@@ -179,6 +179,32 @@ public class mealController {
 		}
     	return resultJSON;
     }
+    
+    
+    /********************************************************
+     * Web // Mobile - Category 자동 완성
+     * @param commandMap
+     * @return Web ->  List // Mobile -> JSON[List]
+     * @throws Exception
+     ********************************************************/
+    @SuppressWarnings("rawtypes")
+	@RequestMapping(value="/meal/autocompleteMeal.do", method=RequestMethod.POST)
+    public @ResponseBody List autocompleteMeal(CommandMap commandMap) throws Exception{
+    	log.debug(mealService.autocompleteMeal(commandMap.getMap()));
+        return mealService.autocompleteMeal(commandMap.getMap());
+    }
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/meal/autocompleteMeal.Mobile", method=RequestMethod.POST)
+    public @ResponseBody JSONObject autocompleteMealMobile(CommandMap commandMap) throws Exception{
+    	JSONObject resultJSON = new JSONObject();
+		List<String> autoCompleteList = mealService.autocompleteMeal(commandMap.getMap());
+    	resultJSON.put("result", autoCompleteList);
+        return resultJSON;
+    }
+    
+    
+    
     /********************************************************
      *  test 용 함수
      *  작업할때 만들고 추후에 지울것
