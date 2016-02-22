@@ -5,7 +5,7 @@
  function otherMealPage(){
  	$.ajax({
  		type:"POST",
- 		url:'/meallog/meal/test2.do',
+ 		url:'/meallog/meal/shareMealList.do',
  		success:function(result){
  			var content = "";
  			for(i=0; i<result.length; i++){

@@ -21,14 +21,14 @@
         )
     ]]>
     </insert>
-    <select id="idCheck" parameterType="String" resultType="boolean">
+    <select id="idCheck" parameterType="hashmap" resultType="boolean">
     <![CDATA[
         SELECT
             if(COUNT(*)>0,'true','false')
         FROM
             MEMBERLIST
         WHERE
-            NICK = #{id}
+            NICK = #{user_id}
 
     ]]>
     </select>

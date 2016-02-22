@@ -40,7 +40,7 @@ function myMealPage(){
 	var array = new Array();
 	$.ajax({
 		type:"POST",
-		url:'/meallog/meal/test.do',
+		url:'/meallog/meal/userMealList.do',
 		success:function(result){
 			var content = "";
 			var username = new String();
@@ -58,8 +58,6 @@ function myMealPage(){
 				
 				array[i] = "anchor_" + result[i].idx;
 			}
-			alert(username);
-			alert(idx);
 			$("#section1").html(content);
 		}
 	})

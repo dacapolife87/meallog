@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 	}
 	@Override
-	public boolean idCheck(String id) throws Exception {
+	public boolean idCheck(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
-		return userDAO.idCheck(id);
+		return userDAO.idCheck(map);
 		
 	}
 }

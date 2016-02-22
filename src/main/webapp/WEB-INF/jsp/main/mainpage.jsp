@@ -220,7 +220,7 @@ function fn_insertMeal(){
 }
 
 function testfunc(x){
-	alert(x);
+
 	$("#exampleModal").modal("show");
 
 }

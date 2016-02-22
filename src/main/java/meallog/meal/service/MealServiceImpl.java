@@ -56,28 +56,19 @@ public class MealServiceImpl implements MealService{
  	}
  
 	@Override
-	public void insertBoard(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
+	public void insertMeal(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		log.debug("[Meal Service] data : "+meal);
 		Member member = (Member) session.getAttribute("member");
-		log.debug("session : "+member);
 		String userName = member.getNick();
 		meal.put("USERNICK", userName);
-		log.debug("insertBoard meal : "+meal.containsKey("name"));
-		log.debug("insertBoard : "+request.getParameter("multipart/form-data"));
 		mealDAO.insertBoard(meal);
 		String filePath = session.getServletContext().getRealPath("");
-//		String userFilePath = filePath+"imgFolder"+File.separator+userName;
-//	       
-		log.debug("realPath : "+filePath);
-		
-		
+
 		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath,request);
         for(int i=0, size=list.size(); i<size; i++){
         	if(i==0){
-        		//final String filePath = "C:\\meallog\\file\\";
         		Map<String, Object> picMap = new HashMap<String, Object>();
-        		log.debug("meal IDX : "+meal.get("IDX").toString());
-        		log.debug("meal file path : "+ userName+File.separator+list.get(0).get("STORED_FILE_NAME"));
         		picMap.put("IDX", meal.get("IDX").toString());
         		picMap.put("PICPATH", userName+"/"+list.get(0).get("STORED_FILE_NAME"));
         		mealDAO.updateFilePath(picMap);
@@ -90,8 +81,7 @@ public class MealServiceImpl implements MealService{
 	public void insertMealMobile(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		Member member = (Member) session.getAttribute("member");
-		log.debug("insertBoard multipart/form-data : "+request.getContentLength());
-		log.debug("insertBoard : "+request.getParameter("multipart/form-data"));
+
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
 		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 	    

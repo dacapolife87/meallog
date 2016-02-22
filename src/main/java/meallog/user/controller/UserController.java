@@ -42,13 +42,14 @@ public class UserController {
         log.debug("JOIN OK 2");
 		return resultJSON;
     }
-    @RequestMapping(value="/idCheck.do", method=RequestMethod.GET)
+    @RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
     public @ResponseBody boolean joinIdCheck(CommandMap commandMap,HttpServletRequest request,HttpServletResponse response ) throws Exception{
+    	log.debug("id check in "+commandMap.getMap());
+    	log.debug("id check in "+request.getContentType());
     	log.debug("id check in "+request.getParameter("id"));
-       
 
-        log.debug("id check : "+userService.idCheck(request.getParameter("id")));
-        return userService.idCheck(request.getParameter("id"));
+        return userService.idCheck(commandMap.getMap());
+        
 
     }
     
@@ -75,32 +76,13 @@ public class UserController {
     
 	  @RequestMapping(value="/meallogin.do")
 	  public String mealLogin(CommandMap commandMap,HttpSession session,HttpServletRequest request ) throws Exception{
+		log.debug("id check in "+commandMap.getMap());
+	    log.debug("id check in "+request.getContentType());
+	    log.debug("id check in "+request.getParameter("id"));
 	  	Member member = userService.loginMember(commandMap.getMap());
 	  	String returnValue;
-//	  	Base64 base;
-//	  	String auth1;
-//	  	byte[] auth2;
-//	  	log.debug("login data check");
-//	  	log.debug("login data11 : "+request.getHeader("Authorization"));
-//	  	
-//	  	
-//	  	auth1 = request.getHeader("Authorization");
-//	  	auth2 = Base64.decode(auth1.getBytes());
-//	  	
-//	  	String byteToString = new String(auth2,0,auth2.length);
-//	  	
-//	  	log.debug("byteToString : "+byteToString);
-	  	
-//	 // The token is 'valid' so magically get a user id from it 
-//	  	 Long id = getUserIdFromToken(auth); 
-//	  	         
-//	  	 // Create our Authentication and let Spring know about it 
-//	  	Authentication auth = new DemoAuthenticationToken(id); 
-//	  	SecurityContextHolder.getContext().setAuthentication(auth);             
 
-//	  	
-//	  	log.debug("login data2 : "+commandMap.getMap());
-	  	ModelAndView mv;
+	  	log.debug("map data : "+commandMap.getMap());
 	  	if(member != null){
 	  		//mv = new ModelAndView("redirect:/logSucceed.do");
 	  		returnValue = "redirect:/logSucceed.do";

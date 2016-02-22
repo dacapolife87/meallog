@@ -27,8 +27,8 @@ public class UserDAO extends AbstractDAO{
     }
 	
 	@SuppressWarnings("unchecked")
-    public boolean idCheck(String id) throws Exception{
-		return selectCheckId("member.idCheck", id);
+    public boolean idCheck(Map<String, Object> map) throws Exception{
+		return selectCheckId("member.idCheck", map);
 
     }
 }

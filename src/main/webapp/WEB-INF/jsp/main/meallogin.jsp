@@ -131,8 +131,17 @@ $(document).ready(
 				fn_userLogin();
 			});
 			$("#signup").on("click", function(e){ //작성하기 버튼
-				e.preventDefault();
-				fn_userSignUp();
+				if(bidCheck==false){
+					alert("사용 중인 ID 입니다.");
+					$("#signupModal").modal();
+				}else if(bpwCheck==false){
+					alert("비밀번호가 잘못 되었습니다.");
+					$("#signupModal").modal();
+				}else{
+					alert("회원가입 성공!");
+					e.preventDefault();
+					fn_userSignUp();
+				}
 			});
 		}
 );
@@ -150,49 +159,61 @@ function fn_userSignUp(){
 }
 
 
-var xhr = null;
 
-function getXHR(){
-	if(window.XMLHttpRequest){
-		return new XMLHttpRequest();
-	}else{
-		return new ActiveXObject("Microsoft.XMLHTTP");
-	}
-}
+var bidCheck = false;
+var bpwCheck = false;
+var elem;
+var icon;
+
 function idCheck(){
-	
-	xhr=getXHR();
-	xhr.onreadystatechange=getResult;
-	var id=document.getElementById("signUp_userID").value;
-	
-	xhr.open("get","/meallog/idCheck.do?id="+id,true);
-	
-	xhr.send(null);
+	var user_id = $('#signUp_userID').val();
+    $.ajax({
+        type: "POST",
+        url: "/meallog/idCheck.do",
+        data: "user_id="+user_id,                    
+        datatype: "json",
+        success: function(data)
+        {
+        	getResult(data)
+        }
+    });
 }
-function getResult(){
-	if(xhr.readyState==4 && xhr.status==200){
-		var isUse=xhr.response;
-		elem =  document.getElementById("signup");
-		if(isUse=="true"){
-			
-			document.getElementById("idcheck").innerHTML="사용불가";
-			elem.disabled = true;
-		}else{
-			document.getElementById("idcheck").innerHTML="사용가능"
+
+function getResult(isUse){
+	elem =  document.getElementById("signup");
+	icon = document.getElementById("idcheck");
+	if(isUse==true){
+		// 아이디 사용중일 경우
+		icon.innerHTML="사용불가";
+		elem.disabled = true;
+		icon.className="btn btn-danger btn-xs pull-right";
+		bidCheck = false;
+	}else{
+		document.getElementById("idcheck").innerHTML="사용가능";
+		if(bpwCheck == true){
 			elem.disabled = false;
 		}
+		icon.className="btn btn-info btn-xs pull-right";
+		bidCheck = true;
 	}
 }
 function pwCheck(){
 	var pw1=document.getElementById("signUp_psw").value;
 	var pw2=document.getElementById("signUp_pswCheck").value;
 	elem =  document.getElementById("signup");
+	icon = document.getElementById("pwcheck");
 	if(pw1==pw2){
 		document.getElementById("pwcheck").innerHTML="비밀번호일치";
-		elem.disabled = false;
+		icon.className="btn btn-info btn-xs pull-right";
+		if(bidCheck == true){
+			elem.disabled = false;
+		}
+		bpwCheck = true;
 	}else{
 		document.getElementById("pwcheck").innerHTML="비밀번호불일치";
+		icon.className="btn btn-danger btn-xs pull-right";
 		elem.disabled = true;
+		bpwCheck = false;
 	}
 }
 
