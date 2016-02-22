@@ -16,16 +16,18 @@ public class SessionCheck extends HandlerInterceptorAdapter{
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	try {
-            if(request.getSession().getAttribute("member") == null ){
-                    response.sendRedirect("/meallog/main.do"); 
-                   
-                    return false;
+            if(request.getSession().getAttribute("member") != null ){
+            	return true;
+            }else if(request.getSession().getAttribute("kakao") != null ){
+            	return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
        
-        return true;
+    	response.sendRedirect("/meallog/main.do"); 
+        
+        return false;
 
     }
 }

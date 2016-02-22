@@ -9,7 +9,7 @@ public class Member {
 	protected String 	nick;
 	protected Date		joinDate;
 	protected Date		modifiedDate;
-	
+	protected String	kakaoToken;
 	public int getIdx() {
 		return idx;
 	}
@@ -50,6 +50,13 @@ public class Member {
 	}
 	public Member setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
+		return this;
+	}
+	public String getkakaoToken() {
+		return kakaoToken;
+	}
+	public Member setkakaoToken(String kakaoToken) {
+		this.kakaoToken = kakaoToken;
 		return this;
 	}
 }
