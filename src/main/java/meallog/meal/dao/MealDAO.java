@@ -47,4 +47,8 @@ public class MealDAO extends AbstractDAO{
     public void deleteMeal(Map<String, Object> map) throws Exception{
     	delete("meal.deleteUserMeal", map);
     }
+    
+    public List<String> autocompleteMeal(Map<String, Object> map) throws Exception{
+		return (List<String>)selectList("meal.autocompleteMeal", map);
+    }
 }
