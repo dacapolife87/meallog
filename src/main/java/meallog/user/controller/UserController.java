@@ -1,5 +1,7 @@
 package meallog.user.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,6 +139,15 @@ public class UserController {
     @RequestMapping(value="/logFail.do")
     public ModelAndView mealLoginFail() throws Exception{
     	ModelAndView mv = new ModelAndView("/login/logInfail");
+        return mv;
+    }
+    @RequestMapping(value="/kakaologin.do")
+    public ModelAndView mealLoginkakao(CommandMap commandMap,HttpSession session) throws Exception{
+    	ModelAndView mv = new ModelAndView("/login/logInSucceed");
+    	log.debug("test : "+commandMap.getMap());
+    	log.debug("test : "+commandMap.getMap().get("authObj.access_token"));
+    	session.setAttribute("login", commandMap.getMap().get("authObj.access_token"));
+    	
         return mv;
     }
     /********************************************************

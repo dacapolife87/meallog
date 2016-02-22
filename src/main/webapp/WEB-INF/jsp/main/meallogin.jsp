@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <%   
 response.setHeader("cache-control","no-store"); // http 1.1   
 response.setHeader("Pragma","no-cache"); // http 1.0   
@@ -35,6 +35,29 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
   <form class="form-inline">
     <button type="button" class="btn btn-primary" id="logInBtn">Login</button>
     <button type="button" class="btn btn-primary" id="signUpBtn">Sign Up</button>
+    <br><br>
+    <a id="kakao-login-btn"></a>
+  	<script>
+      // 사용할 앱의 JavaScript 키를 설정해 주세요.
+      Kakao.init('52051eff6e1983acbaa448f833bf0493');
+
+      // 카카오 로그인 버튼을 생성합니다.
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+        	var comSubmit = new ComSubmit();
+        	comSubmit.addParam("authObj.access_token",authObj.access_token)
+            comSubmit.setUrl("<c:url value='/kakaologin.do' />");
+            comSubmit.submit();
+
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+          alert("kakao btn - fail");
+        }
+      });
+    </script>
+  	
   </form>
 </div>
 
@@ -116,10 +139,58 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 
 
 <script type="text/javascript">
-$(document).ready(
-		function(){
-
-			
+$(document).ready(function(){
+	/// kakao
+	/*
+	Kakao.init("52051eff6e1983acbaa448f833bf0493"); 
+		function getKakaotalkUserProfile(){ 
+			Kakao.API.request({ 
+				url: '/v1/user/me', 
+				success: function(res) { 
+					$("#kakao-profile").append(res.properties.nickname); 
+					$("#kakao-profile").append($("<img/>",{"src":res.properties.profile_image,"alt":res.properties.nickname+"님의 프로필 사진"})); 
+				}, 
+				fail: function(error) { 
+					console.log(error); 
+				} 
+			}); 
+		} 
+		function createKakaotalkLogin(){ 
+			$("#kakao-logged-group .kakao-logout-btn,#kakao-logged-group .kakao-login-btn").remove(); 
+			var loginBtn = $("<a/>",{"class":"kakao-login-btn","text":"로그인"}); 
+			loginBtn.click(function(){ 
+				Kakao.Auth.login({ 
+					persistAccessToken: true, 
+					persistRefreshToken: true, 
+					success: function(authObj) { 
+						getKakaotalkUserProfile(); 
+						createKakaotalkLogout(); 
+					}, 
+					fail: function(err) { 
+						console.log(err); 
+					} 
+				}); 
+			}); 
+			$("#kakao-logged-group").prepend(loginBtn) 
+		} 
+		function createKakaotalkLogout(){ 
+			$("#kakao-logged-group .kakao-logout-btn,#kakao-logged-group .kakao-login-btn").remove(); 
+			var logoutBtn = $("<a/>",{"class":"kakao-logout-btn","text":"로그아웃"}); 
+			logoutBtn.click(function(){ 
+				Kakao.Auth.logout(); 
+				createKakaotalkLogin(); 
+				$("#kakao-profile").text(""); 
+			}); 
+			$("#kakao-logged-group").prepend(logoutBtn); 
+		} 
+		if(Kakao.Auth.getRefreshToken()!=undefined&&Kakao.Auth.getRefreshToken().replace(/ /gi,"")!=""){ 
+			createKakaotalkLogout(); 
+			getKakaotalkUserProfile(); 
+		}else{ 
+			createKakaotalkLogin(); 
+		}
+		*/
+		///// kakao
 			$("#logInBtn").click(function(){
 				$("#loginModal").modal();
 			});
@@ -129,7 +200,9 @@ $(document).ready(
 			$("#loginWin_signUp").click(function(){
 				$("#signupModal").modal();
 			});
-			
+			$("#signUpBtn_kakao").on("click", function(e){ //작성하기 버튼
+				fn_kakaoLogin();
+			});
 			$("#login").on("click", function(e){ //작성하기 버튼
 				e.preventDefault();
 				fn_userLogin();
@@ -149,6 +222,27 @@ $(document).ready(
 			});
 		}
 );
+function fn_kakaoLogin(){
+	
+}
+function createKakaotalkLogin(){ 
+	$("#kakao-logged-group .kakao-logout-btn,#kakao-logged-group .kakao-login-btn").remove(); 
+	var loginBtn = $("<a/>",{"class":"kakao-login-btn","text":"로그인"}); 
+	loginBtn.click(function(){ 
+		Kakao.Auth.login({ 
+			persistAccessToken: true, 
+			persistRefreshToken: true, 
+			success: function(authObj) { 
+				getKakaotalkUserProfile(); 
+			}, 
+			fail: function(err) { 
+			console.log(err); 
+			} 
+		}); 
+	}); 
+	$("#kakao-logged-group").prepend(loginBtn) 
+} 
+
 function fn_userLogin(){
 	var mymeal = new myMealPage();
     var comSubmit = new ComSubmit("logInfrm");
