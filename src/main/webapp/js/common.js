@@ -72,12 +72,12 @@ function myMealPage(){
 			for(i=0; i<result.length; i++){
 				username = result[i].username;
 				idx = result[i].idx;
-				content += '<div class="col-md-4">';
-				content += '<p data-whatever="' + result[i].username + '" >제목 : ' + result[i].name + '</p>';
-				content += '<p>게시자 : ' + result[i].username + '</p>';
-				content += '<a onclick="testfunc(' + idx + ')">';
-				content += '<img src = "'+ result[i].picpath + '" style = "width:400px;height:400px"></img></a>';
-				content += '<p>' + result[i].eatdate + '</p>';
+				content += '<div class="col-sm-4 text-center">';
+				content += '<div class="thumbnail">';
+				content += '<a onclick="showImageModal(' + idx + ')">';
+				content += '<img src = "'+ result[i].picpath + '" style = "width:400;height:300"></img></a>';
+				content += '<p><strong>' + result[i].name + '</strong></p>';
+				content += '</div>';
 				content += '</div>';
 				
 				array[i] = "anchor_" + result[i].idx;

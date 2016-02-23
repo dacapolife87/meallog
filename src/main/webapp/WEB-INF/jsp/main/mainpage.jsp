@@ -195,9 +195,20 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content" id="modalbody">
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Send message</button>
+					<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h4 class="modal-title" id="modalSubject"></h4>
+          				<h4 id="modalUser"></h4>
+        			</div>
+        			<div class="modal-body" align="center">
+          				<p>Some text in the modal.</p>
+          				<img src ="" style="width:400px;height:400px" id="modalImage" /></br>
+          				<p id="modalComment"></p>
+      				</div>
+        			<div class="modal-footer">
+         				<button type="button" class="btn btn-default">Delete</button>
+          				<button type="button" class="btn btn-default">Edit</button>
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
@@ -256,19 +267,32 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 		    });
 		})
 		
-		
-		
-		
-		function testfunc(x){
+		//사진 클릭시 전달되게 되는 idx 넘버 -- 사진 넘버
+		var picIdx;
+		//각 사진 클릭시 호출되는 함수
+		function showImageModal(x){
+			picIdx = x;
+			alert("testFunc Call Alert");
 			$("#exampleModal").modal("show");
 		}
 		
+		//modal을 불러오기 전에 실행되는 함수
 		$("#exampleModal").on('show.bs.modal', function(event){
 			$.ajax({
 				type:"GET",
+				data:{"picIdx" : picIdx},
 				url:'/meallog/meal/test3.do',
 				success:function(result){
-					$("#modalbody").html(result);
+					var subject = document.getElementById("modalSubject");
+					var username = document.getElementById("modalUser");
+					var imagePath = document.getElementById("modalImage");
+					var comment = document.getElementById("modalComment");
+					for(i=0;i<result.length;i++){
+						subject.innerHTML = "Subject : " + result[i].name;
+						username.innerHTML = "Upload User :" + result[i].username;
+						imagePath.src = result[i].picpath;
+						comment.innerHTML = result[i].content;
+					}
 				}
 			})
 			

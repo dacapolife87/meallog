@@ -51,4 +51,9 @@ public class MealDAO extends AbstractDAO{
     public List<String> autocompleteMeal(Map<String, Object> map) throws Exception{
 		return (List<String>)selectList("meal.autocompleteMeal", map);
     }
+    
+    //Popup Test Func
+    public List<Meal> selectPopupMeal(Member member) throws Exception{
+    	return (List<Meal>)selectList("meal.selectPopupMeal", member);
+    }
 }

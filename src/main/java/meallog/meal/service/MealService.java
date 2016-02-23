@@ -19,5 +19,8 @@ public interface MealService {
 	void insertMealMobile(Map<String, Object> map,HttpServletRequest request,HttpSession session) throws Exception;
 	
 	List<String> autocompleteMeal(Map<String, Object> map) throws Exception;
+	
+	//Test
+	List<Meal> selectPopupMeal(HttpSession session, int idx) throws Exception;
 }
 

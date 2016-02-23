@@ -95,4 +95,13 @@ public class MealServiceImpl implements MealService{
 		// TODO Auto-generated method stub
 		return mealDAO.autocompleteMeal(map);
 	}
+	
+	//Popup Test
+	@Override
+	public List<Meal> selectPopupMeal(HttpSession session, int idx) throws Exception {
+		// TODO Auto-generated method stub
+		Member member = (Member) session.getAttribute("member");
+		member.setIdx(idx);
+		return mealDAO.selectPopupMeal(member);
+	}
 }

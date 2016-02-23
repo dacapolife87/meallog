@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -244,11 +245,17 @@ public class mealController {
 //    	return mv;
 //    }
     
+    
+
+      // 각 사진 클릭시 호출되는 함수 
       @RequestMapping(value="/meal/test3.do", method=RequestMethod.GET)
-      public String modalTest(HttpSession session) throws Exception{
+      public @ResponseBody List modalTest(@RequestParam(value="picIdx") int num1 ,HttpSession session) throws Exception{
     	  log.debug("/meal/test3.do Call");
-    	 
-    	  return "/main/modal";
+    	  log.debug("[WebB] user Meal List ");
+          List<Meal> list = mealService.selectPopupMeal(session, num1);
+          log.debug("meal/test3.do : " + list);
+          log.debug("requestParam Value : " + num1);
+    	  return list;
       }
       /********************************************************
        * test 용 함수 끝

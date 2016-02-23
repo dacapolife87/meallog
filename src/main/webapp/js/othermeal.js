@@ -8,13 +8,16 @@
  		url:'/meallog/meal/shareMealList.do',
  		success:function(result){
  			var content = "";
+ 			var idx;
  			for(i=0; i<result.length; i++){
- 				content += '<div class="col-md-4">';
- 				content += '<p>제목:' + result[i].name + '</p>';
- 				content += '<p>게시자 : ' + result[i].username + '</p>';
- 				content += '<img src = "'+ result[i].picpath + '" style = "width:400px;height:400px">';
- 				content += '<p>' + result[i].eatdate + '</p>';
- 				content += '</div>';
+ 				idx = result[i].idx;
+ 				content += '<div class="col-sm-4 text-center">';
+				content += '<div class="thumbnail">';
+				content += '<a onclick="showImageModal(' + idx + ')">';
+				content += '<img src = "'+ result[i].picpath + '" style = "width:400;height:300"></img></a>';
+				content += '<p><strong>' + result[i].name + '</strong></p>';
+				content += '</div>';
+				content += '</div>';
  			}
  			$("#section2").html(content);
  		}
