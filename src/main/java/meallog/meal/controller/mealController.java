@@ -250,7 +250,7 @@ public class mealController {
 
       // 각 사진 클릭시 호출되는 함수 
       @RequestMapping(value="/meal/test3.do", method=RequestMethod.GET)
-      public @ResponseBody List modalTest(@RequestParam(value="picIdx") int num1 ,HttpSession session , CommandMap map) throws Exception{
+      public @ResponseBody Meal modalTest(HttpSession session , CommandMap map) throws Exception{
     	  log.debug("/meal/test3.do Call");
     	  log.debug("[WebB] user Meal List ");
     	  Map<String,Object> userMap = map.getMap();

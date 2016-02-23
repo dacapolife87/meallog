@@ -98,7 +98,7 @@ public class MealServiceImpl implements MealService{
 		
 	//Popup Test2222
 	@Override
-	public List<Meal> selectPopupMeal(Map<String, Object> map) throws Exception {
+	public Meal selectPopupMeal(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		
 		return mealDAO.selectPopupMeal(map);

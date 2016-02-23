@@ -292,10 +292,10 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 					var comment = document.getElementById("modalComment");
 					var modalfooter = document.getElementById("modalFooter");
 					
-					subject.innerHTML = "Subject : " + result[0].name;
-					username.innerHTML = "Upload User :" + result[0].username;
-					imagePath.src = result[0].picpath;
-					comment.innerHTML = result[0].content;
+					subject.innerHTML = "Subject : " + result.name;
+					username.innerHTML = "Upload User :" + result.username;
+					imagePath.src = result.picpath;
+					comment.innerHTML = result.content;
 					
 				}
 			})

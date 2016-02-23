@@ -21,6 +21,6 @@ public interface MealService {
 	List<String> autocompleteMeal(Map<String, Object> map) throws Exception;
 	
 	//Test 22
-	List<Meal> selectPopupMeal(Map<String,Object> map) throws Exception;
+	Meal selectPopupMeal(Map<String,Object> map) throws Exception;
 }
 

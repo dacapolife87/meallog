@@ -53,8 +53,8 @@ public class MealDAO extends AbstractDAO{
     }
     
     //Popup Test 222222222222
-    public List<Meal> selectPopupMeal(Map<String,Object> map) throws Exception{
-    	return (List<Meal>)selectList("meal.selectPopupMeal", map);
+    public Meal selectPopupMeal(Map<String,Object> map) throws Exception{
+    	return (Meal)selectOne("meal.selectPopupMeal", map);
     }
     
 }
