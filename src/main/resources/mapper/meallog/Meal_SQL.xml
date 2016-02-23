@@ -18,18 +18,17 @@
 	</select>
 	<!-- Test -->
 	<!-- MealList 사진 클릭시 한 화면 보여주는 리스트 -->
-	<select id="selectPopupMeal" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
+	<!--  Test 22222 -->
+	<select id="selectPopupMeal" parameterType="hashmap" resultType="meallog.meal.vo.Meal">
 		<![CDATA[
 			SELECT
 				*
 			FROM
 				MEALLIST
 			WHERE
-				IDX = #{idx}
+				IDX = #{picIdx}
 		]]>
 	</select>
-	
-	
 	
     <!-- MealList 출력  공유리스트 -->
     <select id="selectShareMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">

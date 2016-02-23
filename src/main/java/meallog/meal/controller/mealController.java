@@ -1,6 +1,7 @@
 package meallog.meal.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -249,13 +250,13 @@ public class mealController {
 
       // 각 사진 클릭시 호출되는 함수 
       @RequestMapping(value="/meal/test3.do", method=RequestMethod.GET)
-      public @ResponseBody List modalTest(@RequestParam(value="picIdx") int num1 ,HttpSession session) throws Exception{
+      public @ResponseBody List modalTest(@RequestParam(value="picIdx") int num1 ,HttpSession session , CommandMap map) throws Exception{
     	  log.debug("/meal/test3.do Call");
     	  log.debug("[WebB] user Meal List ");
-          List<Meal> list = mealService.selectPopupMeal(session, num1);
-          log.debug("meal/test3.do : " + list);
-          log.debug("requestParam Value : " + num1);
-    	  return list;
+    	  Map<String,Object> userMap = map.getMap();
+    	  log.debug("getMap -------: " + userMap);
+
+    	  return mealService.selectPopupMeal(userMap);
       }
       /********************************************************
        * test 용 함수 끝

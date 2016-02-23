@@ -205,9 +205,9 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
           				<img src ="" style="width:400px;height:400px" id="modalImage" /></br>
           				<p id="modalComment"></p>
       				</div>
-        			<div class="modal-footer">
-         				<button type="button" class="btn btn-default">Delete</button>
-          				<button type="button" class="btn btn-default">Edit</button>
+        			<div class="modal-footer" id="modalFooter">
+          				<button align="left" type="button" class="btn btn-default" onclick="delMyMeal()">Delete</button>
+          				<button align="left" type="button" class="btn btn-default">Edit</button>
           				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
@@ -268,7 +268,9 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 		})
 		
 		//사진 클릭시 전달되게 되는 idx 넘버 -- 사진 넘버
+		//전역 변수
 		var picIdx;
+		var checkUser;
 		//각 사진 클릭시 호출되는 함수
 		function showImageModal(x){
 			picIdx = x;
@@ -283,16 +285,18 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 				data:{"picIdx" : picIdx},
 				url:'/meallog/meal/test3.do',
 				success:function(result){
+					alert("test3.do Succe");
 					var subject = document.getElementById("modalSubject");
 					var username = document.getElementById("modalUser");
 					var imagePath = document.getElementById("modalImage");
 					var comment = document.getElementById("modalComment");
-					for(i=0;i<result.length;i++){
-						subject.innerHTML = "Subject : " + result[i].name;
-						username.innerHTML = "Upload User :" + result[i].username;
-						imagePath.src = result[i].picpath;
-						comment.innerHTML = result[i].content;
-					}
+					var modalfooter = document.getElementById("modalFooter");
+					
+					subject.innerHTML = "Subject : " + result[0].name;
+					username.innerHTML = "Upload User :" + result[0].username;
+					imagePath.src = result[0].picpath;
+					comment.innerHTML = result[0].content;
+					
 				}
 			})
 			

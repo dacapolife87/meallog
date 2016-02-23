@@ -57,9 +57,6 @@ function kakao() {
 }
 
 
-
-
-
 function myMealPage(){
 	var array = new Array();
 	$.ajax({
@@ -67,24 +64,27 @@ function myMealPage(){
 		url:'/meallog/meal/userMealList.do',
 		success:function(result){
 			var content = "";
-			var username = new String();
+			var username;
 			var idx;
 			for(i=0; i<result.length; i++){
 				username = result[i].username;
 				idx = result[i].idx;
 				content += '<div class="col-sm-4 text-center">';
 				content += '<div class="thumbnail">';
-				content += '<a onclick="showImageModal(' + idx + ')">';
+				content += '<a onclick="showImageModal(' + idx+ ')">';
 				content += '<img src = "'+ result[i].picpath + '" style = "width:400;height:300"></img></a>';
 				content += '<p><strong>' + result[i].name + '</strong></p>';
 				content += '</div>';
 				content += '</div>';
-				
-				array[i] = "anchor_" + result[i].idx;
+
 			}
 			$("#section1").html(content);
 		}
 	})
+}
+
+function delMyMeal(){
+	alert("delMyMeal Click");
 }
 
 
