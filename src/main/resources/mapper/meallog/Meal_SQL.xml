@@ -18,7 +18,6 @@
 	</select>
 	<!-- Test -->
 	<!-- MealList 사진 클릭시 한 화면 보여주는 리스트 -->
-	<!--  Test 22222 -->
 	<select id="selectPopupMeal" parameterType="hashmap" resultType="meallog.meal.vo.Meal">
 		<![CDATA[
 			SELECT
@@ -83,7 +82,18 @@
             IDX = #{IDX}
     ]]>
 	</update>
-
+    <!-- MyMeal 공유 버튼 클릭시 -->
+    <!-- MyBatis if문 추가할 것  -->
+    <update id="shareMyMeal" parameterType="hashmap">
+    <![CDATA[
+    	UPDATE MEALLIST
+    	SET
+    		<if></if> 
+    	WHERE
+    		IDX = #{IDX}
+    ]]>
+    </update>
+    
     <!-- MealList 입력 게시물 내용 -->
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[

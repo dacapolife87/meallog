@@ -82,9 +82,49 @@ function myMealPage(){
 		}
 	})
 }
+// 삭제 버튼 클릭시 호출되는 함수
+function delMyMeal(x){
+	var IDX = x;
+	$.ajax({
+		type:"GET",
+		data:{"IDX" : IDX},
+		url:'/meallog/meal/deleteUserMeal.do',
+		success:function(){
+			alert("사진이 삭제되었습니다.");
+			$("#exampleModal").modal("hide");
+			myMealPage();
+		}
+	})
+}
 
-function delMyMeal(){
-	alert("delMyMeal Click");
+// 공유 버튼 클릭시 호출되는 함수
+function shareMyMeal(x,y){
+	var IDX = x;
+
+	if(checkShare==true){
+		$("#shareMyMeal").attr('class', 'glyphicon glyphicon-unchecked pull-left');
+		checkShare = false;
+	}else{
+		$("#shareMyMeal").attr('class', 'glyphicon glyphicon-share pull-left');	
+		checkShare = true;
+	}
+	$.ajax({
+		type:"GET",
+		data:{"IDX" : IDX},
+		url:'/meallog/meal/myMealShare.do',
+		success:function(){
+		
+		}
+	})
+}
+
+// 추천 버튼 클릭시 호출되는 함수
+function recommendMeal(x){
+	var IDX = x;
+	alert("IDX : " + IDX);
+	$.ajax({
+		
+	})
 }
 
 

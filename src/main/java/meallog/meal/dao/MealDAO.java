@@ -57,4 +57,9 @@ public class MealDAO extends AbstractDAO{
     	return (Meal)selectOne("meal.selectPopupMeal", map);
     }
     
+    //공유 버튼 업데이트
+    public void updateShareMeal(Map<String,Object> map) throws Exception{
+    	update("meal.shareMyMeal", map);
+    }
+    
 }

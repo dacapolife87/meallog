@@ -12,6 +12,7 @@ public class Meal {
 	protected boolean 	share;
 	protected String 	wheneat;
 	protected String 	picpath;
+	protected boolean	checkuser;
 	
 	public int getidx() {
 		return idx;
@@ -76,4 +77,12 @@ public class Meal {
 		this.picpath = picpath;
 		return this;
 	}
+	public boolean getcheckuser(){
+		return checkuser;
+	}
+	public Meal setcheckuser(boolean checkuser){
+		this.checkuser = checkuser;
+		return this;
+	}
+	
 }

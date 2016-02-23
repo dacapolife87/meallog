@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.fabric.xmlrpc.base.Member;
+
 import meallog.common.common.CommandMap;
 import meallog.common.dao.AbstractDAO;
 import meallog.meal.service.MealService;
@@ -255,12 +257,30 @@ public class mealController {
     	  log.debug("[WebB] user Meal List ");
     	  Map<String,Object> userMap = map.getMap();
     	  log.debug("getMap -------: " + userMap);
+    	  
+    	  // 비교 코드
 
-    	  return mealService.selectPopupMeal(userMap);
+    	  return mealService.selectPopupMeal(userMap, session);
       }
       /********************************************************
        * test 용 함수 끝
        ********************************************************/
+      
+      /*********************************************************
+       * 
+       * MyMealPage Popup 창에서 공유 버튼 클릭시 호출되는 함수
+       * 
+       ********************************************************/
+      
+      @RequestMapping(value="/meal/myMealShare.do", method=RequestMethod.GET)
+      public void myMealShare(HttpSession session, CommandMap map) throws Exception{
+    	  log.debug("/meal/myMealShare.do Call");
+    	  Map<String,Object> userMap = map.getMap();
+    	  log.debug("getMap :::: " + userMap);
+    	  mealService.updateShare(userMap);
+      }
+      
+      
 }
 
 

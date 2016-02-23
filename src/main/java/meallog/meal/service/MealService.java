@@ -20,7 +20,10 @@ public interface MealService {
 	
 	List<String> autocompleteMeal(Map<String, Object> map) throws Exception;
 	
-	//Test 22
-	Meal selectPopupMeal(Map<String,Object> map) throws Exception;
+	//popup
+	Meal selectPopupMeal(Map<String,Object> map, HttpSession session) throws Exception;
+	
+	//Share 기능
+	void updateShare(Map<String, Object> map) throws Exception;
 }
 

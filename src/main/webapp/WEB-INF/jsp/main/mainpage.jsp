@@ -206,9 +206,7 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
           				<p id="modalComment"></p>
       				</div>
         			<div class="modal-footer" id="modalFooter">
-          				<button align="left" type="button" class="btn btn-default" onclick="delMyMeal()">Delete</button>
-          				<button align="left" type="button" class="btn btn-default">Edit</button>
-          				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          				
 					</div>
 				</div>
 			</div>
@@ -270,11 +268,12 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 		//사진 클릭시 전달되게 되는 idx 넘버 -- 사진 넘버
 		//전역 변수
 		var picIdx;
-		var checkUser;
+		
+		//공유 여부 확인하는 변수
+		var checkShare;
 		//각 사진 클릭시 호출되는 함수
 		function showImageModal(x){
 			picIdx = x;
-			alert("testFunc Call Alert");
 			$("#exampleModal").modal("show");
 		}
 		
@@ -285,18 +284,36 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 				data:{"picIdx" : picIdx},
 				url:'/meallog/meal/test3.do',
 				success:function(result){
-					alert("test3.do Succe");
+					var content ="";
 					var subject = document.getElementById("modalSubject");
 					var username = document.getElementById("modalUser");
 					var imagePath = document.getElementById("modalImage");
 					var comment = document.getElementById("modalComment");
-					var modalfooter = document.getElementById("modalFooter");
 					
 					subject.innerHTML = "Subject : " + result.name;
 					username.innerHTML = "Upload User :" + result.username;
 					imagePath.src = result.picpath;
 					comment.innerHTML = result.content;
 					
+					if(result.checkuser == true){ //true이면 공유 삭제 버튼 편집 버튼 추가
+						if(result.share == true){
+							checkShare = true;
+							content +='<span id="shareMyMeal" class="glyphicon glyphicon-share pull-left" onclick="shareMyMeal(' +result.idx +','+ checkShare+ ')">Share</span>';
+						}else{
+							checkShare = false;
+							content +='<span id="shareMyMeal" class="glyphicon glyphicon-unchecked pull-left" onclick="shareMyMeal(' +result.idx +','+checkShare+ ')">Share</span>';
+						}
+						content +='<button align="left" type="button" class="btn btn-default" onclick="delMyMeal('+picIdx+')">Delete</button>';
+	          			content +='<button align="left" type="button" class="btn btn-default">Edit</button>';
+	          			content +='<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+	          			$("#modalFooter").html(content);
+					}else{ // false이면 추천 닫기 버튼만 추가
+						// if 문 추가해서 만약 추천을 했다면 꽉찬 하트, 추천을 하지 않았다면 빈 하트 출력
+						content += content +='<span id="shareMyMeal" class="glyphicon glyphicon-heart-empty pull-left" onclick="recommendMeal(' +result.idx + ')">Recommend</span>';
+						
+						content += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+						$("#modalFooter").html(content);
+					}
 				}
 			})
 			
