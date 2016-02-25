@@ -88,7 +88,7 @@
     <![CDATA[
     	UPDATE MEALLIST
     	SET
-    		<if></if> 
+    		SHARE = #{SHARE}
     	WHERE
     		IDX = #{IDX}
     ]]>

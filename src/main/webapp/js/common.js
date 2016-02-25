@@ -100,17 +100,22 @@ function delMyMeal(x){
 // 공유 버튼 클릭시 호출되는 함수
 function shareMyMeal(x,y){
 	var IDX = x;
+	var SHARE; // 공유시 boolean 역할을 하게 되는 변수 , 공유 되었다면 1 , 공유가 해제되었다면 0
 
 	if(checkShare==true){
 		$("#shareMyMeal").attr('class', 'glyphicon glyphicon-unchecked pull-left');
+		
 		checkShare = false;
+		SHARE = '0'; 
 	}else{
 		$("#shareMyMeal").attr('class', 'glyphicon glyphicon-share pull-left');	
+		
 		checkShare = true;
+		SHARE = '1';
 	}
 	$.ajax({
 		type:"GET",
-		data:{"IDX" : IDX},
+		data:{"IDX" : IDX , "SHARE" : SHARE},
 		url:'/meallog/meal/myMealShare.do',
 		success:function(){
 		
