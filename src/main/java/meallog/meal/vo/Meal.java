@@ -2,6 +2,8 @@ package meallog.meal.vo;
 
 import java.util.Date;
 
+
+
 public class Meal {
 	protected int 		idx;
 	protected String 	username;
@@ -13,66 +15,66 @@ public class Meal {
 	protected String 	wheneat;
 	protected String 	picpath;
 	
-	public int getidx() {
+	public int getIDX() {
 		return idx;
 	}
-	public Meal setidx(int idx) {
+	public Meal setIDX(int idx) {
 		this.idx = idx;
 		return this;
 	}
-	public String getusername() {
+	public String getUSERNAME() {
 		return username;
 	}
-	public Meal setusername(String user_name) {
-		this.username = user_name;
+	public Meal setUSERNAME(String username) {
+		this.username = username;
 		return this;
 	}
-	public String getname() {
+	public String getNAME() {
 		return name;
 	}
-	public Meal setname(String name) {
+	public Meal setNAME(String name) {
 		this.name = name;
 		return this;
 	}
-	public String getcategory() {
+	public String getCATEGORY() {
 		return category;
 	}
-	public Meal setcategory(String category) {
+	public Meal setCATEGORY(String category) {
 		this.category = category;
 		return this;
 	}
-	public String getcontent() {
+	public String getCONTENT() {
 		return content;
 	}
-	public Meal setcontent(String content) {
+	public Meal setCONTENT(String content) {
 		this.content = content;
 		return this;
 	}
-	public Date geteatdate() {
+	public Date getEATDATE() {
 		return eatdate;
 	}
-	public Meal seteatdate(Date eatdate) {
+	public Meal setEATDATE(Date eatdate) {
 		this.eatdate = eatdate;
 		return this;
 	}
-	public boolean getshare() {
+	public boolean getSHARE() {
 		return share;
 	}
-	public Meal setshare(boolean share) {
+	public Meal setSHARE(boolean share) {
 		this.share = share;
 		return this;
 	}
-	public String getwheneat() {
+	public String getWHENEAT() {
 		return wheneat;
 	}
-	public Meal setwheneat(String wheneat) {
+	public Meal setWHENEAT(String wheneat) {
 		this.wheneat = wheneat;
 		return this;
 	}
-	public String getpicpath() {
+	public String getPICPATH() {
 		return picpath;
 	}
-	public Meal setpicpath(String picpath) {
+	public Meal setPICPATH(String picpath) {
 		this.picpath = picpath;
 		return this;
 	}

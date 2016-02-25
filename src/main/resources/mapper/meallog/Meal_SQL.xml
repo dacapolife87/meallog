@@ -84,7 +84,7 @@
     ]]>
 	</update>
 
-    <!-- MealList 입력 게시물 내용 -->
+    <!-- MealList 입력 게시물 내용
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
@@ -100,7 +100,33 @@
         )
         VALUES
         (
-            #{USERNICK}, 
+            #{USERNAME}, 
+            #{NAME},
+            #{CATEGORY},
+            #{CONTENT},
+            CURDATE(), 
+            ifnull (#{SHARE}, 0 ),  
+            #{WHENEAT},
+            'PICPATH'
+        )
+       ]]>
+	</insert> -->
+	<insert id="insertBoardVO" parameterType="meallog.meal.vo.Meal" useGeneratedKeys="true" keyProperty="IDX">
+    <![CDATA[
+        INSERT INTO MEALLIST
+        ( 
+            USERNAME, 
+            NAME, 
+            CATEGORY, 
+            CONTENT, 
+            EATDATE,
+            SHARE,
+            WHENEAT,
+            PICPATH
+        )
+        VALUES
+        (
+            #{USERNAME}, 
             #{NAME},
             #{CATEGORY},
             #{CONTENT},
