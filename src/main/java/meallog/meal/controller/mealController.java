@@ -125,26 +125,16 @@ public class mealController {
         mealService.insertMeal(meal.getMap(),request,session);
         return mv;
     }
-    @SuppressWarnings("unchecked")
-	@RequestMapping(value="/meal/mealUploadList.mobile", method=RequestMethod.POST)
+
+	@RequestMapping(value="/meal/mealUploadList.mobile")
     public @ResponseBody JSONObject insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
     	log.debug("[Mobile] meal upload Request");
-
-    	log.debug("map data get meal : "+meal.getMap().get("meal"));
+    	log.debug("[Mobile] meal korean test");
+    	log.debug("map data get meal : "+meal.getMap());
     	//log.debug("map data : "+meal.getMap());
-    	
-    	log.debug("req : "+request.getParameterValues("file"));
-    	log.debug("req : "+request.getContentType());
-    	log.debug("req : "+request.getHeaders("file"));
     	JSONObject resultJSON = new JSONObject();
-    	request.setCharacterEncoding("UTF-8");
-
-    	mealService.insertMealMobile(meal.getMap(), request, session);
     	try {
-    		log.debug("insert mobile 1");
-    		request.setCharacterEncoding("UTF-8");
-    		//mealService.insertMealMobile(meal.getMap(), request, session);
-    		
+    		mealService.insertMealMobile(meal.getMap(), request, session);
     		resultJSON.put("result", "insert_OK");
 		} catch (Exception e) {
 			// TODO: handle exception

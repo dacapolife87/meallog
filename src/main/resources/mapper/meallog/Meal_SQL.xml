@@ -101,7 +101,7 @@
     
     
     <!-- MealList 입력 게시물 내용 -->
-    <!-- 
+    
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
@@ -127,8 +127,8 @@
             'PICPATH'
         )
        ]]>
-	</insert> -->
-	<insert id="insertBoardVO" parameterType="meallog.meal.vo.Meal" useGeneratedKeys="true" keyProperty="IDX">
+	</insert> 
+	 <!--<insert id="insertBoardVO" parameterType="meallog.meal.vo.Meal" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
         ( 
@@ -153,7 +153,7 @@
             'PICPATH'
         )
        ]]>
-	</insert>
+	</insert>-->
 	<!-- MealList 입력  시 파일 경로 추가-->
 	<update id="updateFilePath" parameterType="hashmap">
     <![CDATA[

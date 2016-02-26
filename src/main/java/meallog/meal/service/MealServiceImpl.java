@@ -69,24 +69,24 @@ public class MealServiceImpl implements MealService{
 	@Override
 	public void insertMeal(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		Meal mealVO = new Meal();
-		log.debug("[Meal Service] data : "+meal);
-		convertData.convertMapToObject(meal, mealVO);
-		log.debug("vo : "+mealVO.getCATEGORY());
+//		Meal mealVO = new Meal();
+//		log.debug("[Meal Service] data : "+meal);
+//		convertData.convertMapToObject(meal, mealVO);
+//		log.debug("vo : "+mealVO.getCATEGORY());
 		Member member = (Member) session.getAttribute("member");
 		String userName = member.getNick();
-		//meal.put("USERNICK", userName);
-		mealVO.setUSERNAME(userName);
-		mealDAO.insertBoard(mealVO);
+		meal.put("USERNAME", userName);
+		//mealVO.setUSERNAME(userName);
+		mealDAO.insertBoard(meal);
 		log.debug("insert : ");
 		String filePath = session.getServletContext().getRealPath("");
 
 		
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(mealVO, filePath, request);
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath, request);
         for(int i=0, size=list.size(); i<size; i++){
         	if(i==0){
         		Map<String, Object> picMap = new HashMap<String, Object>();
-        		picMap.put("IDX", Integer.toString(mealVO.getIDX()));
+        		picMap.put("IDX", meal.get("IDX"));
         		picMap.put("PICPATH", userName+"/"+list.get(0).get("STORED_FILE_NAME"));
         		mealDAO.updateFilePath(picMap);
         	}
@@ -99,36 +99,27 @@ public class MealServiceImpl implements MealService{
 		// TODO Auto-generated method stub
 		//log.debug("[Meal Service] insertMealMobile : "+meal);
 		
-//		Gson gson = new Gson();
-//    	gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
-//    	Meal mealVO = gson.fromJson((String) meal.get("meal"), Meal.class);
-//    	Member member = (Member) session.getAttribute("member");
-//		String userName = member.getNick();
-//		mealVO.setUSERNAME(userName);
-//		mealDAO.insertBoard(mealVO);
-//		String filePath = session.getServletContext().getRealPath("");
-//		String jsonFile = (String) meal.get("image");
-		Meal mealVO = new Meal();
-		log.debug("[Meal Service] data : "+meal);
-		convertData.convertMapToObject(meal, mealVO);
-		log.debug("vo : "+mealVO.getCATEGORY());
 		
-		log.debug("meal vo change");
 		Member member = (Member) session.getAttribute("member");
 		String userName = member.getNick();
-		//meal.put("USERNICK", userName);
-		mealVO.setUSERNAME(userName);
-		log.debug("meal 1");
-		mealDAO.insertBoard(mealVO);
-		log.debug("insert ");
-		String filePath = session.getServletContext().getRealPath("");
+		meal.put("USERNAME", userName);
+		log.debug("share : "+meal.get("SHARE"));
+		if(meal.get("SHARE").equals("true")){
+			meal.put("SHARE", "1");
+		}else{
+			meal.put("SHARE", "0");
+		}
 		
+		log.debug("share : "+meal.get("SHARE"));
+		mealDAO.insertBoard(meal);
+		String filePath = session.getServletContext().getRealPath("");
+//		
 		log.debug("file pre");
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfoMobile(mealVO, filePath, request);
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath, request);
         for(int i=0, size=list.size(); i<size; i++){
         	if(i==0){
         		Map<String, Object> picMap = new HashMap<String, Object>();
-        		picMap.put("IDX", Integer.toString(mealVO.getIDX()));
+        		picMap.put("IDX", meal.get("IDX"));
         		picMap.put("PICPATH", userName+"/"+list.get(0).get("STORED_FILE_NAME"));
         		mealDAO.updateFilePath(picMap);
         	}

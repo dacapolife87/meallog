@@ -153,7 +153,7 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 								<br/><br/><br/><br/>
 								<div class="form-group pull-left">
 									<label class="pull-left">Date </label><br/>
-									<input type="date" id="eatdate" name="eatdate" min="1979-12-31"></input>
+									<input type="date" id="eatdate" name="EATDATE" min="1979-12-31"></input>
 								</div>
 								<br/><br/><br/><br/>
 								<div class="form-group pull-left">

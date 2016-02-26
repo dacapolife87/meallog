@@ -32,12 +32,12 @@ public class MealDAO extends AbstractDAO{
     public Meal selectUserOneMealList(Map<String, Object> map) throws Exception{
     	return (Meal)selectList("meal.selectUserOneMealList", map);
     }
-//    public void insertBoard(Map<String, Object> meal) throws Exception{
-//    	insert("meal.insertBoard", meal);
-//    }
-    public void insertBoard(Meal meal) throws Exception{
-    	insert("meal.insertBoardVO", meal);
+    public void insertBoard(Map<String, Object> meal) throws Exception{
+    	insert("meal.insertBoard", meal);
     }
+//    public void insertBoard(Meal meal) throws Exception{
+//    	insert("meal.insertBoardVO", meal);
+//    }
     public void insertFile(Map<String, Object> map) throws Exception{
         insert("meal.insertFile", map);
     }
