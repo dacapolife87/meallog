@@ -23,12 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-=======
+
 import com.mysql.fabric.xmlrpc.base.Member;
->>>>>>> origin/master
 
 import meallog.common.common.CommandMap;
 import meallog.common.dao.AbstractDAO;

@@ -225,10 +225,10 @@ public class MealServiceImpl implements MealService{
 		Meal meal = mealDAO.selectPopupMeal(map);
 		
 		// 이 함수를 호출한 곳이 myMealPage 인지 아닌지 검사하는 조건문
-		if(member.getNick().equals(meal.getusername())){
-			meal.setcheckuser(true);
+		if(member.getNick().equals(meal.getUSERNAME())){
+			meal.setCHECKUSER(true);
 		}else{
-			meal.setcheckuser(false);
+			meal.setCHECKUSER(false);
 		}
 		
 		return meal;

@@ -79,10 +79,10 @@ public class Meal {
 		this.picpath = picpath;
 		return this;
 	}
-	public boolean getcheckuser(){
+	public boolean getCHECKUSER(){
 		return checkuser;
 	}
-	public Meal setcheckuser(boolean checkuser){
+	public Meal setCHECKUSER(boolean checkuser){
 		this.checkuser = checkuser;
 		return this;
 	}
