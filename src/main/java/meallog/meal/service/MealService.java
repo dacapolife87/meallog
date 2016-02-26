@@ -17,7 +17,7 @@ public interface MealService {
 	void deleteMeal(Map<String, Object> map) throws Exception;
 	void insertMeal(Map<String, Object> map,HttpServletRequest request,HttpSession session) throws Exception;
 	void insertMealMobile(Map<String, Object> map,HttpServletRequest request,HttpSession session) throws Exception;
-	
+	void insertMealFile(Map<String, Object> map,HttpServletRequest request,HttpSession session) throws Exception;
 	List<String> autocompleteMeal(Map<String, Object> map) throws Exception;
 	
 	//popup

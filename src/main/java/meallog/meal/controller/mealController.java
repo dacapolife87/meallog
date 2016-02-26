@@ -121,17 +121,12 @@ public class mealController {
     @RequestMapping(value="/meal/mealUploadList.do")
     public ModelAndView insertMealBoard(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/meal/main.do");
-        log.debug("req : "+request.getContentType());
         mealService.insertMeal(meal.getMap(),request,session);
         return mv;
     }
 
 	@RequestMapping(value="/meal/mealUploadList.mobile")
     public @ResponseBody JSONObject insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
-    	log.debug("[Mobile] meal upload Request");
-    	log.debug("[Mobile] meal korean test");
-    	log.debug("map data get meal : "+meal.getMap());
-    	//log.debug("map data : "+meal.getMap());
     	JSONObject resultJSON = new JSONObject();
     	try {
     		mealService.insertMealMobile(meal.getMap(), request, session);
