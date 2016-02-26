@@ -219,9 +219,30 @@ public class MealServiceImpl implements MealService{
 		
 	//Popup Test2222
 	@Override
-	public Meal selectPopupMeal(Map<String, Object> map) throws Exception {
+	public Meal selectPopupMeal(Map<String, Object> map , HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		Member member = (Member)session.getAttribute("member");
+		Meal meal = mealDAO.selectPopupMeal(map);
 		
-		return mealDAO.selectPopupMeal(map);
+		// 이 함수를 호출한 곳이 myMealPage 인지 아닌지 검사하는 조건문
+		if(member.getNick().equals(meal.getusername())){
+			meal.setcheckuser(true);
+		}else{
+			meal.setcheckuser(false);
+		}
+		
+		return meal;
 	}
+	
+	//Share 기능
+	@Override
+	public void updateShare(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+
+		mealDAO.updateShareMeal(map);
+	}
+	
+	
+	
+	
 }

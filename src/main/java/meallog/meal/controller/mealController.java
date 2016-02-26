@@ -23,8 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+=======
+import com.mysql.fabric.xmlrpc.base.Member;
+>>>>>>> origin/master
 
 import meallog.common.common.CommandMap;
 import meallog.common.dao.AbstractDAO;
@@ -275,12 +279,30 @@ public class mealController {
     	  log.debug("[WebB] user Meal List ");
     	  Map<String,Object> userMap = map.getMap();
     	  log.debug("getMap -------: " + userMap);
+    	  
+    	  // 비교 코드
 
-    	  return mealService.selectPopupMeal(userMap);
+    	  return mealService.selectPopupMeal(userMap, session);
       }
       /********************************************************
        * test 용 함수 끝
        ********************************************************/
+      
+      /*********************************************************
+       * 
+       * MyMealPage Popup 창에서 공유 버튼 클릭시 호출되는 함수
+       * 
+       ********************************************************/
+      
+      @RequestMapping(value="/meal/myMealShare.do", method=RequestMethod.GET)
+      public void myMealShare(HttpSession session, CommandMap map) throws Exception{
+    	  log.debug("/meal/myMealShare.do Call");
+    	  Map<String,Object> userMap = map.getMap();
+    	  log.debug("getMap :::: " + userMap);
+    	  mealService.updateShare(userMap);
+      }
+      
+      
 }
 
 
