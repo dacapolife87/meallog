@@ -117,7 +117,6 @@ public class MealServiceImpl implements MealService{
         	}
         	mealDAO.insertFile(list.get(i));
         }		
-		
 	}
 	@Override
 	public void updateMeal(Map<String, Object> map) throws Exception {
