@@ -99,16 +99,31 @@ public class MealServiceImpl implements MealService{
 		// TODO Auto-generated method stub
 		//log.debug("[Meal Service] insertMealMobile : "+meal);
 		
-		Gson gson = new Gson();
-    	gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
-    	Meal mealVO = gson.fromJson((String) meal.get("meal"), Meal.class);
-    	Member member = (Member) session.getAttribute("member");
-		String userName = member.getNick();
-		mealVO.setUSERNAME(userName);
-		mealDAO.insertBoard(mealVO);
-		String filePath = session.getServletContext().getRealPath("");
-		String jsonFile = (String) meal.get("image");
+//		Gson gson = new Gson();
+//    	gson = new GsonBuilder().setDateFormat("yyyy/MM/dd").create();
+//    	Meal mealVO = gson.fromJson((String) meal.get("meal"), Meal.class);
+//    	Member member = (Member) session.getAttribute("member");
+//		String userName = member.getNick();
+//		mealVO.setUSERNAME(userName);
+//		mealDAO.insertBoard(mealVO);
+//		String filePath = session.getServletContext().getRealPath("");
+//		String jsonFile = (String) meal.get("image");
+		Meal mealVO = new Meal();
+		log.debug("[Meal Service] data : "+meal);
+		convertData.convertMapToObject(meal, mealVO);
+		log.debug("vo : "+mealVO.getCATEGORY());
 		
+		log.debug("meal vo change");
+		Member member = (Member) session.getAttribute("member");
+		String userName = member.getNick();
+		//meal.put("USERNICK", userName);
+		mealVO.setUSERNAME(userName);
+		log.debug("meal 1");
+		mealDAO.insertBoard(mealVO);
+		log.debug("insert ");
+		String filePath = session.getServletContext().getRealPath("");
+		
+		log.debug("file pre");
 		List<Map<String,Object>> list = fileUtils.parseInsertFileInfoMobile(mealVO, filePath, request);
         for(int i=0, size=list.size(); i<size; i++){
         	if(i==0){

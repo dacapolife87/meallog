@@ -70,7 +70,25 @@ public class FileUtils {
     
     public List<Map<String,Object>> parseInsertFileInfoMobile(Meal mealVO,String filePath, HttpServletRequest request) throws Exception{
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+        log.debug("-------------------------------------------------------");
+        log.debug(multipartHttpServletRequest.getAttribute("file"));
+        
+        log.debug(multipartHttpServletRequest.getContentType());
+        
+        log.debug(multipartHttpServletRequest.getFile("image.jpg"));
+        
+        log.debug(multipartHttpServletRequest.getHeaderNames());
+        
+        log.debug(multipartHttpServletRequest.getFileMap().get("file"));
+        
+        log.debug(multipartHttpServletRequest);
+        log.debug("-------------------------------------------------------");
+        //Iterator<String> iterator2 = multipartHttpServletRequest.get();
         Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+//        while(iterator2.hasNext()){
+//        	log.debug("test");
+//        	
+//        }
         log.debug("test1");
         MultipartFile multipartFile = null;
         String originalFileName = null;
@@ -91,10 +109,12 @@ public class FileUtils {
         if(file.exists() == false){
             file.mkdirs();
         }
-         
+        log.debug("test3");
         while(iterator.hasNext()){
             multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+            log.debug("test4");
             if(multipartFile.isEmpty() == false){
+            	log.debug("test5");
                 originalFileName = multipartFile.getOriginalFilename();
                 originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
                 storedFileName = CommonUtils.getRandomString() + originalFileExtension;

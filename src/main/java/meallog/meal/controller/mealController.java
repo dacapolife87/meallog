@@ -126,14 +126,16 @@ public class mealController {
 	@RequestMapping(value="/meal/mealUploadList.mobile", method=RequestMethod.POST)
     public @ResponseBody JSONObject insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
     	log.debug("[Mobile] meal upload Request");
+
     	log.debug("map data get meal : "+meal.getMap().get("meal"));
     	//log.debug("map data : "+meal.getMap());
     	
-    	log.debug("req : "+request.getParameterValues("image"));
+    	log.debug("req : "+request.getParameterValues("file"));
     	log.debug("req : "+request.getContentType());
-    	log.debug("req : "+request.getHeaders("image"));
+    	log.debug("req : "+request.getHeaders("file"));
     	JSONObject resultJSON = new JSONObject();
-    	
+    	request.setCharacterEncoding("UTF-8");
+
     	mealService.insertMealMobile(meal.getMap(), request, session);
     	try {
     		log.debug("insert mobile 1");
