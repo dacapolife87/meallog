@@ -1,5 +1,8 @@
 package meallog.meal.controller;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,16 +14,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import com.mysql.fabric.xmlrpc.base.Member;
 
 import meallog.common.common.CommandMap;
 import meallog.common.dao.AbstractDAO;
+import meallog.common.util.CommonUtils;
 import meallog.meal.service.MealService;
 import meallog.meal.vo.Meal;
 
@@ -110,19 +121,14 @@ public class mealController {
     @RequestMapping(value="/meal/mealUploadList.do")
     public ModelAndView insertMealBoard(CommandMap meal, HttpServletRequest request,HttpSession session) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/meal/main.do");
-        log.debug("[WebB] meal upload Request");
-        log.debug("map data : "+meal.getMap());
         mealService.insertMeal(meal.getMap(),request,session);
         return mv;
     }
-    @SuppressWarnings("unchecked")
-	@RequestMapping(value="/meal/mealUploadList.mobile", method=RequestMethod.POST)
+
+	@RequestMapping(value="/meal/mealUploadList.mobile")
     public @ResponseBody JSONObject insertMealBoardMoblie(CommandMap meal, HttpServletRequest request, HttpSession session) throws Exception{
-    	log.debug("[Mobile] meal upload Request");
-    	log.debug("map data : "+meal.getMap());
     	JSONObject resultJSON = new JSONObject();
     	try {
-    		request.setCharacterEncoding("UTF-8");
     		mealService.insertMealMobile(meal.getMap(), request, session);
     		resultJSON.put("result", "insert_OK");
 		} catch (Exception e) {

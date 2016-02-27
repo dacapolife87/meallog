@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="meal">
+ <mapper namespace="meal">
+
 	<!-- MealList 출력  개인리스트 -->
 	<select id="selectUserMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
     	<![CDATA[
@@ -16,6 +17,8 @@
             ORDER BY IDX DESC
         ]]>
 	</select>
+	
+	
 	<!-- Test -->
 	<!-- MealList 사진 클릭시 한 화면 보여주는 리스트 -->
 	<select id="selectPopupMeal" parameterType="hashmap" resultType="meallog.meal.vo.Meal">
@@ -82,6 +85,7 @@
             IDX = #{IDX}
     ]]>
 	</update>
+    <!-- MealList 입력 게시물 내용-->
     <!-- MyMeal 공유 버튼 클릭시 -->
     <!-- MyBatis if문 추가할 것  -->
     <update id="shareMyMeal" parameterType="hashmap">
@@ -94,7 +98,10 @@
     ]]>
     </update>
     
+    
+    
     <!-- MealList 입력 게시물 내용 -->
+    
     <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
     <![CDATA[
         INSERT INTO MEALLIST
@@ -110,7 +117,7 @@
         )
         VALUES
         (
-            #{USERNICK}, 
+            #{USERNAME}, 
             #{NAME},
             #{CATEGORY},
             #{CONTENT},
@@ -120,7 +127,33 @@
             'PICPATH'
         )
        ]]>
-	</insert>
+	</insert> 
+	 <!--<insert id="insertBoardVO" parameterType="meallog.meal.vo.Meal" useGeneratedKeys="true" keyProperty="IDX">
+    <![CDATA[
+        INSERT INTO MEALLIST
+        ( 
+            USERNAME, 
+            NAME, 
+            CATEGORY, 
+            CONTENT, 
+            EATDATE,
+            SHARE,
+            WHENEAT,
+            PICPATH
+        )
+        VALUES
+        (
+            #{USERNAME}, 
+            #{NAME},
+            #{CATEGORY},
+            #{CONTENT},
+            CURDATE(), 
+            ifnull (#{SHARE}, 0 ),  
+            #{WHENEAT},
+            'PICPATH'
+        )
+       ]]>
+	</insert>-->
 	<!-- MealList 입력  시 파일 경로 추가-->
 	<update id="updateFilePath" parameterType="hashmap">
     <![CDATA[

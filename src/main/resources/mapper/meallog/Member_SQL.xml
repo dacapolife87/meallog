@@ -43,7 +43,7 @@
             FROM
                 MEMBERLIST
             WHERE
-                EMAIL = #{userID}
+                NICK = #{userID}
                 AND
                 PASSWORD = #{userPW}
     ]]>

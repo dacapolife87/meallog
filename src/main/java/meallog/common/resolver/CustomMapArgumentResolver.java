@@ -3,7 +3,9 @@ package meallog.common.resolver;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
- 
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -11,8 +13,11 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
  
 import meallog.common.common.CommandMap;
+import meallog.common.dao.AbstractDAO;
  
 public class CustomMapArgumentResolver implements HandlerMethodArgumentResolver{
+	protected Log log = LogFactory.getLog(AbstractDAO.class);
+	
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return CommandMap.class.isAssignableFrom(parameter.getParameterType());

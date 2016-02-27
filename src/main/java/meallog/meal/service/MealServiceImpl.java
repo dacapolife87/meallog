@@ -24,7 +24,7 @@ public class MealServiceImpl implements MealService{
 	
 	@Resource(name="fileUtils")
 	private FileUtils fileUtils;
-
+	
     @Resource(name="mealDAO")
     private MealDAO mealDAO;
 
@@ -55,30 +55,68 @@ public class MealServiceImpl implements MealService{
 	@Override
 	public void insertMeal(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		log.debug("[Meal Service] data : "+meal);
 		Member member = (Member) session.getAttribute("member");
 		String userName = member.getNick();
-		meal.put("USERNICK", userName);
-		mealDAO.insertBoard(meal);
-		String filePath = session.getServletContext().getRealPath("");
-
-		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath,request);
-        for(int i=0, size=list.size(); i<size; i++){
-        	if(i==0){
-        		Map<String, Object> picMap = new HashMap<String, Object>();
-        		picMap.put("IDX", meal.get("IDX").toString());
-        		picMap.put("PICPATH", userName+"/"+list.get(0).get("STORED_FILE_NAME"));
-        		mealDAO.updateFilePath(picMap);
-        	}
-        	mealDAO.insertFile(list.get(i));
-        }
+		meal.put("USERNAME", userName);		
+		insertMealFile(meal, request, session);
+		
+//		mealDAO.insertBoard(meal);
+//		String filePath = session.getServletContext().getRealPath("");
+//		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath, request);
+//        for(int i=0, size=list.size(); i<size; i++){
+//        	if(i==0){
+//        		Map<String, Object> picMap = new HashMap<String, Object>();
+//        		picMap.put("IDX", meal.get("IDX"));
+//        		picMap.put("PICPATH", userName+"/"+list.get(0).get("STORED_FILE_NAME"));
+//        		mealDAO.updateFilePath(picMap);
+//        	}
+//        	mealDAO.insertFile(list.get(i));
+//        }
 	}
 	
 	@Override
 	public void insertMealMobile(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
-		log.debug("[Meal Service] insertMealMobile : "+meal);
 		Member member = (Member) session.getAttribute("member");
+		String userName = member.getNick();
+		meal.put("USERNAME", userName);
+		if(meal.get("SHARE").equals("true")){
+			meal.put("SHARE", "1");
+		}else{
+			meal.put("SHARE", "0");
+		}
+		insertMealFile(meal, request, session);
+		
+//		mealDAO.insertBoard(meal);
+//		String filePath = session.getServletContext().getRealPath("");
+//		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath, request);
+//        for(int i=0, size=list.size(); i<size; i++){
+//        	if(i==0){
+//        		Map<String, Object> picMap = new HashMap<String, Object>();
+//        		picMap.put("IDX", meal.get("IDX"));
+//        		picMap.put("PICPATH", meal.get("USERNAME")+"/"+list.get(0).get("STORED_FILE_NAME"));
+//        		mealDAO.updateFilePath(picMap);
+//        	}
+//        	mealDAO.insertFile(list.get(i));
+//        }		
+	}
+	@Override
+	public void insertMealFile(Map<String, Object> meal, HttpServletRequest request, HttpSession session)
+			throws Exception {
+		// TODO Auto-generated method stub
+		mealDAO.insertBoard(meal);
+		String filePath = session.getServletContext().getRealPath("");
+	
+		List<Map<String,Object>> list = fileUtils.parseInsertFileInfo(meal, filePath, request);
+        for(int i=0, size=list.size(); i<size; i++){
+        	if(i==0){
+        		Map<String, Object> picMap = new HashMap<String, Object>();
+        		picMap.put("IDX", meal.get("IDX"));
+        		picMap.put("PICPATH", meal.get("USERNAME")+"/"+list.get(0).get("STORED_FILE_NAME"));
+        		mealDAO.updateFilePath(picMap);
+        	}
+        	mealDAO.insertFile(list.get(i));
+        }		
 	}
 	@Override
 	public void updateMeal(Map<String, Object> map) throws Exception {
@@ -104,10 +142,10 @@ public class MealServiceImpl implements MealService{
 		Meal meal = mealDAO.selectPopupMeal(map);
 		
 		// 이 함수를 호출한 곳이 myMealPage 인지 아닌지 검사하는 조건문
-		if(member.getNick().equals(meal.getusername())){
-			meal.setcheckuser(true);
+		if(member.getNick().equals(meal.getUSERNAME())){
+			meal.setCHECKUSER(true);
 		}else{
-			meal.setcheckuser(false);
+			meal.setCHECKUSER(false);
 		}
 		
 		return meal;
@@ -120,6 +158,7 @@ public class MealServiceImpl implements MealService{
 
 		mealDAO.updateShareMeal(map);
 	}
+
 	
 	
 	

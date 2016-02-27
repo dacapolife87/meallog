@@ -16,15 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import meallog.common.dao.AbstractDAO;
+import meallog.meal.vo.Meal;
 
 @Component("fileUtils")
 public class FileUtils {
 	protected Log log = LogFactory.getLog(AbstractDAO.class);
 	
-    public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map,String filePath, HttpServletRequest request) throws Exception{
+    public List<Map<String,Object>> parseInsertFileInfo(Map<String, Object> meal,String filePath, HttpServletRequest request) throws Exception{
        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
        Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-       
        MultipartFile multipartFile = null;
        String originalFileName = null;
        String originalFileExtension = null;
@@ -32,11 +32,10 @@ public class FileUtils {
        
        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
        Map<String, Object> listMap = null; 
-        
-       String boardIdx = map.get("IDX").toString();
-       String userName = map.get("USERNICK").toString();
-       
-       log.debug(filePath);
+
+       String userName = (String) meal.get("USERNAME");
+
+       log.debug("filePAth : "+ filePath);
        String userFilePath = filePath+"meal"+File.separator+userName;
        
        log.debug("file upload : "+userFilePath);
@@ -56,7 +55,7 @@ public class FileUtils {
                multipartFile.transferTo(file);
                 
                listMap = new HashMap<String,Object>();
-               listMap.put("BOARD_IDX", boardIdx);
+               listMap.put("BOARD_IDX", meal.get("IDX"));
                listMap.put("ORIGINAL_FILE_NAME", originalFileName);
                listMap.put("STORED_FILE_NAME", storedFileName);
                listMap.put("FILE_SIZE", multipartFile.getSize());
