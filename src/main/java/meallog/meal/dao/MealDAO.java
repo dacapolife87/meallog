@@ -62,4 +62,19 @@ public class MealDAO extends AbstractDAO{
     	update("meal.shareMyMeal", map);
     }
     
+    //추천 버튼
+    public void insertRecommendMeal(Map<String,Object> map) throws Exception{
+    	insert("meal.insertRecommend", map);
+    }
+    
+    //추천 해제 버튼
+    public void deleteRecommendMeal(Map<String,Object> map) throws Exception{
+    	delete("meal.deleteRecommend", map);
+    }
+    
+    //추천했는지 체크하는 쿼리
+    public Map<String,Object> checkRecommendMeal(Map<String,Object> map) throws Exception{
+    	return (Map<String,Object>)selectOne("meal.checkRecommend", map);
+    }
+    
 }

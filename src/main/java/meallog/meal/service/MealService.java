@@ -25,5 +25,11 @@ public interface MealService {
 	
 	//Share 기능
 	void updateShare(Map<String, Object> map) throws Exception;
+	
+	//추천 기능
+	void insertRecommend(Map<String,Object> map, HttpSession session) throws Exception;
+	
+	//추천 해제 기능
+	void deleteRecommend(Map<String,Object> map, HttpSession session) throws Exception;
 }
 

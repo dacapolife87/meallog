@@ -14,7 +14,8 @@ public class Meal {
 	protected boolean 	share;
 	protected String 	wheneat;
 	protected String 	picpath;
-	protected boolean	checkuser;
+	protected boolean	checkuser; //로그인한 유저가 본인사진을 클릭했는지 안했는지 구분해주는 변수
+	protected boolean	checkrecommend; //추천을 했는지 안했는지 확인하는 변수
 	
 	public int getIDX() {
 		return idx;
@@ -84,6 +85,13 @@ public class Meal {
 	}
 	public Meal setCHECKUSER(boolean checkuser){
 		this.checkuser = checkuser;
+		return this;
+	}
+	public boolean getcheckrecommend(){
+		return checkrecommend;
+	}
+	public Meal setcheckrecommend(boolean checkrecommend){
+		this.checkrecommend = checkrecommend;
 		return this;
 	}
 	

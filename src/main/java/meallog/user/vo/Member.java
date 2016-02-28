@@ -6,7 +6,7 @@ public class Member {
 	protected int 		idx;
 	protected String 	email;
 	protected String 	password;
-	protected String 	nick;
+	protected String 	nick; //username
 	protected Date		joinDate;
 	protected Date		modifiedDate;
 	protected String	kakaoToken;

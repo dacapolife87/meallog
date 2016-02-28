@@ -14,3 +14,13 @@ test Final 2
 
 
 test Final 3
+
+
+=======================================================
+CREATE TABLE
+
+table name : mealrecommend
+
+Column Name : idx , DataType : INT(11) , PK, NM
+COlumn Name : username, DataType : VARCHAR(100), PK, NM
+========================================================
