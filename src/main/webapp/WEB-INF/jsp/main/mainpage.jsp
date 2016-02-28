@@ -265,6 +265,10 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 		    });
 		})
 		
+		
+		//추천 버튼 클릭시 전달되는
+		var checkRecommend;
+		
 		//사진 클릭시 전달되게 되는 idx 넘버 -- 사진 넘버
 		//전역 변수
 		var picIdx;
@@ -298,22 +302,30 @@ response.setDateHeader("Expires",0); // proxy server 에 cache방지.
 					if(result.checkuser == true){ //true이면 공유 삭제 버튼 편집 버튼 추가
 						if(result.share == true){
 							checkShare = true;
-							content +='<span id="shareMyMeal" class="glyphicon glyphicon-share pull-left" onclick="shareMyMeal(' +result.idx +','+ checkShare+ ')">Share</span>';
+							content +='<span id="shareMyMeal" class="glyphicon glyphicon-share pull-left" style="color: #f4511e" onclick="shareMyMeal(' +result.idx +','+ checkShare+ ')">Share</span>';
 						}else{
 							checkShare = false;
 							content +='<span id="shareMyMeal" class="glyphicon glyphicon-unchecked pull-left" onclick="shareMyMeal(' +result.idx +','+checkShare+ ')">Share</span>';
 						}
 						content +='<button align="left" type="button" class="btn btn-default" onclick="delMyMeal('+picIdx+')">Delete</button>';
 	          			content +='<button align="left" type="button" class="btn btn-default">Edit</button>';
-	          			content +='<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
-	          			$("#modalFooter").html(content);
+	         
 					}else{ // false이면 추천 닫기 버튼만 추가
 						// if 문 추가해서 만약 추천을 했다면 꽉찬 하트, 추천을 하지 않았다면 빈 하트 출력
-						content += content +='<span id="shareMyMeal" class="glyphicon glyphicon-heart-empty pull-left" onclick="recommendMeal(' +result.idx + ')">Recommend</span>';
+						if(result.checkrecommend == true){
+							checkRecommend = true;
+							content += content +='<span id="recommendMeal" class="glyphicon glyphicon-heart pull-left" onclick="recommendMeal(' +result.idx + ')">Recommend</span>';
+						}else{
+							checkRecommend = false;
+							content += content +='<span id="recommendMeal" class="glyphicon glyphicon-heart-empty pull-left" onclick="recommendMeal(' +result.idx + ')">Recommend</span>';	
+						}
 						
-						content += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
-						$("#modalFooter").html(content);
+						
+						
 					}
+					content += '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+					$("#modalFooter").html(content);
+					
 				}
 			})
 			

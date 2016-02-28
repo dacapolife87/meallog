@@ -255,7 +255,7 @@ public class mealController {
       public @ResponseBody Meal modalTest(HttpSession session , CommandMap map) throws Exception{
     	  log.debug("/meal/test3.do Call");
     	  log.debug("[WebB] user Meal List ");
-    	  Map<String,Object> userMap = map.getMap();
+    	  Map<String,Object> userMap = map.getMap(); // picIdx 값이 들어온다
     	  log.debug("getMap -------: " + userMap);
     	  
     	  // 비교 코드
@@ -280,6 +280,26 @@ public class mealController {
     	  mealService.updateShare(userMap);
       }
       
+      
+      /************************************************************
+       * 추천시 들어오는 함수
+       * 
+       * 
+       ************************************************************/
+      
+      @RequestMapping(value="/meal/mealRecommend.do", method=RequestMethod.GET)
+      public void mealRecommend(HttpSession session, CommandMap map) throws Exception{
+    	  log.debug("/meal/mealRecommend.do Call");
+    	  Map<String,Object> userMap = map.getMap(); // idx , checkRecommend : false 값이 들어온다
+    	  log.debug("getMap ::::: " + userMap);
+    	  
+    	  if(userMap.get("checkRecommend").equals("false")){
+    		  mealService.insertRecommend(userMap, session);
+    	  }else{
+    		  mealService.deleteRecommend(userMap, session);
+    	  }
+    	  
+      }
       
 }
 

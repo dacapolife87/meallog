@@ -123,13 +123,6 @@ function shareMyMeal(x,y){
 	})
 }
 
-// 추천 버튼 클릭시 호출되는 함수
-function recommendMeal(x){
-	var IDX = x;
-	alert("IDX : " + IDX);
-	$.ajax({
-		
-	})
-}
+
 
 

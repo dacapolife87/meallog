@@ -28,6 +28,7 @@
 				IDX = #{picIdx}
 		]]>
 	</select>
+		 
 	
     <!-- MealList 출력  공유리스트 -->
     <select id="selectShareMealList" parameterType="meallog.user.vo.Member" resultType="meallog.meal.vo.Meal">
@@ -83,7 +84,7 @@
     ]]>
 	</update>
     <!-- MyMeal 공유 버튼 클릭시 -->
-    <!-- MyBatis if문 추가할 것  -->
+    
     <update id="shareMyMeal" parameterType="hashmap">
     <![CDATA[
     	UPDATE MEALLIST
@@ -156,6 +157,47 @@
     ]]>
 	</insert>
 	
+	<!-- Test OhterMEalPage에서 로그인한 유저가 추천을 했는지 안했는지 알려주는 쿼리문 -->
+	<select id="checkRecommend" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT
+			IDX
+		FROM
+			MEALRECOMMEND
+		WHERE
+			IDX = #{picIdx}
+		AND
+			USERNAME = #{USERNAME}
+	]]>
+	</select>
+	
+	
+	<!-- Test OtherMealPage에서 추천 버튼 클릭시 삽입 쿼리문 -->
+	<insert id="insertRecommend" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MEALRECOMMEND
+		(
+			IDX,
+			USERNAME
+		)
+		VALUES
+		(
+			#{IDX},
+			#{USERNAME}
+		)
+	]]>
+	</insert>
+	
+	<!-- Test OtherMealPage에서 추천 버튼 클릭시 삭제 쿼리문 -->
+	<delete id="deleteRecommend" parameterType="hashmap">
+	<![CDATA[
+		DELETE
+			FROM
+				MEALRECOMMEND
+			WHERE
+				IDX = #{IDX}
+	]]>
+	</delete>
 	
 	<!-- 파일 보기 -->
 	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">

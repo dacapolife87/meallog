@@ -103,11 +103,25 @@ public class MealServiceImpl implements MealService{
 		Member member = (Member)session.getAttribute("member");
 		Meal meal = mealDAO.selectPopupMeal(map);
 		
+		
 		// 이 함수를 호출한 곳이 myMealPage 인지 아닌지 검사하는 조건문
 		if(member.getNick().equals(meal.getusername())){
 			meal.setcheckuser(true);
 		}else{
 			meal.setcheckuser(false);
+			
+			map.put("USERNAME", member.getNick());
+			
+			Map<String,Object> checkMap = mealDAO.checkRecommendMeal(map);
+			
+			log.debug(checkMap);
+			// 로그인한 유저가 현재 클릭한 사진을 클릭했는지 하지 않았는지 체크하는 함수
+			if(checkMap == null){
+				meal.setcheckrecommend(false);
+			}else if(checkMap != null){
+				meal.setcheckrecommend(true);
+			}
+			
 		}
 		
 		return meal;
@@ -119,6 +133,28 @@ public class MealServiceImpl implements MealService{
 		// TODO Auto-generated method stub
 
 		mealDAO.updateShareMeal(map);
+	}
+	
+	//추천 기능
+	@Override
+	public void insertRecommend(Map<String, Object> map, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		Member member = (Member)session.getAttribute("member");
+		String username = member.getNick(); // 
+		map.put("USERNAME", username);
+		log.debug(map);
+		mealDAO.insertRecommendMeal(map);
+	}
+	
+	//추천 해제 기능
+	@Override
+	public void deleteRecommend(Map<String, Object> map, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+//		Member member = (Member)session.getAttribute("member");
+//		String username = member.getNick();
+//		map.put("USERNAME", username);
+		log.debug(map);
+		mealDAO.deleteRecommendMeal(map);
 	}
 	
 	

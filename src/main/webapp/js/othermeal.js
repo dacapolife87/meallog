@@ -22,4 +22,32 @@
  			$("#section2").html(content);
  		}
  	})
- } 
+ }
+ 
+ 
+ // 클릭시 ohermeal에 올라온 사진에 추천 
+ function recommendMeal(x){
+		var IDX = x;
+		var RECOMMEND; // 보내는 값이 true 일때 : 추천 해제 , 보내는 값이 false 일때 : 추천 
+		
+		
+		if(checkRecommend == true){
+			$("#recommendMeal").attr('class', 'glyphicon glyphicon-heart-empty pull-left');
+			checkRecommend = false;
+			RECOMMEND = true;
+		}else{
+			$("#recommendMeal").attr('class', 'glyphicon glyphicon-heart pull-left');
+			checkRecommend = true;
+			RECOMMEND = false;
+		}
+		
+		
+		$.ajax({
+			type:"GET",
+			data:{"IDX" : IDX, "checkRecommend" : RECOMMEND},
+			url:"/meallog/meal/mealRecommend.do",
+			success:function(result){
+				
+			}
+		})
+}
