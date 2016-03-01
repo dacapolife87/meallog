@@ -142,34 +142,30 @@ public class MealServiceImpl implements MealService{
 		Meal meal = mealDAO.selectPopupMeal(map);
 		
 		
-		// 이 함수를 호출한 곳이 myMealPage 인지 아닌지 검사하는 조건문
+		// ���⑥닔瑜��몄텧��怨녹씠 myMealPage �몄� �꾨땶吏�寃�궗�섎뒗 議곌굔臾�
 		if(member.getNick().equals(meal.getUSERNAME())){
 			meal.setCHECKUSER(true);
 		}else{
-<<<<<<< HEAD
 			meal.setCHECKUSER(false);
-=======
-			meal.setcheckuser(false);
-			
+
 			map.put("USERNAME", member.getNick());
 			
 			Map<String,Object> checkMap = mealDAO.checkRecommendMeal(map);
 			
 			log.debug(checkMap);
-			// 로그인한 유저가 현재 클릭한 사진을 클릭했는지 하지 않았는지 체크하는 함수
+			// 濡쒓렇�명븳 �좎�媛��꾩옱 �대┃���ъ쭊���대┃�덈뒗吏��섏� �딆븯�붿� 泥댄겕�섎뒗 �⑥닔
 			if(checkMap == null){
 				meal.setcheckrecommend(false);
 			}else if(checkMap != null){
 				meal.setcheckrecommend(true);
 			}
 			
->>>>>>> jang4
 		}
 		
 		return meal;
 	}
 	
-	//Share 기능
+	//Share 湲곕뒫
 	@Override
 	public void updateShare(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
@@ -178,7 +174,7 @@ public class MealServiceImpl implements MealService{
 	}
 
 	
-	//추천 기능
+	//異붿쿇 湲곕뒫
 	@Override
 	public void insertRecommend(Map<String, Object> map, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
@@ -189,7 +185,7 @@ public class MealServiceImpl implements MealService{
 		mealDAO.insertRecommendMeal(map);
 	}
 	
-	//추천 해제 기능
+	//異붿쿇 �댁젣 湲곕뒫
 	@Override
 	public void deleteRecommend(Map<String, Object> map, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
