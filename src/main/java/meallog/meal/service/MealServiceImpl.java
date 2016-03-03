@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.springframework.stereotype.Service;
 
 import meallog.common.dao.AbstractDAO;
@@ -77,15 +79,31 @@ public class MealServiceImpl implements MealService{
 	@Override
 	public void insertMealMobile(Map<String, Object> meal, HttpServletRequest request,HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
+		String json = (String) meal.get("meal");  
+		JSONObject jsonObj = new JSONObject();  
+		jsonObj = (JSONObject) JSONValue.parse(json);  
+		
+		 
+		Map<String,Object> mealMap = new HashMap<String,Object>();  
+		mealMap.put("CATEGORY",jsonObj.get("category"));  
+		mealMap.put("CONTENT",jsonObj.get("content"));  
+		mealMap.put("EATDATE",jsonObj.get("eatdate"));  
+		mealMap.put("WHENEAT",jsonObj.get("wheneat"));  
+		mealMap.put("NAME",jsonObj.get("name"));  
+		mealMap.put("SHARE",jsonObj.get("share"));  
+		mealMap.put("IDX",jsonObj.get("idx"));  
+		
+		
 		Member member = (Member) session.getAttribute("member");
 		String userName = member.getNick();
-		meal.put("USERNAME", userName);
-		if(meal.get("SHARE").equals("true")){
-			meal.put("SHARE", "1");
+		mealMap.put("USERNAME", userName);
+		if(mealMap.get("SHARE").equals("true")){
+			mealMap.put("SHARE", "1");
 		}else{
-			meal.put("SHARE", "0");
+			mealMap.put("SHARE", "0");
 		}
-		insertMealFile(meal, request, session);
+		
+		insertMealFile(mealMap, request, session);
 		
 //		mealDAO.insertBoard(meal);
 //		String filePath = session.getServletContext().getRealPath("");
