@@ -266,9 +266,9 @@ var icon;
 function idCheck(){
 	var user_id = $('#signUp_userID').val();
     $.ajax({
-        type: "POST",
-        url: "/meallog/idCheck.do",
-        data: "user_id="+user_id,                    
+        type: "GET",
+        url: "/meallog/idCheck.do"+"?user_id="+user_id,
+        //data: "user_id="+user_id,                    
         datatype: "json",
         success: function(data)
         {

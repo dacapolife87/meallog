@@ -50,14 +50,14 @@ public class mealController {
      * @throws Exception
      ********************************************************/
     @SuppressWarnings("rawtypes")
-	@RequestMapping(value="/meal/userMealList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/userMealList.do")
     public @ResponseBody  List userMealList(HttpSession session) throws Exception{
     	log.debug("[WebB] user Meal List ");
         List<Meal> list = mealService.selectUserMealList(session);
         return list;
     }
     @SuppressWarnings("rawtypes")
-	@RequestMapping(value="/meal/shareMealList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/shareMealList.do")
     public @ResponseBody List shareMealList(HttpSession session) throws Exception{
     	log.debug("[WebB] share Meal List ");
         List<Meal> list = mealService.selectShareMealList(session);
@@ -70,7 +70,7 @@ public class mealController {
      * @throws Exception
      ********************************************************/
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/meal/userMealList.mobile", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/userMealList.mobile")
     public @ResponseBody  JSONObject userMealListMobile(HttpSession session) throws Exception{
     	log.debug("[Mobile] user Meal List ");
 	  	JSONObject resultJSON = new JSONObject();
@@ -79,7 +79,7 @@ public class mealController {
         return resultJSON;
     }
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/meal/shareMealList.mobile", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/shareMealList.mobile")
     public @ResponseBody  JSONObject shareMealListMobile(HttpSession session) throws Exception{
     	log.debug("[Mobile] Share Meal List ");
 	  	JSONObject resultJSON = new JSONObject();
@@ -95,13 +95,13 @@ public class mealController {
      * @throws Exception
      ********************************************************/
     
-    @RequestMapping(value="/meal/userOneMealList.do", method=RequestMethod.POST)
+    @RequestMapping(value="/meal/userOneMealList.do")
     public @ResponseBody  Meal selectUserOneMealList(CommandMap requestMeal) throws Exception{
         Meal meal = mealService.selectUserOneMealList(requestMeal.getMap());
         return meal;
     }
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/meal/userOneMealList.mobile", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/userOneMealList.mobile")
     public @ResponseBody  JSONObject selectUserOneMealListMobile(CommandMap requestMeal) throws Exception{
 	  	JSONObject resultJSON = new JSONObject();
 	  	Meal meal = mealService.selectUserOneMealList(requestMeal.getMap());
@@ -198,14 +198,14 @@ public class mealController {
      * @throws Exception
      ********************************************************/
     @SuppressWarnings("rawtypes")
-	@RequestMapping(value="/meal/autocompleteMeal.do", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/autocompleteMeal.do")
     public @ResponseBody List autocompleteMeal(CommandMap commandMap) throws Exception{
     	log.debug(mealService.autocompleteMeal(commandMap.getMap()));
         return mealService.autocompleteMeal(commandMap.getMap());
     }
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/meal/autocompleteMeal.Mobile", method=RequestMethod.POST)
+	@RequestMapping(value="/meal/autocompleteMeal.Mobile")
     public @ResponseBody JSONObject autocompleteMealMobile(CommandMap commandMap) throws Exception{
     	JSONObject resultJSON = new JSONObject();
 		List<String> autoCompleteList = mealService.autocompleteMeal(commandMap.getMap());

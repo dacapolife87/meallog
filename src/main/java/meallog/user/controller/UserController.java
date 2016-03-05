@@ -51,14 +51,14 @@ public class UserController {
 	 * @return Web ->  ModelAndView // Mobile -> JSON[result_Code]
 	 * @throws Exception
 	 ********************************************************/
-    @RequestMapping(value="/joinMember.do", method=RequestMethod.POST)
+    @RequestMapping(value="/joinMember.do")
     public ModelAndView insertBoard(CommandMap commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("redirect:/main.do");
         userService.joinMember(commandMap.getMap());
         return mv;
     }
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/joinMember.mobile", method=RequestMethod.POST)
+	@RequestMapping(value="/joinMember.mobile")
     public @ResponseBody JSONObject joinMobile(CommandMap commandMap) throws Exception{
 		JSONObject resultJSON = new JSONObject();
     	try {
@@ -76,7 +76,7 @@ public class UserController {
      * @return boolean 존재하면 true 없으면 false
      * @throws Exception
      ********************************************************/
-    @RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
+    @RequestMapping(value="/idCheck.do")
     public @ResponseBody boolean joinIdCheck(CommandMap commandMap) throws Exception{
     	log.debug(userService.idCheck(commandMap.getMap()));
         return userService.idCheck(commandMap.getMap());
@@ -88,7 +88,7 @@ public class UserController {
      * @return Web ->  String // Mobile -> JSON[result_Code]
      * @throws Exception
      ********************************************************/
-    @RequestMapping(value="/meallogin.do", method=RequestMethod.POST)
+    @RequestMapping(value="/meallogin.do")
     public String mealLogin(CommandMap commandMap,HttpSession session) throws Exception{
     	Member member = userService.loginMember(commandMap.getMap());
 	  	String returnValue;
@@ -102,7 +102,7 @@ public class UserController {
 	    return returnValue;
 	}
     @SuppressWarnings("unchecked")
-	@RequestMapping(value="/meallogin.mobile", method=RequestMethod.POST)
+	@RequestMapping(value="/meallogin.mobile")
     public @ResponseBody JSONObject mealLoginMobile(CommandMap commandMap,HttpSession session) throws Exception{
 	  	String result;
 	  	JSONObject resultJSON = new JSONObject();
